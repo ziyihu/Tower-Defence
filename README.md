@@ -22,7 +22,16 @@ This is a tower defence game using C# language.
  Small generator: generates a little bit of power
  Large generator: generates a lot of power
 
+
+ On Feb 9th.
+ Have implemented the targeting facility to increase the damage of nearby towers
+ Have implemented the reasearch lab to get research points to unlock the tech tree
+ Have implemented the supercapacitor to increase the rate of the fire of nearby towers
+ Have implemented the alien recovery to get diamonds when killing enemies in the range
  
+ 
+ 
+Undo parts: 
  Targeting facility: increases the damage of nearby towers
  Research labs: generates research point over time
  Supercapcitor: increases the rate of fire of nearby towers
