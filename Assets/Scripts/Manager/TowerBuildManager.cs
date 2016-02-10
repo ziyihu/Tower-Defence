@@ -75,6 +75,10 @@ public class TowerBuildManager : MonoBehaviour {
 		return allAttakBuilding;
 	}
 
+	public List<Tower4> GetStasisBuilding(){
+		return gManager.tower4List;
+	}
+
 	//circle to show the attack range
 	public GameObject circleObj;
 
@@ -98,8 +102,19 @@ public class TowerBuildManager : MonoBehaviour {
 		return diamondColNum;
 	}
 
+	//one samll geneator can provide 5 power
+	private static int smallGenPower = 5;
+	//one big geneator can provide 10 power
+	private static int bigGenPower = 10;
+
+	public void SetSmallGenPower(int number){ smallGenPower = number; }
+	public int GetSmallGenPower() { return smallGenPower; }
+
+	public void SetBigGenPower(int number) { bigGenPower = number; }
+	public int GetBigGenPower() { return bigGenPower; }
+
 	public int GetCurrentPowerNum(){
-		powerNum = smallGenNum * 5 + largeGenNum * 10;
+		powerNum = smallGenNum * smallGenPower + largeGenNum * bigGenPower;
 		return powerNum;
 	}
 
@@ -346,14 +361,14 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "SmallGeneator"){
 				name = "Small Power";
-				description = "this tower will provide 5 power";
+				description = "this tower will provide "+ GetSmallGenPower() +" power";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0+"";
 				levelNumber = 0 + "";
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "LargeGeneator"){
 				name = "Large Power";
-				description = "this tower will provide 10 power";
+				description = "this tower will provide "+ GetBigGenPower() + " power";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0+"";
 				levelNumber = 0 + "";
@@ -428,6 +443,23 @@ public class TowerBuildManager : MonoBehaviour {
 		levelNum.text = levelNumText;
 	}
 
+	private static int tower1UpgradeAttackNumber = 10;
+	private static int tower2UpgradeAttackNumber = 15;
+	private static int tower7UpgradeAttackNumber = 20;
+	private static int tower10UpgradeAttackNumber = 25;
+
+	public void SetTower1UpgradeNumber(int number){	tower1UpgradeAttackNumber = number;}
+	public int GetTower1UpgradeNumber() { return tower1UpgradeAttackNumber; }
+
+	public void SetTower2UpgradeNumber(int number){ tower2UpgradeAttackNumber = number; }
+	public int GetTower2UpgradeNumber() { return tower2UpgradeAttackNumber; }
+
+	public void SetTower7UpgradeNumber(int number){ tower7UpgradeAttackNumber = number; }
+	public int GetTower7UpgradeNumber() { return tower7UpgradeAttackNumber; }
+
+	public void SetTower10UpgradeNumber(int number){ tower10UpgradeAttackNumber = number; }
+	public int GetTower10UpgradeNumber() { return tower10UpgradeAttackNumber; }
+
 	public void UpGradeBtnClick(){
 		if (building.GetLevel() <= 1) {
 			upgrade.normalSprite = "btn_red1";
@@ -439,7 +471,7 @@ public class TowerBuildManager : MonoBehaviour {
 		level = building.GetLevel ();
 		//increase the attack power
 		attackNum = building.GetAttackPower ();
-		building.SetAttackPower (attackNum + 50);
+		building.SetAttackPower (attackNum + tower10UpgradeAttackNumber);
 		//increase the level
 		level = level + 1;
 		building.SetLevel (level);

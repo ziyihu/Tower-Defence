@@ -8,6 +8,22 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 	public List<Character> building = new List<Character>();
 	List<Character> allCharacter = new List<Character> ();
 	List<Vector3> position = new List<Vector3>();
+	private static int tower1AttackNumber = 1;
+	private static int tower2AttackNumber = 1;
+	private static int tower7AttackNumber = 1;
+	private static int tower10AttackNumber = 1;
+
+	public void SetTower1AttackNumber(int number) { tower1AttackNumber = number; }
+	public int GetTower1AttackNumber(){ return tower1AttackNumber; }
+
+	public void SetTower2AttackNumber(int number) { tower2AttackNumber = number; }
+	public int GetTower2AttackNumber(){ return tower2AttackNumber; }
+
+	public void SetTower7AttackNumber(int number) { tower7AttackNumber = number; }
+	public int GetTower7AttackNumber(){ return tower7AttackNumber; }
+
+	public void SetTower10AttackNumber(int number) { tower10AttackNumber = number; }
+	public int GetTower10AttackNumber(){ return tower10AttackNumber; }
 	
 	Character chara = new Character();
 
@@ -84,7 +100,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetCamp(camp);
 				character.SetAttackRate(2f);
 				//set attack power
-				character.SetAttackPower(1);
+				character.SetAttackPower(tower1AttackNumber);
 				tempChar = character;
 			}
 			//Tower02
@@ -98,7 +114,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetCamp(camp);
 				character.SetAttackRate(1f);
 				//set attack power
-				character.SetAttackPower(1);
+				character.SetAttackPower(tower2AttackNumber);
 				tempChar = character;
 			}
 			//Tower4
@@ -121,7 +137,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetDir(dir);
 				character.SetPose(pose);
 				character.SetCamp(camp);
-				character.SetAttackPower(1);
+				character.SetAttackPower(tower7AttackNumber);
 				character.SetAttackRate(1f);
 				tempChar = character;
 			}
@@ -134,7 +150,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetDir(dir);
 				character.SetPose(pose);
 				character.SetCamp(camp);
-				character.SetAttackPower(1);
+				character.SetAttackPower(tower10AttackNumber);
 				character.SetAttackRate(1f);
 				tempChar = character;
 			}

@@ -14,7 +14,13 @@ public class TechNode : MonoBehaviour {
 	private static bool isTower8 = false;
 	private static bool isTower9 = false;
 	private static bool isTower10 = false;
-
+	//no 15. tech node. Extra Damage
+	private static bool isIncreasedPower = false;
+	//no 17. tech node. Stasis field does damage
+	private static bool isStasisDamage = false;
+	//no 20. tech node. Generator provide more power
+	private static bool isGeneratorPower = false;
+	
 	public bool GetTower1{
 		get { return isTower1; }
 	}
@@ -53,6 +59,18 @@ public class TechNode : MonoBehaviour {
 
 	public bool GetTower10{
 		get { return isTower10; }
+	}
+
+	public bool GetIncreasedPower{
+		get { return isIncreasedPower; }
+	}
+
+	public bool GetStasisDamage{
+		get { return isStasisDamage; }
+	}
+
+	public bool GetGeneratorPower{
+		get { return isGeneratorPower; }
 	}
 
 	public UIAtlas Atlas;
@@ -124,6 +142,15 @@ public class TechNode : MonoBehaviour {
 		}
 		if (ableSprite == "bismarck_1") {
 			isTower10 = true;
+		}
+		if (ableSprite == "btnActive_o") {
+			isIncreasedPower = true;
+		}
+		if (ableSprite == "towerUpgrad_o") {
+			isStasisDamage = true;
+		}
+		if (ableSprite == "towerTank_1_o") {
+			isGeneratorPower = true;
 		}
 	}
 
