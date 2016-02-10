@@ -27,12 +27,20 @@ public class DiamondManager : MonoBehaviour {
 		diamondLabel.text = 0 + "";
 		tManager = new TowerBuildManager ();
 	}
-	
+
+	public void AddDiamond(int number){
+		currentDiamond += number;
+	}
+
+	public void UseDiamond(int number){
+		currentDiamond -= number;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		speed = tManager.GetDiamondCollectionSpeedNum ();
-
 		time += Time.deltaTime;
+		diamondLabel.text = currentDiamond + "";
 		if (speed > 0) {
 			if(timer <= time){
 				StartCoroutine(Add(speed));

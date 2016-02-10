@@ -49,7 +49,17 @@ public class Enemy : Character {
 	}
 
 	public virtual void OnDie(){
-
+		if(TowerBuildManager._instance.GetAlienBuilding().Count > 0){
+			foreach (AlienRecovery chara in TowerBuildManager._instance.GetAlienBuilding()) {
+				foreach(Character chara1 in EnemySpawnManager._instance.enemyList){
+					if(chara1.Life<=0){
+						if(Vector3.Distance(chara.GetPos(),chara1.GetPos()) < chara.GetAttackRange()){
+							DiamondManager._instance.AddDiamond(10);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public override void OnBeHit(int damage){

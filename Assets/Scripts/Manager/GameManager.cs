@@ -24,6 +24,9 @@ public class GameManager : UnityAllSceneSingleton<GameManager>,IMessageObject {
 	public List<LargeMine> largeMineList = new List<LargeMine> ();
 	public List<SmallGeneator> smallGenList = new List<SmallGeneator> ();
 	public List<LargeGeneator> largeGenList = new List<LargeGeneator> ();
+	public List<TargetingFacility> targetingFacList = new List<TargetingFacility> ();
+	public List<SuperCapacitor> superCapList = new List<SuperCapacitor> ();
+	public List<AlienRecovery> alienRecList = new List<AlienRecovery> ();
 	public CharacterManager cManager;
 	public Status CurStatus = Status.NONE;
 

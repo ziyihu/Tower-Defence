@@ -34,6 +34,7 @@ public struct CharacterData{
 		ANTENNA,
 		LAB,
 		CAPACITOR,
+		TARGETING,
 		ALIEN
 	}
 	public void Reset(){

@@ -29,6 +29,12 @@ public class TowerBuildManager : MonoBehaviour {
 	public static bool smallGeneator = false;
 	//can put the large geneator or not
 	public static bool largeGeneator = false;
+	//can put the targeting facility or not
+	public static bool targetingFacility = false;
+	//can put the super capacitor or not
+	public static bool superCapacitor = false;
+	//can put the alien recovery or not
+	public static bool alienRecovery = false;
 
 	public static bool tower03 = false;
 	public static bool tower05 = false;
@@ -53,6 +59,21 @@ public class TowerBuildManager : MonoBehaviour {
 
 	private static int smallGenNum = 0;
 	private static int largeGenNum = 0;
+
+	//get all the attack towers 
+	private List<Character> allAttakBuilding = new List<Character> ();
+	//has increase attack towers
+	private List<Character> hasIncreasedBuilding = new List<Character>();
+	//has increase attack rate towers
+	private List<Character> hasIncreasedRateBuilding = new List<Character>();
+
+	public List<AlienRecovery> GetAlienBuilding(){
+		return gManager.alienRecList;
+	}
+
+	public List<Character> getAllAttackBuilding(){
+		return allAttakBuilding;
+	}
 
 	//circle to show the attack range
 	public GameObject circleObj;
@@ -167,6 +188,21 @@ public class TowerBuildManager : MonoBehaviour {
 				SetTower("largegeneator");
 				largeGeneator = false;
 			}
+		} else if(targetingFacility) {
+			if(Input.GetMouseButtonDown(0)){
+				SetTower("targetingfacility");
+				targetingFacility = false;
+			}
+		} else if(superCapacitor) {
+			if(Input.GetMouseButtonDown(0)){
+				SetTower("supercapacitor");
+				superCapacitor = false;
+			}
+		} else if(alienRecovery){
+			if(Input.GetMouseButtonDown(0)){
+				SetTower("alienrecovery");
+				alienRecovery = false;
+			}
 		}
 		//if(time > tower1AttackRate){
 			if (gManager.tower1List.Count > 0 && Time.timeScale == 1) {
@@ -200,6 +236,34 @@ public class TowerBuildManager : MonoBehaviour {
 				t.HitEnemy();
 			}
 		}
+		if (gManager.targetingFacList.Count > 0 && Time.timeScale == 1) {
+			foreach(TargetingFacility t in gManager.targetingFacList){
+				t.FindTowers();
+				t.IncreaseAttack();
+			}
+		}
+		if (gManager.superCapList.Count > 0 && Time.timeScale == 1) {
+			foreach(SuperCapacitor t in gManager.superCapList){
+				t.FindTowers();
+				t.IncreaseAttackRate();
+			}
+		}
+//		if (gManager.alienRecList.Count > 0 && Time.timeScale == 1) {
+//			foreach(Character chara in gManager.alienRecList){
+//				foreach(Character chara1 in EnemySpawnManager._instance.enemyList){
+//					if(chara1.Life <= 0){
+//						if(Vector3.Distance(chara.GetPos(),chara1.GetPos())< chara.GetAttackRange()){
+//							//for every enemy, add 10 diamond when killing them
+//							DiamondManager._instance.AddDiamond(10);
+//						}
+//					}
+//				}
+//			}
+//		}
+		//check if the enemy die in the range of the Alien Recovery Tower
+		//if in the range, add diamond. else do nothing
+		//TODO
+
 		//click on the screen, if click on the tower, show the tower info
 		if (Input.GetMouseButtonDown (0)) {
 			GetTower();
@@ -294,6 +358,30 @@ public class TowerBuildManager : MonoBehaviour {
 				attackNumber = 0+"";
 				levelNumber = 0 + "";
 				SetPanel(name,description,attackNumber,levelNumber);
+			} else if(hit.transform.tag == "Targeting"){
+				name = "Targeting Facility";
+				description = "this tower will increase 10 attack number for nearby towers";
+				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
+				attackNumber = 0+"";
+				levelNumber = 0 + "";
+				SetAttackRangeShow(building);
+				SetPanel(name,description,attackNumber,levelNumber);
+			} else if(hit.transform.tag == "SuperCapacitor"){
+				name = "Super Capacitor";
+				description = "this tower will increase the attack rate for nearby towers";
+				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
+				attackNumber = 0+"";
+				levelNumber = 0+"";
+				SetAttackRangeShow(building);
+				SetPanel(name,description,attackNumber,levelNumber);
+			} else if(hit.transform.tag == "AlienRecovery"){
+				name = "Alien Recovery";
+				description = "this tower will collect diamond when killing enemies in the range";
+				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
+				attackNumber = 0+"";
+				levelNumber = 0+"";
+				SetAttackRangeShow(building);
+				SetPanel(name,description,attackNumber,levelNumber);
 			}
 
 
@@ -323,7 +411,9 @@ public class TowerBuildManager : MonoBehaviour {
 		}
 		if(building.buildingType == CharacterData.buildingMode.TOWER4 || building.buildingType == CharacterData.buildingMode.LAB
 		   || building.buildingType == CharacterData.buildingMode.MINE1 || building.buildingType == CharacterData.buildingMode.MINE2
-		   || building.buildingType == CharacterData.buildingMode.GENERATOR1 || building.buildingType == CharacterData.buildingMode.GENERATOR2){
+		   || building.buildingType == CharacterData.buildingMode.GENERATOR1 || building.buildingType == CharacterData.buildingMode.GENERATOR2
+		   || building.buildingType == CharacterData.buildingMode.TARGETING || building.buildingType == CharacterData.buildingMode.CAPACITOR
+		   || building.buildingType == CharacterData.buildingMode.ALIEN){
 			upgrade.normalSprite = "btn_red4";
 			upgrade.enabled = false;
 		}
@@ -381,6 +471,13 @@ public class TowerBuildManager : MonoBehaviour {
 	}
 
 	public void DestoryBuildingInList(long id){
+		SetAttackRangeHide ();
+		for (int i = allAttakBuilding.Count - 1; i >= 0; i--) {
+			if(allAttakBuilding[i].ID == id){
+				allAttakBuilding[i].Destroy();
+				allAttakBuilding.RemoveAt(i);
+			}
+		}
 		for (int i = gManager.tower1List.Count - 1; i >= 0; i--) {
 			if(gManager.tower1List[i].ID == id){
 				gManager.tower1List[i].Destroy();
@@ -453,6 +550,38 @@ public class TowerBuildManager : MonoBehaviour {
 				gManager.largeGenList[i].Destroy();
 				gManager.largeGenList.RemoveAt(i);
 				largeGenNum = gManager.largeGenList.Count;
+				break;
+			}
+		}
+		//delete the targeting tower, need to reset the attack number has been increased to normal
+		for (int i = gManager.targetingFacList.Count - 1; i >= 0; i--) {
+			if(gManager.targetingFacList[i].ID == id){
+				//decrease all the tower attack power
+				foreach(Character chara in gManager.targetingFacList[i].hasIncreasedList){
+					chara.SetAttackPower(chara.GetAttackPower()-10);
+				}
+				gManager.targetingFacList[i].Destroy();
+				gManager.targetingFacList.RemoveAt(i);
+				break;
+			}
+		}
+		//delete the supercap tower, need to reset the attack rate has been increased to normal
+		for (int i = gManager.superCapList.Count - 1; i >= 0; i--) {
+			if(gManager.superCapList[i].ID == id){
+				//decrease all the tower attack power
+				foreach(Character chara in gManager.superCapList[i].hasIncreasedList){
+					chara.SetAttackRate(1f);
+				}
+				gManager.superCapList[i].Destroy();
+				gManager.superCapList.RemoveAt(i);
+				break;
+			}
+		}
+		//delete the alien recovery tower
+		for (int i = gManager.alienRecList.Count - 1; i >= 0; i--) {
+			if(gManager.alienRecList[i].ID == id){
+				gManager.alienRecList[i].Destroy();
+				gManager.alienRecList.RemoveAt(i);
 				break;
 			}
 		}
@@ -531,26 +660,31 @@ public class TowerBuildManager : MonoBehaviour {
 					Tower1 tower1 = (Tower1)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER1, 1,
 				                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tower1.SetPosition (obstacle3Pos);
+					allAttakBuilding.Add(tower1);
 					gManager.tower1List.Add(tower1);
 				} else if(tower == "tower2"){
 					Tower2 tower2 = (Tower2)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER2, 1,
 					                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tower2.SetPosition (obstacle3Pos);
+					allAttakBuilding.Add(tower2);
 					gManager.tower2List.Add(tower2);
 				}else if(tower == "tower10"){
 					Tower10 tower10 = (Tower10)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER10, 1,
 					                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tower10.SetPosition (obstacle3Pos);
+					allAttakBuilding.Add(tower10);
 					gManager.tower10List.Add(tower10);
 				} else if(tower == "tower4"){
 					Tower4 tower4 = (Tower4)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER4, 1,
 					                                                   1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tower4.SetPosition (obstacle3Pos);
+					allAttakBuilding.Add(tower4);
 					gManager.tower4List.Add(tower4);   
 				} else if(tower == "tower7"){
 					Tower7 tower7 = (Tower7)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER7, 1,
 					                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tower7.SetPosition (obstacle3Pos);
+					allAttakBuilding.Add(tower7);
 					gManager.tower7List.Add(tower7);   
 				} else if(tower == "research"){
 					Research research = (Research)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.LAB, 1,
@@ -595,6 +729,24 @@ public class TowerBuildManager : MonoBehaviour {
 					lg.SetPosition (obstacle3Pos);
 					gManager.largeGenList.Add(lg);
 					largeGenNum = gManager.largeGenList.Count;
+				}
+				else if(tower == "targetingfacility"){
+					TargetingFacility tf = (TargetingFacility)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TARGETING, 1,
+					                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
+					tf.SetPosition (obstacle3Pos);
+					gManager.targetingFacList.Add(tf);   
+				}
+				else if(tower == "supercapacitor"){
+					SuperCapacitor sc = (SuperCapacitor)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.CAPACITOR, 1,
+					                                                                  1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
+					sc.SetPosition (obstacle3Pos);
+					gManager.superCapList.Add(sc);   
+				}
+				else if(tower == "alienrecovery"){
+					AlienRecovery ar = (AlienRecovery)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.ALIEN, 1,
+					                                                            1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
+					ar.SetPosition (obstacle3Pos);
+					gManager.alienRecList.Add(ar);   
 				}
 			}
 		}
@@ -646,5 +798,17 @@ public class TowerBuildManager : MonoBehaviour {
 
 	public void OnLargeGenClicked(){
 		largeGeneator = true;
+	}
+
+	public void OnTargetingClicked(){
+		targetingFacility = true;
+	}
+
+	public void OnCapacitorClicked(){
+		superCapacitor = true;
+	}
+
+	public void OnAlienClicked(){
+		alienRecovery = true;
 	}
 }

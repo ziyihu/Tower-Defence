@@ -82,7 +82,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetDir(dir);
 				character.SetPose (pose);
 				character.SetCamp(camp);
-				character.SetAttackRate(1f);
+				character.SetAttackRate(2f);
 				//set attack power
 				character.SetAttackPower(1);
 				tempChar = character;
@@ -135,7 +135,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPose(pose);
 				character.SetCamp(camp);
 				character.SetAttackPower(1);
-				character.SetAttackRate(2f);
+				character.SetAttackRate(1f);
 				tempChar = character;
 			}
 			//Research
@@ -187,7 +187,34 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetCamp(camp);
 				tempChar = character;
 			}
-			//created the barrack, add to the building list
+			//Targeting Facility
+			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.TARGETING){
+				TargetingFacility character = new TargetingFacility();
+				character.SetPos(pos);
+				character.SetPose(pose);
+				character.SetCamp(camp);
+				character.SetAttackRange(2);
+				tempChar = character;
+			}
+			//Super Capacitor
+			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.CAPACITOR){
+				SuperCapacitor character = new SuperCapacitor();
+				character.SetPos(pos);
+				character.SetPose(pose);
+				character.SetCamp(camp);
+				character.SetAttackRange(2);
+				tempChar = character;
+			}
+			//Alien Recovery
+			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.ALIEN){
+				AlienRecovery character = new AlienRecovery();
+				character.SetPos(pos);
+				character.SetPose(pose);
+				character.SetCamp(camp);
+				character.SetAttackRange(2);
+				tempChar = character;
+			}
+			//created the tower, add to the building list
 			if(tempChar != null){
 				building.Add(tempChar);
 			} else { 
