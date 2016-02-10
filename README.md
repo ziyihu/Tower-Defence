@@ -29,20 +29,24 @@ This is a tower defence game using C# language.
  Have implemented the supercapacitor to increase the rate of the fire of nearby towers
  Have implemented the alien recovery to get diamonds when killing enemies in the range
  
- 
+ On Feb 10th.
+ Have implemented the extra damage tech
+ Have implemented the stasis field does damage tech
+ Have implemented the increase power produce from the generators
  
 Undo parts: 
- Targeting facility: increases the damage of nearby towers
- Research labs: generates research point over time
- Supercapcitor: increases the rate of fire of nearby towers
+// Targeting facility: increases the damage of nearby towers
+// Research labs: generates research point over time
+// Supercapcitor: increases the rate of fire of nearby towers
  Antenna: supplies power to nearby towers
- Alien recovery: generate resources from aliens killed nearby
+// Alien recovery: generate resources from aliens killed nearby
  
- Extra damage
+// Extra damage
  Overcharge: towers can be set to consume more power, deal more damage
- Stasis field does damage
+// Stasis field does damage
  Increased antenna range
  Increased antenna power delivery
+// Increased power production from generators 
  Research acceleration:can spend resources to get research points
  Napalm: add DOT to shots
  Increased armor piercing
