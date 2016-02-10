@@ -23,6 +23,18 @@ public class CannonBullet : MonoBehaviour, IBullet {
 	private float explosionRange = 1.0f;
 
 	private GameObject explosionObj = null;
+	private GameObject DOTObj = null;
+
+	//the armor piercing rate
+	private float tower1MissRate = 0.2f;
+	private float tower2MissRate = 0.3f;
+	private float tower7MissRate = 0.3f;
+
+	TechNode node;
+
+	void Start(){
+		node = new TechNode ();
+	}
 
 	public void Fire(Character target){
 		curTarget = target;
@@ -54,6 +66,9 @@ public class CannonBullet : MonoBehaviour, IBullet {
 				float currentDist = Vector3.Distance(this.transform.position, target.GetPos());
 				if(currentDist < 0.5f){
 					move = false;
+					if(node.GetPosion){
+						OnDOTEffect();
+					}
 					OnHited();
 				}
 				this.transform.Translate(Vector3.forward*Mathf.Min(speed * Time.deltaTime,currentDist));
@@ -70,6 +85,13 @@ public class CannonBullet : MonoBehaviour, IBullet {
 		//create a new game object to show the explosion effect
 		explosionObj = (GameObject)GameObject.Instantiate (Resources.Load ("explosion"));
 		explosionObj.transform.position = curTarget.GetPos();
+	}
+
+	//DOT Effect
+	public void OnDOTEffect(){
+		DOTObj = (GameObject)GameObject.Instantiate(Resources.Load("DOT"));
+		DOTObj.transform.position = curTarget.GetPos ();
+		DOTObj.GetComponent<DOTMoveAndHit> ().SetTarget (curTarget);
 	}
 
 	public void OnHited(){

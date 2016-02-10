@@ -8,7 +8,7 @@ public class Tower4 : Building {
 	public Character curEnemy;
 	public List<Character> enemyLists = new List<Character> ();
 	public int attackPower = 100;
-	
+	TechNode node;
 	float mHitDelta;
 	bool endAttack = true;
 	int curFps = 0;
@@ -21,6 +21,11 @@ public class Tower4 : Building {
 	float attackIntervale = 1;
 	float dirRotation;
 	bool isExist;
+
+	void Start(){
+		node = new TechNode ();
+	}
+
 	public Tower4(){
 		model = (GameObject)GameObject.Instantiate(Resources.Load("tower4"));
 		model.name = "" + ID;
@@ -40,7 +45,11 @@ public class Tower4 : Building {
 		}
 		for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
 			if(Vector3.Distance(this.GetPos(),EnemySpawnManager._instance.enemyList[i].GetPos()) >= this.GetAttackRange()){
-				EnemySpawnManager._instance.enemyList[i].SetSpeed(0.01f);
+				if(node != null && node.GetExtraSlow){
+					EnemySpawnManager._instance.enemyList[i].SetSpeed(0.015f);
+				} else {
+					EnemySpawnManager._instance.enemyList[i].SetSpeed(0.02f);
+				}
 			} else {
 				EnemySpawnManager._instance.enemyList[i].SetSpeed(0.008f);
 			}

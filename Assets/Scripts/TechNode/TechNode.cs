@@ -20,6 +20,12 @@ public class TechNode : MonoBehaviour {
 	private static bool isStasisDamage = false;
 	//no 20. tech node. Generator provide more power
 	private static bool isGeneratorPower = false;
+	//no 22. tech node. Research Speed Up
+	private static bool isResearchSpeedup = false;
+	//no 23. tech node. Napalm
+	private static bool isPoison = false;
+	//no 26. tech node. Extra slow effect on all enemy
+	private static bool isExtraSlow = false;
 	
 	public bool GetTower1{
 		get { return isTower1; }
@@ -71,6 +77,18 @@ public class TechNode : MonoBehaviour {
 
 	public bool GetGeneratorPower{
 		get { return isGeneratorPower; }
+	}
+
+	public bool GetResearchSpeedup{
+		get { return isResearchSpeedup; }
+	}
+
+	public bool GetPosion{
+		get { return isPoison; }
+	}
+
+	public bool GetExtraSlow{
+		get { return isExtraSlow; }
 	}
 
 	public UIAtlas Atlas;
@@ -151,6 +169,15 @@ public class TechNode : MonoBehaviour {
 		}
 		if (ableSprite == "towerTank_1_o") {
 			isGeneratorPower = true;
+		}
+		if (ableSprite == "towerTank_2_o") {
+			isResearchSpeedup = true;
+		}
+		if (ableSprite == "towerStinger_o") {
+			isPoison = true;
+		}
+		if (ableSprite == "towerskyrunner_2_o") {
+			isExtraSlow = true;
 		}
 	}
 

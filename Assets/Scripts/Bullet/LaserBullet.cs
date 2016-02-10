@@ -16,9 +16,17 @@ public class LaserBullet : MonoBehaviour, IBullet {
 		private float distanceToTarget;
 		private bool move = true;
 		private Character curTarget;
+		private GameObject DOTObj = null;
+
+	//tower10 miss rate
+	private float tower10MissRate = 0.3f;
 		
-		
-		
+	TechNode node;
+
+	void Start(){
+		node = new TechNode ();
+	}
+
 		public void Fire(Character target){
 			curTarget = target;
 			Transform house = transform.GetChild (0);
@@ -40,6 +48,9 @@ public class LaserBullet : MonoBehaviour, IBullet {
 					float currentDist = Vector3.Distance(this.transform.position, target.GetPos());
 					if(currentDist < 0.5f){
 						move = false;
+						if(node.GetPosion){
+							OnDOTEffect();
+						}
 						OnHited();
 					}
 					this.transform.Translate(Vector3.forward*Mathf.Min(speed * Time.deltaTime,currentDist));
@@ -52,7 +63,13 @@ public class LaserBullet : MonoBehaviour, IBullet {
 			}
 		}
 		
-		
+	//DOT Effect
+	public void OnDOTEffect(){
+		DOTObj = (GameObject)GameObject.Instantiate(Resources.Load("DOT"));
+		DOTObj.transform.position = curTarget.GetPos ();
+		DOTObj.GetComponent<DOTMoveAndHit> ().SetTarget (curTarget);
+	}
+
 		public void OnHited(){
 			if (parent10 != null) {
 				BulletManager.Instance.CalcuBulletDamage (curTarget, this.parent10);

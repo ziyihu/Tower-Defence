@@ -8,7 +8,7 @@ public class StasisDamage : MonoBehaviour {
 	private float timer = 1f;
 	private float time = 0;
 
-	private bool isStasisDamage;
+	private bool isStasisDamage = false;
 
 	CharacterManager cManager;
 	private TechNode node;

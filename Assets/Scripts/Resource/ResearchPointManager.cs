@@ -22,6 +22,12 @@ public class ResearchPointManager : MonoBehaviour {
 	private bool isActive = false;
 	private int speed = 0;
 
+	//if active the Research Acceleration tech, set this to 0.1-0.9 to speed up the Research point gathering
+	private static float speedUp = 1f;
+
+	public void SetSpeedUp(float number) { if(number > 0 && number < 1) speedUp = number; }
+	public float GetSpeedUp() { return speedUp; }
+	
 	TowerBuildManager tManager;
 
 	public void SetActive(){
@@ -51,15 +57,15 @@ public class ResearchPointManager : MonoBehaviour {
 		} else {
 			isActive = true;
 			if(speed == 1){
-				timer = 0.9f;
+				timer = 0.9f * speedUp;
 			} else if(speed == 2){
-				timer = 0.8f;
+				timer = 0.8f * speedUp;
 			} else if(speed == 3){
-				timer = 0.7f;
+				timer = 0.7f * speedUp;
 			} else if(speed == 4){
-				timer = 0.6f;
+				timer = 0.6f * speedUp;
 			} else if(speed == 5){
-				timer = 0.5f;
+				timer = 0.5f * speedUp;
 			}
 		}
 		time += Time.deltaTime;
