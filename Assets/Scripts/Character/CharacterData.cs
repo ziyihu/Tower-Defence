@@ -12,6 +12,7 @@ public struct CharacterData{
 		BOWMAN,
 		GIANT,
 		VIKING,
+		WOLF
 	}
 	public enum buildingMode{
 		BARRACK = 1,

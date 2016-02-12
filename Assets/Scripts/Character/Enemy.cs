@@ -32,7 +32,6 @@ public class Enemy : Character {
 	}
 
 	public void SetPosition(Vector3 position){
-		Debug.Log("2");
 		model.transform.localPosition = position;
 	}
 
