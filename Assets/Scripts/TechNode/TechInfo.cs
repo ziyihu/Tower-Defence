@@ -42,6 +42,81 @@ public class TechInfo : MonoBehaviour {
 				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
 				techNodeInfoName.text = "Stasis Tower";
 				techNodeInfoDes.text = "Description:\nslows all enemies in range";
+			} else if(this.transform.tag == "smallmine"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Small Mine";
+				techNodeInfoDes.text = "Description:\nslows diamond acquisition";
+			} else if(this.transform.tag == "largemine"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Large Mine";
+				techNodeInfoDes.text = "Description:\nfast diamond acquisition";
+			} else if(this.transform.tag == "smallgenerator"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Small Generator";
+				techNodeInfoDes.text = "Description:\ngenerates a little bit of power";
+			} else if(this.transform.tag == "largegenerator"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Large Generator";
+				techNodeInfoDes.text = "Description:\ngenerates a lot of power";
+			} else if(this.transform.tag == "researchlab"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Research Lab";
+				techNodeInfoDes.text = "Description:\ngenerates research point over time";
+			} else if(this.transform.tag == "targetingfacility"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Targeting Facility";
+				techNodeInfoDes.text = "Description:\nincreases the damage of nearby towers";
+			} else if(this.transform.tag == "supercapacitor"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Super Capacitor";
+				techNodeInfoDes.text = "Description:\nincreases the rate of fire of nearby towers";
+			} else if(this.transform.tag == "alienrecovery"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Alien Recovery";
+				techNodeInfoDes.text = "Description:\ngenerators resources from aliens killed nearby";
+			} else if(this.transform.tag == "extradamage"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Extra Damage";
+				techNodeInfoDes.text = "Description:\nincreases the damage of the towers";
+			} else if(this.transform.tag == "stasisfielddamage"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Stasis Damage";
+				techNodeInfoDes.text = "Description:\nstasis field does damage";
+			} else if(this.transform.tag == "generatorspower"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Generator Power";
+				techNodeInfoDes.text = "Description:\nincreaesd power production from generators";
+			} else if(this.transform.tag == "researchacceleration"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Research Speedup";
+				techNodeInfoDes.text = "Description:\nincreases the research speed, gets more points";
+			} else if(this.transform.tag == "napalm"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Lasts Posion";
+				techNodeInfoDes.text = "Description:\nadd posion effect to the shoting";
+			} else if(this.transform.tag == "extraslow2"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Extra Slow";
+				techNodeInfoDes.text = "Description:\nextra slow effect on all enemies";
+			} else if(this.transform.tag == "liferecovery"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Life Recovery";
+				techNodeInfoDes.text = "Description:\nrecovery life when no enemies reached there in a while";
 			}
 		} else {
 			techNodeInfoPanel.SetActive(false);

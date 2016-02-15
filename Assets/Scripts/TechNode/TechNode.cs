@@ -14,6 +14,25 @@ public class TechNode : MonoBehaviour {
 	private static bool isTower8 = false;
 	private static bool isTower9 = false;
 	private static bool isTower10 = false;
+
+
+	//no 7. tech node. Small Mine
+	private static bool isSmallMine = false;
+	//no 8. tech node. Large Mine
+	private static bool isLargeMine = false;
+	//no 9. tech node. Small Generator
+	private static bool isSmallGenerator = false;
+	//no 10. tech node. Large Generator
+	private static bool isLargeGenerator = false;
+	//no 11. tech node. Research Lab
+	private static bool isResearchLab = false;
+	//no 12. tech node. Targeting facility
+	private static bool isTargeting = false;
+	//no 13. tech node. Super Capacitor
+	private static bool isSuperCapacitor = false;
+	//no 14. tech node. Alien Recovery
+	private static bool isAlienRecovery = false;
+
 	//no 15. tech node. Extra Damage
 	private static bool isIncreasedPower = false;
 	//no 17. tech node. Stasis field does damage
@@ -91,6 +110,37 @@ public class TechNode : MonoBehaviour {
 		get { return isExtraSlow; }
 	}
 
+	public bool GetSmallMine{
+		get { return isSmallMine; }
+	}
+
+	public bool GetLargeMine{
+		get { return isLargeMine; }
+	}
+
+	public bool GetSmallGenerator{
+		get { return isSmallGenerator; }
+	}
+
+	public bool GetLargeGenerator{
+		get { return isLargeGenerator; }
+	}
+
+	public bool GetResearchLab{
+		get { return isResearchLab; }
+	}
+
+	public bool GetTargetingFacility{
+		get { return isTargeting; }
+	}
+
+	public bool GetSuperCapacitor{
+		get { return isSuperCapacitor; }
+	}
+
+	public bool GetAlienRecovery{
+		get { return isAlienRecovery; }
+	}
 	public UIAtlas Atlas;
 	public List<TechNode> techNodeList = new List<TechNode>();
 	public string ableSprite;
@@ -178,6 +228,30 @@ public class TechNode : MonoBehaviour {
 		}
 		if (ableSprite == "towerskyrunner_2_o") {
 			isExtraSlow = true;
+		}
+		if (ableSprite == "smallMine") {
+			isSmallMine = true;
+		}
+		if (ableSprite == "largeMine") {
+			isLargeMine = true;
+		}
+		if (ableSprite == "research001") {
+			isResearchLab = true;
+		}
+		if (ableSprite == "smallgeneator001") {
+			isSmallGenerator = true;
+		}
+		if (ableSprite == "largegeneator001") {
+			isLargeGenerator = true;
+		}
+		if (ableSprite == "Targeting") {
+			isTargeting = true;
+		}
+		if(ableSprite == "supercapacitor001"){
+			isSuperCapacitor = true;
+		}
+		if(ableSprite == "AlienRecovery"){
+			isAlienRecovery = true;
 		}
 	}
 

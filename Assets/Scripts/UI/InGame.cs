@@ -15,6 +15,17 @@ public class InGame : MonoBehaviour {
 	public UIButton tower08;
 	public UIButton tower09;
 	public UIButton tower10;
+
+	public GameObject smallMine;
+	public GameObject largeMine;
+
+	public GameObject smallGenerator;
+	public GameObject largeGenerator;
+
+	public GameObject researchLab;
+	public GameObject targetingFacility;
+	public GameObject superCapacitor;
+	public GameObject alienRecovery;
 	
 	public UIButton stop;
 	public UIButton start;
@@ -114,5 +125,29 @@ public class InGame : MonoBehaviour {
 		if (node.GetTower10) {
 			tower10.transform.GetChild(0).gameObject.SetActive(false);
 		} 
+		if (node.GetSmallMine) {
+			smallMine.transform.GetChild(0).gameObject.SetActive(false);
+		}
+		if (node.GetLargeMine) {
+			largeMine.transform.GetChild(0).gameObject.SetActive(false);
+		}
+		if (node.GetSmallGenerator) {
+			smallGenerator.transform.GetChild(0).gameObject.SetActive(false);
+		}
+		if (node.GetLargeGenerator) {
+			largeGenerator.transform.GetChild(0).gameObject.SetActive(false);
+		}
+		if (node.GetResearchLab) {
+			researchLab.transform.GetChild(0).gameObject.SetActive(false);
+		}
+		if (node.GetTargetingFacility) {
+			targetingFacility.transform.GetChild(0).gameObject.SetActive(false);
+		}
+		if (node.GetSuperCapacitor) {
+			superCapacitor.transform.GetChild(0).gameObject.SetActive(false);
+		}
+		if (node.GetAlienRecovery) {
+			alienRecovery.transform.GetChild(0).gameObject.SetActive(false);
+		}
 	}
 }
