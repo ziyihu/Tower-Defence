@@ -34,6 +34,21 @@ This is a tower defence game using C# language.
  Have implemented the stasis field does damage tech
  Have implemented the increase power produce from the generators
  
+ On Feb 14th.
+ Have implemented the Research acceleration
+ Have implemented the lasts posion to the shoting
+ Have implemented the extra slow effect on all enemies
+ Have added 30 types of enemies in the game
+ Have implemented the description of the tech node(if put mouse on the tech node, it will show the description of the node)
+ Have implemented the relation of the tower selection panel to the tech node(the tower is locked unless you click that tech node)
+ 
+ Need to be done:
+ add power provider techology(the tower will only able to attck when the other tower providing power to it)
+ change the attack effect of the laser tower
+ implement the armor
+ implement the number related to the wave
+ implement the number related to the life
+ 
 Undo parts: 
 // Targeting facility: increases the damage of nearby towers
 // Research labs: generates research point over time
@@ -47,12 +62,12 @@ Undo parts:
  Increased antenna range
  Increased antenna power delivery
 // Increased power production from generators 
- Research acceleration:can spend resources to get research points
- Napalm: add DOT to shots
+// Research acceleration:can spend resources to get research points
+// Napalm: add DOT to shots
  Increased armor piercing
  
  Extra slow effect when enemies reach base
- Extra slow effect on all enemies
+// Extra slow effect on all enemies
  Recover life when no enemies reached there in a while
  
  
