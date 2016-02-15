@@ -79,7 +79,7 @@ public class Enemy : Character {
 			
 			//destory the game object
 			GameManager.Instance.DeleteById(ID);
-			//create a new game object to show the animation
+			//create a new game object to show the animation die
 			dieObj = (GameObject)GameObject.Instantiate (Resources.Load ("die"));
 			dieObj.transform.position = diePos;
 			return;

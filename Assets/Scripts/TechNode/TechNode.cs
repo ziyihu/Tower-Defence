@@ -102,7 +102,7 @@ public class TechNode : MonoBehaviour {
 
 	void Start(){
 		foreach (TechNode node in techNodeList) {
-			node.nodeButton.isEnabled = false;
+			node.nodeButton.GetComponent<UIButton>().enabled = false;
 			if(unableSprite != null){
 				node.nodeButton.normalSprite = node.unableSprite;
 			}
@@ -113,7 +113,7 @@ public class TechNode : MonoBehaviour {
 	public void ActiveNextNode(){
 		if(Atlas != null){
 			foreach (TechNode node in techNodeList) {
-				node.nodeButton.isEnabled = true;
+				node.nodeButton.GetComponent<UIButton>().enabled = true;
 				if(ableSprite != null){
 					node.nodeButton.normalSprite = node.ableSprite;
 				}
@@ -128,7 +128,7 @@ public class TechNode : MonoBehaviour {
 	public void OnBtnClicked(){
 		isActive = true;
 		nodeButton.SetState(UIButtonColor.State.Pressed,true);
-		nodeButton.isEnabled = false;
+		nodeButton.GetComponent<UIButton>().enabled = false;
 		if(active != null)
 			active.gameObject.SetActive (true);
 		if (ableSprite == "bloodraven_1") {
@@ -187,4 +187,5 @@ public class TechNode : MonoBehaviour {
 			isActive = false;
 		}
 	}
+	
 }

@@ -65,8 +65,8 @@ public class QuadTextureAni : MonoBehaviour
 					mSpriteNames.Add(sprite.name);
 				}
 			}
-			if(mSpriteNames.Count != 0 &&  mSpriteNames[0].Contains("_"))
-				mSpriteNames.Sort(SortByName);
+			//if(mSpriteNames.Count != 0 &&  mSpriteNames[0].Contains("_"))
+			//	mSpriteNames.Sort(SortByName);
 		}
 	}
 	
@@ -88,13 +88,13 @@ public class QuadTextureAni : MonoBehaviour
 
 		if (mActive && mSpriteNames.Count > 1 && Application.isPlaying && mFPS > 0f)
 		{
-			mDelta += RealTime.deltaTime;
+			mDelta += Time.deltaTime;
 			float rate = 1f / mFPS;
 			
 			if (rate < mDelta)
 			{
 				
-				mDelta = (rate > 0f) ? mDelta - rate : 0f;
+				mDelta = 0f;
 				if(flip)
 				{
 					if(needReverse)
@@ -141,7 +141,7 @@ public class QuadTextureAni : MonoBehaviour
 				{
 
 					//Debug.LogError(mIndex);
-					if(mIndex >= 1 && mIndex < mSpriteNames.Count)
+					if(mIndex >= 0 && mIndex < mSpriteNames.Count)
 					mSprite.spriteName = mSpriteNames[mIndex];
 					mSprite.mirrorX = mirror;
 					mSprite.InitFace();

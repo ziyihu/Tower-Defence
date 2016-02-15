@@ -27,6 +27,16 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 	
 	Character chara = new Character();
 
+	private void SetEnemy(Character chara,Vector3 pos,Vector3 dir,int camp,CharacterStatus.Pose pose,float speed,int life){
+		chara.SetPos(pos);
+		chara.SetDir(dir);
+		chara.SetPose(pose);
+		chara.SetCamp(camp);
+		chara.SetSpeed(speed);
+		//set bowman max life
+		chara.SetLife(life);
+	}
+
 	public Character SpawnCharacter(CharacterData.CharacterClassType classType, int charModeType, int camp, int level, Vector3 pos, Vector3 dir, CharacterStatus.Pose pose){
 		this.START_METHOD("SpawnCharacter");
 		Character tempChar = null;
@@ -35,33 +45,253 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 			//create the enemy
 			if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.BOWMAN){
 				Bowman chara = new Bowman();
-				chara.SetPos(pos);
-				chara.SetDir(dir);
-				chara.SetPose(pose);
-				chara.SetCamp(camp);
-				chara.SetSpeed(0.02f);
-				//set bowman max life
-				chara.SetLife(200);
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.GIANT){
-				Gaint chara = new Gaint();
-				chara.SetPos(pos);
-				chara.SetDir(dir);
-				chara.SetPose(pose);
-				chara.SetCamp(camp);
-				chara.SetSpeed(0.02f);
-				//set giant max life
-				chara.SetLife(400);
+				Gaint chara = new Gaint("giant");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,20);
 				tempChar = chara;
 			} else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.VIKING){
 				Viking chara = new Viking();
-				chara.SetPos(pos);
-				chara.SetDir(dir);
-				chara.SetPose(pose);
-				chara.SetCamp(camp);
-				chara.SetSpeed(0.02f);
-				//set viking max life
-				chara.SetLife(300);
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,30);
+				tempChar = chara;
+			}
+			//create enemy2
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY2){
+				Gaint chara = new Gaint("enemy2");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			//enemy3
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY3){
+				Gaint chara = new Gaint("enemy3");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			//enemy4
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY4){
+				Gaint chara = new Gaint("enemy4");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY5){
+				Gaint chara = new Gaint("enemy5");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY6){
+				Gaint chara = new Gaint("enemy6");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY7){
+				Gaint chara = new Gaint("enemy7");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY8){
+				Gaint chara = new Gaint("enemy8");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY9){
+				Gaint chara = new Gaint("enemy9");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY10){
+				Gaint chara = new Gaint("enemy10");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY11){
+				Gaint chara = new Gaint("enemy11");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY12){
+				Gaint chara = new Gaint("enemy12");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY13){
+				Gaint chara = new Gaint("enemy13");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY14){
+				Gaint chara = new Gaint("enemy14");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY15){
+				Gaint chara = new Gaint("enemy15");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY16){
+				Gaint chara = new Gaint("enemy16");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY17){
+				Gaint chara = new Gaint("enemy17");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY18){
+				Gaint chara = new Gaint("enemy18");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY19){
+				Gaint chara = new Gaint("enemy19");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY20){
+				Gaint chara = new Gaint("enemy20");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY21){
+				Gaint chara = new Gaint("enemy21");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY22){
+				Gaint chara = new Gaint("enemy22");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY23){
+				Gaint chara = new Gaint("enemy23");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY24){
+				Gaint chara = new Gaint("enemy24");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY25){
+				Gaint chara = new Gaint("enemy25");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY26){
+				Gaint chara = new Gaint("enemy26");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY27){
+				Gaint chara = new Gaint("enemy27");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY28){
+				Gaint chara = new Gaint("enemy28");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY29){
+				Gaint chara = new Gaint("enemy29");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY30){
+				Gaint chara = new Gaint("enemy30");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY31){
+				Gaint chara = new Gaint("enemy31");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY32){
+				Gaint chara = new Gaint("enemy32");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY33){
+				Gaint chara = new Gaint("enemy33");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY34){
+				Gaint chara = new Gaint("enemy34");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY35){
+				Gaint chara = new Gaint("enemy35");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY36){
+				Gaint chara = new Gaint("enemy36");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY37){
+				Gaint chara = new Gaint("enemy37");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY38){
+				Gaint chara = new Gaint("enemy38");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY39){
+				Gaint chara = new Gaint("enemy39");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY40){
+				Gaint chara = new Gaint("enemy40");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY41){
+				Gaint chara = new Gaint("enemy41");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY42){
+				Gaint chara = new Gaint("enemy42");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY43){
+				Gaint chara = new Gaint("enemy43");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY44){
+				Gaint chara = new Gaint("enemy44");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY45){
+				Gaint chara = new Gaint("enemy45");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY46){
+				Gaint chara = new Gaint("enemy46");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.BOSS1){
+				Gaint chara = new Gaint("boss1");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.BOSS2){
+				Gaint chara = new Gaint("boss2");
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
 			if(tempChar != null){

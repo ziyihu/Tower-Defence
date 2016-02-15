@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class EnemyMove : MonoBehaviour {
+
+	private GameObject effect11 = null;
+
 	// Use this for initialization
 	void Start () {
 
@@ -23,7 +26,7 @@ public class EnemyMove : MonoBehaviour {
 					ani.namePrefix = "walkright";
 					ani.mFPS = 20;
 					ani.RebuildSpriteList();
-					if(enemy.characterType == CharacterData.CharacterModel.VIKING){
+					if(enemy.characterType == CharacterData.CharacterModel.BOWMAN || enemy.characterType == CharacterData.CharacterModel.VIKING){
 						ani.mirror = true;
 					} else {
 						ani.mirror = false;
@@ -47,7 +50,7 @@ public class EnemyMove : MonoBehaviour {
 					ani.namePrefix = "walkright";
 					ani.mFPS = 20;
 					ani.RebuildSpriteList();
-					if(enemy.characterType == CharacterData.CharacterModel.VIKING){
+					if(enemy.characterType == CharacterData.CharacterModel.BOWMAN || enemy.characterType == CharacterData.CharacterModel.VIKING){
 						ani.mirror = false;
 					} else {
 						ani.mirror = true;
@@ -65,13 +68,13 @@ public class EnemyMove : MonoBehaviour {
 				}
 				enemy.SetPos (new Vector3 (enemy.GetPos ().x + enemy.Speed * Time.timeScale, enemy.GetPos ().y, enemy.GetPos ().z));
 			}
-			else if(enemy.GetPos().x < 22.4f && enemy.GetPos().x > 22.3f && enemy.GetPos().z <= 23.6f && enemy.GetPos().z >= 19.5f){
+			else if(enemy.GetPos().x < 22.6f && enemy.GetPos().x > 22.3f && enemy.GetPos().z <= 23.6f && enemy.GetPos().z >= 19.5f){
 			//sixth path,walk left
 				if (ani != null) {
 					ani.namePrefix = "walkright";
 					ani.mFPS = 20;
 					ani.RebuildSpriteList();
-					if(enemy.characterType == CharacterData.CharacterModel.VIKING){
+					if(enemy.characterType == CharacterData.CharacterModel.BOWMAN || enemy.characterType == CharacterData.CharacterModel.VIKING){
 						ani.mirror = true;
 					} else {
 						ani.mirror = false;
@@ -89,9 +92,20 @@ public class EnemyMove : MonoBehaviour {
 				}
 				enemy.SetPos (new Vector3 (enemy.GetPos ().x + enemy.Speed * Time.timeScale, enemy.GetPos ().y, enemy.GetPos ().z));
 			}
-			if(enemy.GetPos().x > 25.0f){
+			if(enemy.GetPos().x > 23.2f){
+				//show the escape effect
+				//TODO
+				effect11 = (GameObject)GameObject.Instantiate(Resources.Load("effect11"));
+				effect11.transform.position = enemy.GetPos ();
+				//current life decrease 1
+				//if life is less than 0, game over
+				if(LifeManager._instance.GetLife() >= 1){
+					LifeManager._instance.SetLife(LifeManager._instance.GetLife()-1);
+				} else if(LifeManager._instance.GetLife() == 0){
+					GameManager.Instance.CurStatus = GameManager.Status.END_GAME;
+				}
 				EnemySpawnManager._instance.enemyList.Remove(enemy);
-					enemy.Destroy();
+				enemy.Destroy();
 			}
 		}
 
