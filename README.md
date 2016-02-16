@@ -42,6 +42,15 @@ This is a tower defence game using C# language.
  Have implemented the description of the tech node(if put mouse on the tech node, it will show the description of the node)
  Have implemented the relation of the tower selection panel to the tech node(the tower is locked unless you click that tech node)
  
+ On Feb 16th.
+ Have implemented the power provider tower
+ Have implemented the power provider range increasing tech 
+ Have implemented the power provider power delivery tech
+ Have implemented the extra slow tech(when the enemy reach the base, the other enemy speed will be decreased)
+ Have implemented the life recovery tech
+ Have implemented the number related to the waves
+ 
+ 
  Need to be done:
  add power provider techology(the tower will only able to attck when the other tower providing power to it)
  change the attack effect of the laser tower
@@ -59,14 +68,14 @@ Undo parts:
 // Extra damage
  Overcharge: towers can be set to consume more power, deal more damage
 // Stasis field does damage
- Increased antenna range
- Increased antenna power delivery
+// Increased antenna range
+// Increased antenna power delivery
 // Increased power production from generators 
 // Research acceleration:can spend resources to get research points
 // Napalm: add DOT to shots
  Increased armor piercing
  
- Extra slow effect when enemies reach base
+// Extra slow effect when enemies reach base
 // Extra slow effect on all enemies
  Recover life when no enemies reached there in a while
  
