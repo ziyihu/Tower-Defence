@@ -13,7 +13,7 @@ public class MemoryManager : UnityAllSceneSingleton<MemoryManager>, IMessageObje
 		this.START_METHOD ("CreateNativeStruct");
 		Type type = Type.GetType (className);
 		//only allow 100 game object been created
-		if (structs.Count <= 100) {
+		if (structs.Count <= 1000) {
 			if(!structLists.ContainsKey(className)){
 				structLists.Add(className,structs);
 			}

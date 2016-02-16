@@ -45,7 +45,24 @@ public class TechNode : MonoBehaviour {
 	private static bool isPoison = false;
 	//no 26. tech node. Extra slow effect on all enemy
 	private static bool isExtraSlow = false;
-	
+
+
+	//TODO
+	//no 6. tech node. Antenna
+	private static bool isAtenna = false;
+	//no 16. tech node. Over Charge
+	private static bool isOverCharge = false;
+	//no 18. tech node. Antenna Range
+	private static bool isAtennaRange = false;
+	//no 19. tech node. Antenna Power
+	private static bool isAtennaPower = false;
+	//no 24. tech node. Armor Piercing
+	private static bool isArmorPiercing = false;
+	//no 25. tech node. Extra Slow2
+	private static bool isExtraSlow2 = false;
+
+
+
 	public bool GetTower1{
 		get { return isTower1; }
 	}
@@ -141,6 +158,32 @@ public class TechNode : MonoBehaviour {
 	public bool GetAlienRecovery{
 		get { return isAlienRecovery; }
 	}
+
+	//TODO
+	public bool GetAnetnna{
+		get { return isAtenna; }
+	}
+
+	public bool GetOverCharge{
+		get { return isOverCharge; }
+	}
+
+	public bool GetAntennaRange{
+		get { return isAtennaRange; }
+	}
+
+	public bool GetAntennaPower{
+		get { return isAtennaPower; }
+	}
+
+	public bool GetArmorPiercing{
+		get { return isArmorPiercing; }
+	}
+
+	public bool GetExtraSlow2{
+		get { return isExtraSlow2; }
+	}
+
 	public UIAtlas Atlas;
 	public List<TechNode> techNodeList = new List<TechNode>();
 	public string ableSprite;
@@ -253,6 +296,25 @@ public class TechNode : MonoBehaviour {
 		if(ableSprite == "AlienRecovery"){
 			isAlienRecovery = true;
 		}
+		if (ableSprite == "Antenna001") {
+			isAtenna = true;
+		}
+		if (ableSprite == "btnPlay_p") {
+			isOverCharge = true;
+		}
+		if (ableSprite == "towertoxic_o") {
+			isAtennaRange = true;
+		}
+		if (ableSprite == "towerbismarck_o") {
+			isAtennaPower = true;
+		}
+		if (ableSprite == "btnSpeed_p") {
+			isArmorPiercing = true;
+		}
+		if (ableSprite == "btnOption_p") {
+			isExtraSlow2 = true;
+		}
+
 	}
 
 	void Update(){

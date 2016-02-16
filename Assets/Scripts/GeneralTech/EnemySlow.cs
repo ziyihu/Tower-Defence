@@ -5,7 +5,8 @@ public class EnemySlow : MonoBehaviour {
 
 	private bool isExtraSlow = false;
 	private bool hasExtraSlow = false;
-	
+	private float slowSpeed = 0.01f;
+
 	CharacterManager cManager;
 	private TechNode node;
 
@@ -22,7 +23,7 @@ public class EnemySlow : MonoBehaviour {
 		}
 		if (isExtraSlow) {
 			for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
-				EnemySpawnManager._instance.enemyList[i].SetSpeed(0.015f);
+				EnemySpawnManager._instance.enemyList[i].SetSpeed(slowSpeed);
 			}
 		}
 	}

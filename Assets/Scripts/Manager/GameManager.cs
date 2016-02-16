@@ -27,6 +27,7 @@ public class GameManager : UnityAllSceneSingleton<GameManager>,IMessageObject {
 	public List<TargetingFacility> targetingFacList = new List<TargetingFacility> ();
 	public List<SuperCapacitor> superCapList = new List<SuperCapacitor> ();
 	public List<AlienRecovery> alienRecList = new List<AlienRecovery> ();
+	public List<Antenna> antennaList = new List<Antenna> ();
 	public CharacterManager cManager;
 	public Status CurStatus = Status.NONE;
 

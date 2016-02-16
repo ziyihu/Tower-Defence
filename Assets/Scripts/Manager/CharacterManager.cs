@@ -24,6 +24,11 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 
 	public void SetTower10AttackNumber(int number) { tower10AttackNumber = number; }
 	public int GetTower10AttackNumber(){ return tower10AttackNumber; }
+
+	private static float antennaRange = 1;
+
+	public void SetAntennaRange(float number) { antennaRange = number; }
+	public float GetAntennaRange() { return antennaRange; }
 	
 	Character chara = new Character();
 
@@ -458,6 +463,15 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPose(pose);
 				character.SetCamp(camp);
 				character.SetAttackRange(2);
+				tempChar = character;
+			}
+			//Antenna
+			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.ANTENNA){
+				Antenna character = new Antenna();
+				character.SetPos(pos);
+				character.SetPose(pose);
+				character.SetCamp(camp);
+				character.SetAttackRange(antennaRange);
 				tempChar = character;
 			}
 			//created the tower, add to the building list

@@ -24,6 +24,8 @@ public class GeneratePowerIncrease : MonoBehaviour {
 			isGeneratorPower = true;
 		}
 		if (isGeneratorPower) {
+			int addPower = TowerBuildManager._instance.GetSmallGenNum()*smallGenIncrease + TowerBuildManager._instance.GetLargeGenNum()*bigGenIncrease;
+			TowerBuildManager._instance.AddPower(addPower);
 			TowerBuildManager._instance.SetSmallGenPower(TowerBuildManager._instance.GetSmallGenPower() + smallGenIncrease);
 			TowerBuildManager._instance.SetBigGenPower(TowerBuildManager._instance.GetBigGenPower() + bigGenIncrease);
 			isGeneratorPower = false;

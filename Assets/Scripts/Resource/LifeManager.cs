@@ -16,13 +16,13 @@ public class LifeManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		lifeLabel = this.transform.Find("ResourceInfo/LifeLabel").GetComponent<UILabel> ();
+		lifeLabel = this.transform.parent.Find("ResPanel/ResourceInfo/LifeLabel").GetComponent<UILabel> ();
 		lifeLabel.text = currentLife + "/" + maxLife;
 	}
 	public int GetLife() { return currentLife; }
 	public void SetLife(int life) { currentLife = life; lifeLabel.text = currentLife + "/" + maxLife; }
 
-
+		
 
 	// Update is called once per frame
 	void Update () {

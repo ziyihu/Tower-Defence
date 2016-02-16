@@ -117,7 +117,38 @@ public class TechInfo : MonoBehaviour {
 				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
 				techNodeInfoName.text = "Life Recovery";
 				techNodeInfoDes.text = "Description:\nrecovery life when no enemies reached there in a while";
+			} else if(this.transform.tag == "antenna"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Antenna";
+				techNodeInfoDes.text = "Description:\nsupplies power to nearby towers";
+			} else if(this.transform.tag == "overcharge"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Over Charge";
+				techNodeInfoDes.text = "Description:\ntowers can be set to consume more power, deal more damage";
+			} else if(this.transform.tag == "antennarange"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Antenna Range";
+				techNodeInfoDes.text = "Description:\nincreased antenna range";
+			} else if(this.transform.tag == "antennadelivery"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Antenna Power";
+				techNodeInfoDes.text = "Description:\nincreased antenna power delivery";
+			} else if(this.transform.tag == "armor"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Armor Piercing";
+				techNodeInfoDes.text = "Description:\nincreased armor piercing";
+			} else if(this.transform.tag == "extraslow2"){
+				techNodeInfoPanel.SetActive(true);
+				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
+				techNodeInfoName.text = "Extra Slow";
+				techNodeInfoDes.text = "Description:\nextra slow effect when enemies reach base";
 			}
+
 		} else {
 			techNodeInfoPanel.SetActive(false);
 		}
