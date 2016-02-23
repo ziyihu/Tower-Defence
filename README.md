@@ -59,6 +59,8 @@ This is a tower defence game using C# language.
  
  Almost finish all parts of the game
  
+ Next part is to set up numbers, and change the laser effect, add effect to the antenna when its working and when its providing power to the other towers.
+ 
  
 Undo parts: 
 // Targeting facility: increases the damage of nearby towers
