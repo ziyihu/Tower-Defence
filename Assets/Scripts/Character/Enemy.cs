@@ -9,6 +9,8 @@ public class Enemy : Character {
 	private Vector3 diePos;
 	private GameObject dieObj = null;
 
+	private TechNode node = new TechNode();
+
 	public CharacterData.CharacterModel characterType;
 	public Transform GetTransform (){
 		return model.transform;
@@ -64,7 +66,13 @@ public class Enemy : Character {
 	public override void OnBeHit(int damage){
 		base.OnBeHit (damage);
 		if(model != null){
-		data.life -= damage;
+			if(!node.GetArmorPiercing){
+				if(damage - GetArmor > 0){
+					data.life = data.life - (damage - GetArmor);
+				}
+			} else if(node.GetArmorPiercing){
+				data.life -= damage;
+			}
 		if (data.life <= 0) {
 			
 			//hide the blood number panel

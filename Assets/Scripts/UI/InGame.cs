@@ -26,6 +26,8 @@ public class InGame : MonoBehaviour {
 	public GameObject targetingFacility;
 	public GameObject superCapacitor;
 	public GameObject alienRecovery;
+
+	public GameObject antenna;
 	
 	public UIButton stop;
 	public UIButton start;
@@ -148,6 +150,9 @@ public class InGame : MonoBehaviour {
 		}
 		if (node.GetAlienRecovery) {
 			alienRecovery.transform.GetChild(0).gameObject.SetActive(false);
+		}
+		if (node.GetAnetnna) {
+			antenna.transform.GetChild(0).gameObject.SetActive(false);
 		}
 	}
 }

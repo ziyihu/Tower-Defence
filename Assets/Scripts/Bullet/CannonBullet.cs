@@ -30,11 +30,7 @@ public class CannonBullet : MonoBehaviour, IBullet {
 	private float tower2MissRate = 0.3f;
 	private float tower7MissRate = 0.3f;
 
-	TechNode node;
-
-	void Start(){
-		node = new TechNode ();
-	}
+	TechNode node = new TechNode();
 
 	public void Fire(Character target){
 		curTarget = target;

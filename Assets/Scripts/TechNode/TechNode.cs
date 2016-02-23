@@ -45,6 +45,8 @@ public class TechNode : MonoBehaviour {
 	private static bool isPoison = false;
 	//no 26. tech node. Extra slow effect on all enemy
 	private static bool isExtraSlow = false;
+	//no 27. tech node. Life Recovery
+	private static bool isLifeRecovery = false;
 
 
 	//TODO
@@ -183,6 +185,9 @@ public class TechNode : MonoBehaviour {
 	public bool GetExtraSlow2{
 		get { return isExtraSlow2; }
 	}
+	public bool GetLifeRecovery{
+		get { return isLifeRecovery; }
+	}
 
 	public UIAtlas Atlas;
 	public List<TechNode> techNodeList = new List<TechNode>();
@@ -218,110 +223,142 @@ public class TechNode : MonoBehaviour {
 		}
 	}
 
+	private void UsePointGetTech(){
+		ResearchPointManager._instance.UseResearchPoint ();
+		ActiveNextNode ();
+		nodeButton.GetComponent<UIButton> ().enabled = false;
+	}
+
 	public void OnBtnClicked(){
-		isActive = true;
 		nodeButton.SetState(UIButtonColor.State.Pressed,true);
-		nodeButton.GetComponent<UIButton>().enabled = false;
-		if(active != null)
-			active.gameObject.SetActive (true);
-		if (ableSprite == "bloodraven_1") {
-			isTower8 = true;
-		}
-		if (ableSprite == "marine_1") {
-			isTower1 = true;
-		}
-		if (ableSprite == "firebat_1") {
-			isTower2 = true;
-		}
-		if (ableSprite == "shining_1") {
-			isTower5 = true;
-		}
-		if (ableSprite == "rapidfire_1") {
-			isTower3 = true;
-		}
-		if (ableSprite == "tank_1") {
-			isTower4 = true;
-		}
-		if (ableSprite == "thor_1") {
-			isTower6 = true;
-		}
-		if (ableSprite == "skyrunnerG_1") {
-			isTower9 = true;
-		}
-		if (ableSprite == "toxic_1") {
-			isTower7 = true;
-		}
-		if (ableSprite == "bismarck_1") {
-			isTower10 = true;
-		}
-		if (ableSprite == "btnActive_o") {
-			isIncreasedPower = true;
-		}
-		if (ableSprite == "towerUpgrad_o") {
-			isStasisDamage = true;
-		}
-		if (ableSprite == "towerTank_1_o") {
-			isGeneratorPower = true;
-		}
-		if (ableSprite == "towerTank_2_o") {
-			isResearchSpeedup = true;
-		}
-		if (ableSprite == "towerStinger_o") {
-			isPoison = true;
-		}
-		if (ableSprite == "towerskyrunner_2_o") {
-			isExtraSlow = true;
-		}
-		if (ableSprite == "smallMine") {
-			isSmallMine = true;
-		}
-		if (ableSprite == "largeMine") {
-			isLargeMine = true;
-		}
-		if (ableSprite == "research001") {
-			isResearchLab = true;
-		}
-		if (ableSprite == "smallgeneator001") {
-			isSmallGenerator = true;
-		}
-		if (ableSprite == "largegeneator001") {
-			isLargeGenerator = true;
-		}
-		if (ableSprite == "Targeting") {
-			isTargeting = true;
-		}
-		if(ableSprite == "supercapacitor001"){
-			isSuperCapacitor = true;
-		}
-		if(ableSprite == "AlienRecovery"){
-			isAlienRecovery = true;
-		}
-		if (ableSprite == "Antenna001") {
-			isAtenna = true;
-		}
-		if (ableSprite == "btnPlay_p") {
-			isOverCharge = true;
-		}
-		if (ableSprite == "towertoxic_o") {
-			isAtennaRange = true;
-		}
-		if (ableSprite == "towerbismarck_o") {
-			isAtennaPower = true;
-		}
-		if (ableSprite == "btnSpeed_p") {
-			isArmorPiercing = true;
-		}
-		if (ableSprite == "btnOption_p") {
-			isExtraSlow2 = true;
-		}
-
+		if(ResearchPointManager._instance.GetResearchPoint() > 0){
+			if(active != null)
+				active.gameObject.SetActive (true);
+			if (ableSprite == "bloodraven_1") {
+				isTower8 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "marine_1") {
+				isTower1 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "firebat_1") {
+				isTower2 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "shining_1") {
+				isTower5 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "rapidfire_1") {
+				isTower3 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "tank_1") {
+				isTower4 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "thor_1") {
+				isTower6 = true;
+				UsePointGetTech();
+			}	
+			if (ableSprite == "skyrunnerG_1") {
+				isTower9 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "toxic_1") {
+				isTower7 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "bismarck_1") {
+				isTower10 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "btnActive_o") {
+				isIncreasedPower = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "towerUpgrad_o") {
+				isStasisDamage = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "towerTank_1_o") {
+				isGeneratorPower = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "towerTank_2_o") {
+				isResearchSpeedup = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "towerStinger_o") {
+				isPoison = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "towerskyrunner_2_o") {
+				isExtraSlow = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "smallMine") {
+				isSmallMine = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "largeMine") {
+				isLargeMine = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "research001") {
+				isResearchLab = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "smallgenerator002") {
+				isSmallGenerator = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "largegenerator001") {
+				isLargeGenerator = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "Targeting") {
+				isTargeting = true;
+				UsePointGetTech();
+			}
+			if(ableSprite == "supercapacitor001"){
+				isSuperCapacitor = true;
+				UsePointGetTech();
+			}
+			if(ableSprite == "AlienRecovery"){
+				isAlienRecovery = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "Antenna001") {
+				isAtenna = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "btnPlay_p") {
+				isOverCharge = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "towertoxic_o") {
+				isAtennaRange = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "towerbismarck_o") {
+				isAtennaPower = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "btnSpeed_p") {
+				isArmorPiercing = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "btnOption_p") {
+				isExtraSlow2 = true;
+				UsePointGetTech();
+			}
+			if (ableSprite == "towerskyrunner_1_o") {
+				isLifeRecovery = true;
+				UsePointGetTech();
+			}
+	}
 	}
 
-	void Update(){
-		if (isActive) {
-			ActiveNextNode();
-			isActive = false;
-		}
-	}
-	
 }

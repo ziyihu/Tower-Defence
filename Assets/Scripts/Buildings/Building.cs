@@ -103,5 +103,6 @@ public class Building :  Character
 		base.DoAI ();
 		
 	}
+
 }
 

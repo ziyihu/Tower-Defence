@@ -37,7 +37,7 @@ public class EnemySpawnManager : MonoBehaviour {
 		while (enemyList.Count > 0) {
 			yield return new WaitForSeconds(0.2f);
 		}
-		
+		WaveAdd ();
 		//second wave enemy
 		foreach (EnemySpawn s in vikingBornArray) {
 			enemyList.Add(s.Born());
@@ -46,7 +46,7 @@ public class EnemySpawnManager : MonoBehaviour {
 		while (enemyList.Count>0) {
 			yield return new WaitForSeconds(0.2f);
 		}
-
+		WaveAdd ();
 
 		//enemy 2 - 9
 		for (int i = 0; i < 10; i++) {
@@ -56,6 +56,8 @@ public class EnemySpawnManager : MonoBehaviour {
 		while (enemyList.Count > 0) {
 			yield return new WaitForSeconds(0.2f);
 		}
+		WaveAdd ();
+
 		for (int i = 0; i < 10; i++) {
 			enemyList.Add(enemySpawn.EnemyBorn("enemy3"));
 			yield return new WaitForSeconds(1f);
@@ -63,6 +65,8 @@ public class EnemySpawnManager : MonoBehaviour {
 		while (enemyList.Count > 0) {
 			yield return new WaitForSeconds(0.2f);
 		}
+		WaveAdd ();
+
 		for (int i = 0; i < 10; i++) {
 			enemyList.Add(enemySpawn.EnemyBorn("enemy4"));
 			yield return new WaitForSeconds(1f);
@@ -70,6 +74,8 @@ public class EnemySpawnManager : MonoBehaviour {
 		while (enemyList.Count > 0) {
 			yield return new WaitForSeconds(0.2f);
 		}
+		WaveAdd ();
+
 		for (int i = 0; i < 10; i++) {
 			enemyList.Add(enemySpawn.EnemyBorn("enemy5"));
 			yield return new WaitForSeconds(1f);
@@ -255,6 +261,10 @@ public class EnemySpawnManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.2f);
 		}
 
+	}
+
+	private void WaveAdd(){
+		WaveManager._instance.SetCurrentWave (WaveManager._instance.GetCurrentWave () + 1);
 	}
 
 }

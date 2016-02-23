@@ -26,10 +26,13 @@ public  class Character : IMessageObject,IComparable<Character>
 	public int GetCurrentSkillId() {return data.currentUseSkillId;}
 	public int GetAttackPower(){return data.attackPower;}
 	public float GetAttackRange(){return data.attackRange;}
+	public int GetNeedPower(){ return data.needPower; }
 	public int GetCamp(){return data.camp;}
 	public Vector3 GetLocalPos(){return model.transform.localPosition;}
 	public Vector3 GetRealPos(){return model.transform.position;}
 	public int GetLevel() {return data.level;}
+	public Antenna GetPowerProvider() { return data.powerProvider; }
+	public int GetArmor{ get { return data.armor; } }
 	//public Vector3 GetPos
 	private bool bNeedChange = false;
 	private bool bInited = false;
@@ -135,12 +138,21 @@ public  class Character : IMessageObject,IComparable<Character>
 	public void SetSpeed(float speed){
 		data.speed = speed;
 	}
+	public void SetArmor(int armor){
+		data.armor = armor;
+	}
 	public virtual void Start()
 	{
 		if (data.classType == (int)CharacterData.CharacterClassType.CHARACTER)
 			mId += 10000;
 		//Core.EventSystem.OnReachedTargetEvent += OnReachedTarget;
 		//RVOController controller =	status.gameObject.GetComponent<RVOController> ();
+	}
+	public void SetNeedPower(int power){
+		data.needPower = power;
+	}
+	public void SetPowerProvider(Antenna ant){
+		data.powerProvider = ant;
 	}
 	
 	public virtual void OnPathComplete()

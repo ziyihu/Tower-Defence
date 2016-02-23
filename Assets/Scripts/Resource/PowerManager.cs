@@ -11,18 +11,16 @@ public class PowerManager : MonoBehaviour {
 
 	private UILabel powerLabel;
 	private int power;
-	TowerBuildManager tManager;
 
 	// Use this for initialization
 	void Start () {
 		powerLabel = this.transform.Find ("PowerBg/PowerNumber").GetComponent<UILabel> ();
 		powerLabel.text = 0 + "";
-		tManager = new TowerBuildManager ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		power = tManager.GetCurrentPowerNum ();
+		power = TowerBuildManager._instance.GetCurrentPowerNum ();
 		powerLabel.text = power + "";
 	}
 }

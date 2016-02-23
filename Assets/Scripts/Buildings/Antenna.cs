@@ -3,6 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Antenna : Building {
+
+	public List<Character> providePowerTowers = new List<Character> ();
+
+	public void AddToProvidePowerTowerList(Character building){
+		providePowerTowers.Add (building);
+	}
+
+	public void RemoveFromProvidePowerTowerList(Character building){
+		providePowerTowers.Remove (building);
+	}
+
+	public List<Character> GetProvidePowerTowerList(){
+		return providePowerTowers;
+	}
+
 	//current power of the antenna
 	private int currentPower = 0;
 	//max power of the antenna
@@ -19,7 +34,7 @@ public class Antenna : Building {
 		maxPower = power;
 	}
 
-	public void AddPower(int power){
+	public void UsePower(int power){
 		if (currentPower + power <= maxPower) {
 			currentPower += power;
 		} else {
@@ -27,7 +42,7 @@ public class Antenna : Building {
 		}
 	}
 
-	public void UsePower(int power){
+	public void AddPower(int power){
 		if (currentPower - power >= 0) {
 			currentPower -= power;
 		} else {

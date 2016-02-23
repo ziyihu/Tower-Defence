@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class CharacterManager : MonoBehaviour,IMessageObject {
 
+	private List<int> armorList = new List<int>(){0,2,4,6,8,10};
+	private List<int> armorList2 = new List<int>(){0,0,2,4,6,8};
+
+	private TechNode node = new TechNode ();
+
 	List<Character> chars = new List<Character>();
 	public List<Character> building = new List<Character>();
 	List<Character> allCharacter = new List<Character> ();
@@ -50,37 +55,45 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 			//create the enemy
 			if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.BOWMAN){
 				Bowman chara = new Bowman();
+				chara.SetArmor(armorList[0]);
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
-			} else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.GIANT){
-				Gaint chara = new Gaint("giant");
-				SetEnemy(chara,pos,dir,camp,pose,0.02f,20);
-				tempChar = chara;
-			} else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.VIKING){
+			}
+//			} else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.GIANT){
+//				Gaint chara = new Gaint("giant");
+//				SetEnemy(chara,pos,dir,camp,pose,0.02f,20);
+//				tempChar = chara;
+//			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.VIKING){
 				Viking chara = new Viking();
+				chara.SetArmor(armorList[1]);
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,30);
 				tempChar = chara;
 			}
 			//create enemy2
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY2){
 				Gaint chara = new Gaint("enemy2");
+				chara.SetArmor(armorList[2]);
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
 			//enemy3
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY3){
 				Gaint chara = new Gaint("enemy3");
+				chara.SetArmor(armorList[3]);
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
 			//enemy4
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY4){
 				Gaint chara = new Gaint("enemy4");
+				chara.SetArmor(armorList[4]);
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY5){
 				Gaint chara = new Gaint("enemy5");
+				chara.SetArmor(armorList[5]);
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
@@ -334,6 +347,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPose (pose);
 				character.SetCamp(camp);
 				character.SetAttackRate(2f);
+				character.SetNeedPower(1);
 				//set attack power
 				character.SetAttackPower(tower1AttackNumber);
 				tempChar = character;
@@ -348,6 +362,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPose (pose);
 				character.SetCamp(camp);
 				character.SetAttackRate(1f);
+				character.SetNeedPower(2);
 				//set attack power
 				character.SetAttackPower(tower2AttackNumber);
 				tempChar = character;
@@ -361,6 +376,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetDir(dir);
 				character.SetPose(pose);
 				character.SetCamp(camp);
+				character.SetNeedPower(1);
 				tempChar = character;
 			}
 			//Tower7
@@ -374,6 +390,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetCamp(camp);
 				character.SetAttackPower(tower7AttackNumber);
 				character.SetAttackRate(1f);
+				character.SetNeedPower(2);
 				tempChar = character;
 			}
 			//Tower10
@@ -387,6 +404,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetCamp(camp);
 				character.SetAttackPower(tower10AttackNumber);
 				character.SetAttackRate(1f);
+				character.SetNeedPower(3);
 				tempChar = character;
 			}
 			//Research
@@ -445,6 +463,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPose(pose);
 				character.SetCamp(camp);
 				character.SetAttackRange(2);
+				character.SetNeedPower(1);
 				tempChar = character;
 			}
 			//Super Capacitor
@@ -454,6 +473,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPose(pose);
 				character.SetCamp(camp);
 				character.SetAttackRange(2);
+				character.SetNeedPower(1);
 				tempChar = character;
 			}
 			//Alien Recovery

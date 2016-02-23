@@ -70,6 +70,12 @@ public class TowerBuildManager : MonoBehaviour {
 		return largeGenNum;
 	}
 
+	//cost of towers
+	//basic tower : 5	shotgun : 10	stasis field : 20	Howiztzer : 30	Laser : 50
+	//research : 20		smallmine : 30	largemine : 50		smallpow : 30	largepow : 50
+	//targeting : 35	supercapacitor : 45		alien : 35	antenna : 15
+	private List<int> towerCostList = new List<int>(){5,10,20,30,50,20,30,50,30,50,35,45,35,15};
+
 	//get all the attack towers 
 	private List<Character> allAttakBuilding = new List<Character> ();
 	//has increase attack towers
@@ -255,8 +261,10 @@ public class TowerBuildManager : MonoBehaviour {
 		//if(time > tower1AttackRate){
 			if (gManager.tower1List.Count > 0 && Time.timeScale == 1) {
 				foreach (Tower1 t in gManager.tower1List) {
+				if(t.GetPowerProvider()!=null){
 					t.CheckEnemy ();
 					t.HitEnemy ();
+				}
 				}
 			}
 		//	time = 0;
@@ -559,12 +567,32 @@ public class TowerBuildManager : MonoBehaviour {
 		}
 		for (int i = needPowerTowers.Count - 1; i >= 0; i--) {
 			if(needPowerTowers[i].ID == id){
+				//check if the tower has been powered before
+				//if yes, return the power
+				if(needPowerTowers[i].GetPowerProvider() != null){
+					//return power to the generator
+					AddPower(needPowerTowers[i].GetNeedPower());
+					//delete the tower from the antenna power list
+					needPowerTowers[i].GetPowerProvider().RemoveFromProvidePowerTowerList(needPowerTowers[i]);
+					//return power to the antenna
+					needPowerTowers[i].GetPowerProvider().AddPower(needPowerTowers[i].GetNeedPower());
+					//set the parent null
+					needPowerTowers[i].SetPowerProvider(null);
+				}
+				//if no, do nothing
 				needPowerTowers[i].Destroy();
 				needPowerTowers.RemoveAt(i);
 			}
 		}
 		for (int i = antennaList.Count - 1; i >= 0; i--) {
 			if(antennaList[i].ID == id){
+				//remove all the tower in the already powered list
+				foreach(Character building in ((Antenna)antennaList[i]).GetProvidePowerTowerList()){
+					//remove the tower provider
+					building.SetPowerProvider(null);
+					//return power
+					AddPower(building.GetNeedPower());
+				}
 				antennaList[i].Destroy();
 				antennaList.RemoveAt(i);
 			}
@@ -769,116 +797,146 @@ public class TowerBuildManager : MonoBehaviour {
 						return;
 					}
 				}
-				if(tower == "tower1"){
+				if(tower == "tower1" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[0]){
 					Tower1 tower1 = (Tower1)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER1, 1,
 				                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tower1.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[0]);
 					allAttakBuilding.Add(tower1);
+					//need power1
+					needPowerTowers.Add(tower1);
 					gManager.tower1List.Add(tower1);
-				} else if(tower == "tower2"){
+				} else if(tower == "tower2" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[1]){
 					Tower2 tower2 = (Tower2)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER2, 1,
 					                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tower2.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[1]);
 					allAttakBuilding.Add(tower2);
 					//need power1
 					needPowerTowers.Add(tower2);
 					gManager.tower2List.Add(tower2);
-				}else if(tower == "tower10"){
-					Tower10 tower10 = (Tower10)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER10, 1,
-					                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
-					tower10.SetPosition (obstacle3Pos);
-					//need power2
-					needPowerTowers.Add(tower10);
-					allAttakBuilding.Add(tower10);
-					gManager.tower10List.Add(tower10);
-				} else if(tower == "tower4"){
+				} else if(tower == "tower4" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[2]){
 					Tower4 tower4 = (Tower4)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER4, 1,
 					                                                   1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tower4.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[2]);
 					//need power1
 					needPowerTowers.Add(tower4);
 					allAttakBuilding.Add(tower4);
 					gManager.tower4List.Add(tower4);   
-				} else if(tower == "tower7"){
+				} else if(tower == "tower7" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[3]){
 					Tower7 tower7 = (Tower7)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER7, 1,
 					                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tower7.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[3]);
 					//need power1
 					needPowerTowers.Add(tower7);
 					allAttakBuilding.Add(tower7);
 					gManager.tower7List.Add(tower7);   
-				} else if(tower == "research"){
+				} else if(tower == "tower10" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[4]){
+					Tower10 tower10 = (Tower10)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TOWER10, 1,
+					                                                   1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
+					tower10.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[4]);
+					//need power2
+					needPowerTowers.Add(tower10);
+					allAttakBuilding.Add(tower10);
+					gManager.tower10List.Add(tower10);
+				} else if(tower == "research" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[5]){
 					Research research = (Research)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.LAB, 1,
 					                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					research.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[5]);
 					gManager.researchList.Add(research);
 					researchTowerNum = gManager.researchList.Count;
-				} else if(tower == "smallmine"){
+				} else if(tower == "smallmine" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[6]){
 					foreach(DiamondResource dr in gManager.diamondList){
 						if(Vector3.Distance(dr.GetPos() ,obstacle3Pos) <= 0.8f){
 							SmallMine sm = (SmallMine)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.MINE1, 1,
 							                                                  1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 							sm.SetPosition (obstacle3Pos);
+							//cost diamond
+							DiamondManager._instance.UseDiamond(towerCostList[6]);
 							sm.nearestDiamond = dr;
 							gManager.smallMineList.Add(sm);
 							smallMineNum = gManager.smallMineList.Count;
 						}
 					}
 				}
-				else if(tower == "largemine"){
+				else if(tower == "largemine" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[7]){
 					foreach(DiamondResource dr in gManager.diamondList){
 						if(Vector3.Distance(dr.GetPos() ,obstacle3Pos) <= 0.8f){
 							LargeMine lm = (LargeMine)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.MINE2, 1,
 							                                                  1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 							lm.SetPosition (obstacle3Pos);
+							//cost diamond
+							DiamondManager._instance.UseDiamond(towerCostList[7]);
 							lm.nearestDiamond = dr;
 							gManager.largeMineList.Add(lm);
 							largeMineNum = gManager.largeMineList.Count;
 						}
 					}
 				}
-				else if(tower == "smallgeneator"){
+				else if(tower == "smallgeneator" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[8]){
 					SmallGeneator sg = (SmallGeneator)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.GENERATOR1, 1,
 							                                                  1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					sg.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[8]);
 					gManager.smallGenList.Add(sg);
 					powerNum += smallGenPower;
 					smallGenNum = gManager.smallGenList.Count;
 				}
-				else if(tower == "largegeneator"){
+				else if(tower == "largegeneator" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[9]){
 					LargeGeneator lg = (LargeGeneator)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.GENERATOR2, 1,
 					                                                          1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					lg.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[9]);
 					gManager.largeGenList.Add(lg);
 					powerNum += bigGenPower;
 					largeGenNum = gManager.largeGenList.Count;
 				}
-				else if(tower == "targetingfacility"){
+				else if(tower == "targetingfacility" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[10]){
 					TargetingFacility tf = (TargetingFacility)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.TARGETING, 1,
 					                                                1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					tf.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[10]);
 					//need power1
 					needPowerTowers.Add(tf);
 					gManager.targetingFacList.Add(tf);   
 				}
-				else if(tower == "supercapacitor"){
+				else if(tower == "supercapacitor" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[11]){
 					SuperCapacitor sc = (SuperCapacitor)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.CAPACITOR, 1,
 					                                                                  1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					sc.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[11]);
 					//need power1
 					needPowerTowers.Add(sc);
 					gManager.superCapList.Add(sc);   
 				}
-				else if(tower == "alienrecovery"){
+				else if(tower == "alienrecovery" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[12]){
 					AlienRecovery ar = (AlienRecovery)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.ALIEN, 1,
 					                                                            1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					ar.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[12]);
 					gManager.alienRecList.Add(ar);   
 				}
-				else if(tower == "antenna"){
+				else if(tower == "antenna" && DiamondManager._instance.GetCurrentDiamond() >= towerCostList[13]){
 					Antenna ant = (Antenna)cManager.SpawnCharacter(CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.ANTENNA, 1,
 					                                                          1, obstacle3Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 					ant.SetPosition (obstacle3Pos);
+					//cost diamond
+					DiamondManager._instance.UseDiamond(towerCostList[13]);
 					gManager.antennaList.Add(ant); 
 					antennaList.Add(ant);
 				}

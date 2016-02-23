@@ -3,6 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Tower1 : Building {
+
+	public Antenna powerProvider;
+	public int needPower = 1;
+
+	public int GetNeedPower(){
+		return needPower;
+	}
+
 	//Current Enemy
 	public Character curEnemy;
 	public List<Character> enemyLists = new List<Character> ();

@@ -17,7 +17,7 @@ public class ResearchPointManager : MonoBehaviour {
 	private float time = 0;
 
 	private int currentPercentage = 0;
-	private int currentPoint = 0;
+	private int currentPoint = 10;
 
 	private bool isActive = false;
 	private int speed = 0;
@@ -27,6 +27,9 @@ public class ResearchPointManager : MonoBehaviour {
 
 	public void SetSpeedUp(float number) { if(number > 0 && number < 1) speedUp = number; }
 	public float GetSpeedUp() { return speedUp; }
+
+	public int GetResearchPoint() { return currentPoint; }
+	public void UseResearchPoint() { currentPoint = currentPoint - 1; }
 	
 	TowerBuildManager tManager;
 
@@ -51,6 +54,7 @@ public class ResearchPointManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		currentPointLabel.text = currentPoint+"";
 		speed = tManager.GetResearchTowerNum ();
 		if (speed == 0) {
 			isActive = false;

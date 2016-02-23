@@ -6,7 +6,7 @@ public class AlienRecovery : Building {
 
 	public List<Character> towerList = new List<Character> ();
 	public List<Character> hasIncreasedList = new List<Character>();
-	
+
 	private bool hasIncreased = false;
 	
 	public float time = 0;

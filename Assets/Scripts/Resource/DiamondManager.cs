@@ -14,7 +14,7 @@ public class DiamondManager : MonoBehaviour {
 	
 	private float timer = 1f;
 	private float time = 0;
-	private int currentDiamond = 0;
+	private int currentDiamond = 2000;
 	
 	private bool isActive = false;
 	private int speed = 0;
@@ -28,6 +28,10 @@ public class DiamondManager : MonoBehaviour {
 		tManager = new TowerBuildManager ();
 	}
 
+	public int GetCurrentDiamond(){
+		return currentDiamond;
+	}
+
 	public void AddDiamond(int number){
 		currentDiamond += number;
 	}
@@ -38,6 +42,7 @@ public class DiamondManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		diamondLabel.text = currentDiamond + "";
 		speed = tManager.GetDiamondCollectionSpeedNum ();
 		time += Time.deltaTime;
 		diamondLabel.text = currentDiamond + "";

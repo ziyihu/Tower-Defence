@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class Tower7 : Building {
 
+	public Antenna powerProvider;
+
 	//Current Enemy
 	public Character curEnemy;
 	public List<Character> enemyLists = new List<Character> ();

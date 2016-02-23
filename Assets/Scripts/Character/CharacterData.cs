@@ -108,5 +108,7 @@ public struct CharacterData{
 	public float attackInterval;
 	public float attackRate;
 	public int currentUseSkillId;
-
+	public int armor;
+	public int needPower;
+	public Antenna powerProvider;
 }
