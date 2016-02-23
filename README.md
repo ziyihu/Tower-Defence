@@ -50,19 +50,21 @@ This is a tower defence game using C# language.
  Have implemented the life recovery tech
  Have implemented the number related to the waves
  
+ On Feb 23th
+ Have implemented the armor
+ Have implemented the number related to the life
+ Have implemented the number related to the waves
+ Have implemented the antenna(provide power to nearby towers so that the towers can work)
+ when destory towers, power generator, the power will change.
  
- Need to be done:
- add power provider techology(the tower will only able to attck when the other tower providing power to it)
- change the attack effect of the laser tower
- implement the armor
- implement the number related to the wave
- implement the number related to the life
+ Almost finish all parts of the game
+ 
  
 Undo parts: 
 // Targeting facility: increases the damage of nearby towers
 // Research labs: generates research point over time
 // Supercapcitor: increases the rate of fire of nearby towers
- Antenna: supplies power to nearby towers
+// Antenna: supplies power to nearby towers
 // Alien recovery: generate resources from aliens killed nearby
  
 // Extra damage
@@ -73,10 +75,10 @@ Undo parts:
 // Increased power production from generators 
 // Research acceleration:can spend resources to get research points
 // Napalm: add DOT to shots
- Increased armor piercing
+// Increased armor piercing
  
 // Extra slow effect when enemies reach base
 // Extra slow effect on all enemies
- Recover life when no enemies reached there in a while
+// Recover life when no enemies reached there in a while
  
  
