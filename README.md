@@ -59,6 +59,12 @@ This is a tower defence game using C# language.
  
  Almost finish all parts of the game
  
+ Add enemy introduction panel, add game over panel.
+ Ensure 6 types of enemy.
+ There are 20 waves of enemies in the game now.
+ Set up some numbers, enemy hp, enemy armor, tower cost, tower attack number.
+ Add antenna providing power effects.
+ 
  Next part is to set up numbers, and change the laser effect, add effect to the antenna when its working and when its providing power to the other towers.
  
  
