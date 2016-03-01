@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 public class CharacterManager : MonoBehaviour,IMessageObject {
 
-	private List<int> armorList = new List<int>(){0,2,4,6,8,10};
-	private List<int> armorList2 = new List<int>(){0,0,2,4,6,8};
+	private List<int> armorList = new List<int>(){1,2,2,3,4,5};
+	//private List<int> armorList2 = new List<int>(){0,1,1,2,3,4};
+
+	private List<int> hpList = new List<int>(){5,7,9,12,15,18};
 
 	private TechNode node = new TechNode ();
 
@@ -13,10 +15,10 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 	public List<Character> building = new List<Character>();
 	List<Character> allCharacter = new List<Character> ();
 	List<Vector3> position = new List<Vector3>();
-	private static int tower1AttackNumber = 1;
-	private static int tower2AttackNumber = 1;
-	private static int tower7AttackNumber = 1;
-	private static int tower10AttackNumber = 1;
+	private static int tower1AttackNumber = 4;
+	private static int tower2AttackNumber = 3;
+	private static int tower7AttackNumber = 8;
+	private static int tower10AttackNumber = 10;
 
 	public void SetTower1AttackNumber(int number) { tower1AttackNumber = number; }
 	public int GetTower1AttackNumber(){ return tower1AttackNumber; }
@@ -30,7 +32,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 	public void SetTower10AttackNumber(int number) { tower10AttackNumber = number; }
 	public int GetTower10AttackNumber(){ return tower10AttackNumber; }
 
-	private static float antennaRange = 1;
+	private static float antennaRange = 0.5f;
 
 	public void SetAntennaRange(float number) { antennaRange = number; }
 	public float GetAntennaRange() { return antennaRange; }
@@ -157,11 +159,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
-			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY18){
-				Gaint chara = new Gaint("enemy18");
-				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
-				tempChar = chara;
-			} 
+
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY19){
 				Gaint chara = new Gaint("enemy19");
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
@@ -182,11 +180,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
-			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY23){
-				Gaint chara = new Gaint("enemy23");
-				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
-				tempChar = chara;
-			} 
+
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY24){
 				Gaint chara = new Gaint("enemy24");
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
@@ -197,11 +191,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
-			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY26){
-				Gaint chara = new Gaint("enemy26");
-				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
-				tempChar = chara;
-			} 
+
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY27){
 				Gaint chara = new Gaint("enemy27");
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
@@ -212,11 +202,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
-			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY29){
-				Gaint chara = new Gaint("enemy29");
-				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
-				tempChar = chara;
-			} 
+			 
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY30){
 				Gaint chara = new Gaint("enemy30");
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
@@ -267,21 +253,13 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
-			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY40){
-				Gaint chara = new Gaint("enemy40");
-				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
-				tempChar = chara;
-			} 
+
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY41){
 				Gaint chara = new Gaint("enemy41");
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
-			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY42){
-				Gaint chara = new Gaint("enemy42");
-				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
-				tempChar = chara;
-			} 
+
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY43){
 				Gaint chara = new Gaint("enemy43");
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
@@ -312,6 +290,47 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				SetEnemy(chara,pos,dir,camp,pose,0.02f,10);
 				tempChar = chara;
 			} 
+
+
+			//used enemies model
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY18){
+				Gaint chara = new Gaint("enemy18");
+				chara.SetArmor(armorList[0]);
+				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[0]);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY23){
+				Gaint chara = new Gaint("enemy23");
+				chara.SetArmor(armorList[1]);
+				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[1]);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY26){
+				Gaint chara = new Gaint("enemy26");
+				chara.SetArmor(armorList[2]);
+				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[2]);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY29){
+				Gaint chara = new Gaint("enemy29");
+				chara.SetArmor(armorList[3]);
+				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[3]);
+				tempChar = chara;
+			}
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY40){
+				Gaint chara = new Gaint("enemy40");
+				chara.SetArmor(armorList[4]);
+				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[4]);
+				tempChar = chara;
+			} 
+			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY42){
+				Gaint chara = new Gaint("enemy42");
+				chara.SetArmor(armorList[5]);
+				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[5]);
+				tempChar = chara;
+			} 
+
+
 			if(tempChar != null){
 				chars.Add(tempChar);
 			} else {
@@ -346,7 +365,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetDir(dir);
 				character.SetPose (pose);
 				character.SetCamp(camp);
-				character.SetAttackRate(2f);
+				character.SetAttackRate(1f);
 				character.SetNeedPower(1);
 				//set attack power
 				character.SetAttackPower(tower1AttackNumber);
@@ -355,7 +374,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 			//Tower02
 			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.TOWER2){
 				Tower2 character = new Tower2();
-				character.SetAttackRange(3);
+				character.SetAttackRange(2);
 				character.SetLevel(1);
 				character.SetPos(pos);
 				character.SetDir(dir);
@@ -382,7 +401,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 			//Tower7
 			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.TOWER7){
 				Tower7 character = new Tower7();
-				character.SetAttackRange(2);
+				character.SetAttackRange(3.5f);
 				character.SetLevel(1);
 				character.SetPos(pos);
 				character.SetDir(dir);
@@ -396,7 +415,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 			//Tower10
 			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.TOWER10){
 				Tower10 character = new Tower10();
-				character.SetAttackRange(4);
+				character.SetAttackRange(3.5f);
 				character.SetLevel(1);
 				character.SetPos(pos);
 				character.SetDir(dir);

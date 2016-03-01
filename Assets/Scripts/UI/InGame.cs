@@ -4,6 +4,7 @@ using System.Collections;
 public class InGame : MonoBehaviour {
 
 	public TweenPosition techTween;
+	public TweenPosition wikiTween;
 
 	public UIButton tower01;
 	public UIButton tower02;
@@ -34,6 +35,7 @@ public class InGame : MonoBehaviour {
 	public UIButton techTree;
 	public UIButton wiki;
 	public UIButton closeBtn;
+	public UIButton closewiki;
 
 	private TechNode node;
 	
@@ -48,6 +50,7 @@ public class InGame : MonoBehaviour {
 		UIEventListener.Get (techTree.gameObject).onClick += OnShowTechTree;
 		UIEventListener.Get (closeBtn.gameObject).onClick += OnHideTechTree;
 		UIEventListener.Get (wiki.gameObject).onClick += OnShowWiki;
+		UIEventListener.Get (closewiki.gameObject).onClick += OnHideWiki;
 		Time.timeScale = 0;
 	}
 	
@@ -82,8 +85,13 @@ public class InGame : MonoBehaviour {
 		techTween.PlayReverse ();
 	}
 
-	void OnShowWiki(GameObject obj){
-		
+	public void OnShowWiki(GameObject obj){
+		wikiTween.PlayForward ();
+		Time.timeScale = 0;
+	}
+
+	public void OnHideWiki(GameObject obj){
+		wikiTween.PlayReverse ();
 	}
 
 	void OnDestory(){
@@ -94,6 +102,7 @@ public class InGame : MonoBehaviour {
 		UIEventListener.Get (techTree.gameObject).onClick -= OnShowTechTree;
 		UIEventListener.Get (closeBtn.gameObject).onClick -= OnHideTechTree;
 		UIEventListener.Get (wiki.gameObject).onClick -= OnShowWiki;
+		UIEventListener.Get (closewiki.gameObject).onClick -= OnHideWiki;
 	}
 
 	void Update(){

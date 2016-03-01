@@ -71,10 +71,10 @@ public class TowerBuildManager : MonoBehaviour {
 	}
 
 	//cost of towers
-	//basic tower : 5	shotgun : 10	stasis field : 20	Howiztzer : 30	Laser : 50
+	//basic tower : 10	shotgun : 30	stasis field : 40	Howiztzer : 50	Laser : 100
 	//research : 20		smallmine : 30	largemine : 50		smallpow : 30	largepow : 50
 	//targeting : 35	supercapacitor : 45		alien : 35	antenna : 15
-	private List<int> towerCostList = new List<int>(){5,10,20,30,50,20,30,50,30,50,35,45,35,15};
+	private List<int> towerCostList = new List<int>(){10,30,40,50,100,20,30,50,30,50,35,45,35,15};
 
 	//get all the attack towers 
 	private List<Character> allAttakBuilding = new List<Character> ();
@@ -259,49 +259,61 @@ public class TowerBuildManager : MonoBehaviour {
 			}
 		}
 		//if(time > tower1AttackRate){
-			if (gManager.tower1List.Count > 0 && Time.timeScale == 1) {
-				foreach (Tower1 t in gManager.tower1List) {
+		if (gManager.tower1List.Count > 0 && Time.timeScale == 1) {
+			foreach (Tower1 t in gManager.tower1List) {
 				if(t.GetPowerProvider()!=null){
 					t.CheckEnemy ();
 					t.HitEnemy ();
 				}
-				}
 			}
+		}
 		//	time = 0;
 		//}
 		if (gManager.tower2List.Count > 0 && Time.timeScale == 1) {
 			foreach (Tower2 t in gManager.tower2List) {
-				t.CheckEnemy ();
-				t.HitEnemy();
+				if(t.GetPowerProvider()!= null){
+					t.CheckEnemy ();
+					t.HitEnemy();
+				}
 			}
 		}
 		if (gManager.tower4List.Count > 0 && Time.timeScale == 1) {
 			foreach (Tower4 t in gManager.tower4List) {
-				t.SlowEnemy();
+				if(t.GetPowerProvider()!=null){
+					t.SlowEnemy();
+				}
 			}
 		}
 		if (gManager.tower7List.Count > 0 && Time.timeScale == 1) {
 			foreach (Tower7 t in gManager.tower7List) {
-				t.CheckEnemy();
-				t.HitEnemy();
+				if(t.GetPowerProvider()!=null){
+					t.CheckEnemy();
+					t.HitEnemy();
+				}
 			}
 		}
 		if (gManager.tower10List.Count > 0 && Time.timeScale == 1) {
 			foreach (Tower10 t in gManager.tower10List){
-				t.CheckEnemy();
-				t.HitEnemy();
+				if(t.GetPowerProvider()!=null){
+					t.CheckEnemy();
+					t.HitEnemy();
+				}
 			}
 		}
 		if (gManager.targetingFacList.Count > 0 && Time.timeScale == 1) {
 			foreach(TargetingFacility t in gManager.targetingFacList){
-				t.FindTowers();
-				t.IncreaseAttack();
+				if(t.GetPowerProvider()!=null){
+					t.FindTowers();
+					t.IncreaseAttack();
+				}
 			}
 		}
 		if (gManager.superCapList.Count > 0 && Time.timeScale == 1) {
 			foreach(SuperCapacitor t in gManager.superCapList){
-				t.FindTowers();
-				t.IncreaseAttackRate();
+				if(t.GetPowerProvider()!=null){
+					t.FindTowers();
+					t.IncreaseAttackRate();
+				}
 			}
 		}
 //		if (gManager.alienRecList.Count > 0 && Time.timeScale == 1) {
@@ -498,10 +510,11 @@ public class TowerBuildManager : MonoBehaviour {
 	}
 	
 
-	private static int tower1UpgradeAttackNumber = 10;
-	private static int tower2UpgradeAttackNumber = 15;
-	private static int tower7UpgradeAttackNumber = 20;
-	private static int tower10UpgradeAttackNumber = 25;
+	private static int tower1UpgradeAttackNumber = 1;
+	private static int tower2UpgradeAttackNumber = 1;
+	private static int tower7UpgradeAttackNumber = 1;
+	private static int tower10UpgradeAttackNumber = 1;
+	private static int upgradeDiamondCost = 20;
 
 	public void SetTower1UpgradeNumber(int number){	tower1UpgradeAttackNumber = number;}
 	public int GetTower1UpgradeNumber() { return tower1UpgradeAttackNumber; }
@@ -516,6 +529,8 @@ public class TowerBuildManager : MonoBehaviour {
 	public int GetTower10UpgradeNumber() { return tower10UpgradeAttackNumber; }
 
 	public void UpGradeBtnClick(){
+		//use 20 diamond to upgrade
+		if(DiamondManager._instance.GetCurrentDiamond() >= upgradeDiamondCost){
 		if (building.GetLevel() <= 1) {
 			upgrade.normalSprite = "btn_red1";
 			upgrade.enabled = true;
@@ -527,6 +542,7 @@ public class TowerBuildManager : MonoBehaviour {
 		//increase the attack power
 		attackNum = building.GetAttackPower ();
 		building.SetAttackPower (attackNum + tower10UpgradeAttackNumber);
+			DiamondManager._instance.UseDiamond(20);
 		//increase the level
 		level = level + 1;
 		building.SetLevel (level);
@@ -536,6 +552,7 @@ public class TowerBuildManager : MonoBehaviour {
 			UpdateTexture ();
 		} else if(building.buildingType == CharacterData.buildingMode.TOWER2){
 			UpdateTexture2();
+		}
 		}
 	}
 

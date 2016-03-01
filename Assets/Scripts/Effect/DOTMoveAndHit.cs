@@ -4,7 +4,7 @@ using System.Collections;
 public class DOTMoveAndHit : MonoBehaviour {
 
 	private float timer = 0.33f;
-	private int attackNum = 30;
+	private int attackNum = 3;
 	private float time = 0;
 
 	public Character target;

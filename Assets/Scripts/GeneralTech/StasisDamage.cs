@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StasisDamage : MonoBehaviour {
 
-	private int stasisDamageNumber = 30;
+	private int stasisDamageNumber = 3;
 	private float stasisDamageRate = 1f;
 	private float timer = 1f;
 	private float time = 0;

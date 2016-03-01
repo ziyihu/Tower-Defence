@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Tower4 : Building {
 
 	public Antenna powerProvider;
-	public int needPower = 1;
 
 	//Current Enemy
 	public Character curEnemy;

@@ -9,7 +9,7 @@ public class Tower7 : Building {
 	//Current Enemy
 	public Character curEnemy;
 	public List<Character> enemyLists = new List<Character> ();
-	public int attackPower = 100;
+	public int attackPower = 1;
 	
 	float mHitDelta;
 	bool endAttack = true;
@@ -74,7 +74,17 @@ public class Tower7 : Building {
 					}
 				}
 				if(enemyLists.Count > 0){
-					curEnemy = enemyLists[0];
+					for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
+						for(int j = 0 ; j < enemyLists.Count ; j++){
+							if(EnemySpawnManager._instance.enemyList[i].ID == enemyLists[j].ID){
+								curEnemy = enemyLists[j];
+								break;
+							}
+						}
+						if(curEnemy != null){
+							break;
+						}
+					}
 				} else if(enemyLists.Count == 0){
 					curEnemy = null;
 					return;
@@ -107,7 +117,17 @@ public class Tower7 : Building {
 			return;
 		}
 		if(enemyLists.Count > 0){
-			curEnemy = enemyLists[0];
+			for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
+				for(int j = 0 ; j < enemyLists.Count ; j++){
+					if(EnemySpawnManager._instance.enemyList[i].ID == enemyLists[j].ID){
+						curEnemy = enemyLists[j];
+						break;
+					}
+				}
+				if(curEnemy != null){
+					break;
+				}
+			}
 		} else if(enemyLists.Count == 0){
 			curEnemy = null;
 			return;
@@ -151,7 +171,17 @@ public class Tower7 : Building {
 					bulletgo.transform.position = GetTransform().position+GetTransform().forward * 0.6f;
 					bullet.parent7 = this;
 					if(enemyLists.Count > 0){
-						curEnemy = enemyLists[0];
+						for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
+							for(int j = 0 ; j < enemyLists.Count ; j++){
+								if(EnemySpawnManager._instance.enemyList[i].ID == enemyLists[j].ID){
+									curEnemy = enemyLists[j];
+									break;
+								}
+							}
+							if(curEnemy != null){
+								break;
+							}
+						}
 						if(curEnemy!=null){
 							bullet.Fire(curEnemy);
 						}

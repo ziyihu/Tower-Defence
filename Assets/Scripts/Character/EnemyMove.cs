@@ -99,9 +99,10 @@ public class EnemyMove : MonoBehaviour {
 				effect11.transform.position = enemy.GetPos ();
 				//current life decrease 1
 				//if life is less than 0, game over
-				if(LifeManager._instance.GetLife() >= 1){
+				if(LifeManager._instance.GetLife() > 1){
 					LifeManager._instance.SetLife(LifeManager._instance.GetLife()-1);
-				} else if(LifeManager._instance.GetLife() == 0){
+				} else if(LifeManager._instance.GetLife() == 1){
+					LifeManager._instance.SetLife(LifeManager._instance.GetLife()-1);
 					GameManager.Instance.CurStatus = GameManager.Status.END_GAME;
 				}
 				EnemySpawnManager._instance.enemyList.Remove(enemy);

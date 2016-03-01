@@ -1,15 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class Tower1 : Building {
 
 	public Antenna powerProvider;
-	public int needPower = 1;
-
-	public int GetNeedPower(){
-		return needPower;
-	}
 
 	//Current Enemy
 	public Character curEnemy;
@@ -81,7 +76,17 @@ public class Tower1 : Building {
 					}
 				}
 				if(enemyLists.Count > 0){
-					curEnemy = enemyLists[0];
+					for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
+						for(int j = 0 ; j < enemyLists.Count ; j++){
+							if(EnemySpawnManager._instance.enemyList[i].ID == enemyLists[j].ID){
+								curEnemy = enemyLists[j];
+								break;
+							}
+						}
+						if(curEnemy != null){
+							break;
+						}
+					}
 				} else if(enemyLists.Count == 0){
 					curEnemy = null;
 					return;
@@ -114,7 +119,17 @@ public class Tower1 : Building {
 			return;
 		}
 		if(enemyLists.Count > 0){
-			curEnemy = enemyLists[0];
+			for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
+				for(int j = 0 ; j < enemyLists.Count ; j++){
+					if(EnemySpawnManager._instance.enemyList[i].ID == enemyLists[j].ID){
+						curEnemy = enemyLists[j];
+						break;
+					}
+				}
+				if(curEnemy != null){
+					break;
+				}
+			}
 		} else if(enemyLists.Count == 0){
 			curEnemy = null;
 			return;
@@ -159,7 +174,17 @@ public class Tower1 : Building {
 				bulletgo.transform.position = GetTransform().position+GetTransform().forward * 0.6f;
 				bullet.parent1 = this;
 					if(enemyLists.Count > 0){
-						curEnemy = enemyLists[0];
+						for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
+							for(int j = 0 ; j < enemyLists.Count ; j++){
+								if(EnemySpawnManager._instance.enemyList[i].ID == enemyLists[j].ID){
+									curEnemy = enemyLists[j];
+									break;
+								}
+							}
+							if(curEnemy != null){
+								break;
+							}
+						}
 						if(curEnemy!=null){
 							bullet.Fire(curEnemy);
 						}

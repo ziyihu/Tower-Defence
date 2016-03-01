@@ -20,7 +20,9 @@ public class CannonBullet : MonoBehaviour, IBullet {
 	private bool move = true;
 	private Character curTarget;
 	private float Distance;
-	private float explosionRange = 1.0f;
+	private float explosionRange = 3f;
+
+	public float minDistance = 0.5f;
 
 	private GameObject explosionObj = null;
 	private GameObject DOTObj = null;
@@ -30,6 +32,8 @@ public class CannonBullet : MonoBehaviour, IBullet {
 	private float tower2MissRate = 0.3f;
 	private float tower7MissRate = 0.3f;
 
+	private bool isAntennaFire = false;
+
 	TechNode node = new TechNode();
 
 	public void Fire(Character target){
@@ -37,6 +41,16 @@ public class CannonBullet : MonoBehaviour, IBullet {
 		Transform house = transform.GetChild (0);
 		house.gameObject.GetComponent<Renderer>().sortingOrder = 4;
 
+		distanceToTarget = Vector3.Distance (this.transform.position, target.GetPos());
+		StartCoroutine (Shoot (target));
+	}
+
+	public void AntennaFire(Character target){
+		isAntennaFire = true;
+		curTarget = target;
+		Transform house = transform.GetChild (0);
+		house.gameObject.GetComponent<Renderer>().sortingOrder = 4;
+		
 		distanceToTarget = Vector3.Distance (this.transform.position, target.GetPos());
 		StartCoroutine (Shoot (target));
 	}
@@ -60,9 +74,9 @@ public class CannonBullet : MonoBehaviour, IBullet {
 				Vector3 targetPos = target.GetPos();
 				this.transform.LookAt(targetPos);
 				float currentDist = Vector3.Distance(this.transform.position, target.GetPos());
-				if(currentDist < 0.5f){
+				if(currentDist < minDistance){
 					move = false;
-					if(node.GetPosion){
+					if(node.GetPosion && isAntennaFire == false){
 						OnDOTEffect();
 					}
 					OnHited();
@@ -110,10 +124,18 @@ public class CannonBullet : MonoBehaviour, IBullet {
 			} 
 		}
 		if (parent7 != null) {
+//			foreach(Character chara in EnemySpawnManager._instance.enemyList){
+//				Distance = Vector3.Distance(chara.GetPos(),curTarget.GetPos());
+//				if(Distance <= explosionRange){
+//					BulletManager.Instance.CalcuBulletDamage (chara, this.parent7);
+//				}
+//			}
+
 			for(int i = 0 ; i< EnemySpawnManager._instance.enemyList.Count ; i++){
 				Distance = Vector3.Distance(EnemySpawnManager._instance.enemyList[i].GetPos(),curTarget.GetPos());
 				if(Distance <= explosionRange){
-					if((EnemySpawnManager._instance.enemyList[i].Life - this.parent7.attackPower) <= 0){
+					if((EnemySpawnManager._instance.enemyList[i].Life - this.parent7.GetAttackPower()) <= 0){
+						//thie enemy die, remove from the enemy list
 						BulletManager.Instance.CalcuBulletDamage (EnemySpawnManager._instance.enemyList[i], this.parent7);
 						i--;
 					} else {

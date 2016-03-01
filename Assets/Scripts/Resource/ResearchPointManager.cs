@@ -57,7 +57,8 @@ public class ResearchPointManager : MonoBehaviour {
 		currentPointLabel.text = currentPoint+"";
 		speed = tManager.GetResearchTowerNum ();
 		if (speed == 0) {
-			isActive = false;
+			isActive = true;
+			timer = 2;
 		} else {
 			isActive = true;
 			if(speed == 1){
