@@ -72,9 +72,9 @@ public class TowerBuildManager : MonoBehaviour {
 
 	//cost of towers
 	//basic tower : 10	shotgun : 30	stasis field : 40	Howiztzer : 50	Laser : 100
-	//research : 20		smallmine : 30	largemine : 50		smallpow : 30	largepow : 50
-	//targeting : 35	supercapacitor : 45		alien : 35	antenna : 15
-	private List<int> towerCostList = new List<int>(){10,30,40,50,100,20,30,50,30,50,35,45,35,15};
+	//research : 40		smallmine : 30	largemine : 100		smallpow : 30	largepow : 100
+	//targeting : 50	supercapacitor : 50		alien : 50	antenna : 30
+	private List<int> towerCostList = new List<int>(){10,30,40,50,100,40,30,100,30,100,50,50,50,30};
 
 	//get all the attack towers 
 	private List<Character> allAttakBuilding = new List<Character> ();
@@ -157,14 +157,14 @@ public class TowerBuildManager : MonoBehaviour {
 		cManager = new CharacterManager ();
 		gManager = new GameManager ();
 		//add the diamond resource to the game manager.
-		Vector3 obstaclePos = new Vector3 (17.15f, 1.0f, 19.3f);
+		Vector3 obstaclePos = new Vector3 (17.15f, 1.0f, 23.8f);
 		DiamondResource diamond = (DiamondResource)cManager.SpawnCharacter (CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.DIAMOND, 1,
 		                                                                    1, obstaclePos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 		diamond.SetPosition (obstaclePos);
 		gManager.diamondList.Add (diamond);
 		
 		//tower2
-		Vector3 obstacle1Pos = new Vector3 (21.15f, 1.0f, 19.3f);
+		Vector3 obstacle1Pos = new Vector3 (21.15f, 1.0f, 17.8f);
 		diamond = (DiamondResource)cManager.SpawnCharacter (CharacterData.CharacterClassType.BUILDING, (int)CharacterData.buildingMode.DIAMOND, 1,
 		                                                    1, obstacle1Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 		diamond.SetPosition (obstacle1Pos);
@@ -177,86 +177,211 @@ public class TowerBuildManager : MonoBehaviour {
 		diamond.SetPosition (obstacle2Pos);
 		gManager.diamondList.Add (diamond);
 	}
-	
+
+
+
+
+	private static GameObject go = null;
+
+	//decide whether can set tower or not
+	private void PreSetTower(string name,RaycastHit hit){
+		if(go==null){
+			go = (GameObject)GameObject.Instantiate (Resources.Load (name));
+			go.transform.position = Vector3.zero;
+		}
+		if(go!=null && hit.point!=null){
+			go.gameObject.GetComponent<BoxCollider>().enabled = false;
+			go.transform.position = hit.point;
+		}
+		
+		if(hit.collider != null){
+			if(hit.collider.tag == "Map"){
+				go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
+			} else {
+				go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+			}
+		}
+		
+		float x = 0;
+		if(hit.point.x - (int)hit.point.x <= 0.8f && hit.point.x - (int)hit.point.x > 0.3f){
+			x = (int)hit.point.x + 0.65f;
+		} else if(hit.point.x - (int)hit.point.x <= 0.3f && hit.point.x - (int)hit.point.x >= 0){
+			x = (int)hit.point.x + 0.15f;
+		} else {
+			x = (int)hit.point.x + 1.15f;
+		}
+		float y = 1.0f;
+		float z = 0;
+		if(hit.point.z - (int)hit.point.z <= 0.05f && hit.point.z - (int)hit.point.z >= 0){
+			z = (int)hit.point.z - 0.2f;
+		} else if(hit.point.z - (int)hit.point.z <= 0.55f && hit.point.z - (int)hit.point.z > 0.05f){
+			z = (int)hit.point.z + 0.3f;
+		} else {
+			z = (int)hit.point.z + 0.8f;
+		}
+		//in the enemy position, can not set the tower
+		//restriction
+		if(x <= 14.65f || x >= 23.65f || z <= 16.55f || z >= 25.3f){
+			go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+		}
+		//first path
+		if(x == 15.65f && z >= 18.3f && z <= 24.8f){
+			go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+		}
+		//second path
+		if(x >= 16.15f && x <= 20.15f && (z == 18.3f || z == 18.8f)){
+			go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+		}
+		//third path
+		if((x == 19.65f || x == 20.15f) && z >= 18.8f && z <= 23.8f){
+			go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+		}
+		//forth path
+		if((z == 23.3f || z == 23.8f) && x >= 20.65f && x <= 22.65f){
+			go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+		}
+		//fifth path
+		if((x == 22.15f || x == 22.65f) && z >= 19.3f && z <= 22.8f){
+			go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+		}
+		if(x == 23.15f && (z == 19.8f || z == 19.3f)){
+			go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+		}
+
+
+	 	if(name == "smallmine"){
+			Vector3 obstacle3Pos = new Vector3(hit.point.x,1,hit.point.z);
+			go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+			foreach(DiamondResource dr in gManager.diamondList){
+				if(Vector3.Distance(dr.GetPos() ,obstacle3Pos) <= 0.8f && hit.collider.tag == "Map" && x > 14.65f){
+					go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
+				}
+			}
+		}
+		else if(name == "largemine"){
+			Vector3 obstacle3Pos = new Vector3(hit.point.x,1,hit.point.z);
+			go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+			foreach(DiamondResource dr in gManager.diamondList){
+				if(Vector3.Distance(dr.GetPos() ,obstacle3Pos) <= 0.8f && hit.collider.tag == "Map" && x > 14.65f){
+					go.GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
+				}
+			}
+		}
+		
+	}
+
 	// Update is called once per frame
 	void Update () {
-//		RaycastHit hit = new RaycastHit();
-//		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-//		Physics.Raycast(ray, out hit, 100);
-//		if (hit.collider.tag == "Map") {
-//			Debug.Log("x:"+hit.point.x + "\t\ty:"+hit.point.y+"\t\tz:"+hit.point.z);
-//		}
+
+			RaycastHit hit = new RaycastHit();
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Physics.Raycast(ray, out hit, 100);
+			
+
 		time = time + Time.deltaTime;
 		if (tower01) {
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("tower1");
 				tower01 = false;
 			}
+			PreSetTower("tower1",hit);
 		} else if (tower02) {
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("tower2");
 				tower02 = false;
 			}
+			PreSetTower("tower2",hit);
 		} else if(tower04){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("tower4");
 				tower04 = false;
 			}
+			PreSetTower("tower4",hit);
 		} else if(tower07){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("tower7");
 				tower07 = false;
 			}
+			PreSetTower("tower7",hit);
 		} else if(tower10){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("tower10");
 				tower10 = false;
 			}
+			PreSetTower("tower10",hit);
 		} else if(research){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("research");
 				research = false;
 			}
+			PreSetTower("research",hit);
 		} else if(smallMine){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("smallmine");
 				smallMine = false;
 			}
+			//small mine is a little different, need to do some modify
+			//TODO
+			PreSetTower("smallmine",hit);
 		} else if(largeMine){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("largemine");
 				largeMine = false;
 			}
+			//large mine is the same as small mine, need to do some modify
+			//TODO
+			PreSetTower("largemine",hit);
+
 		} else if(smallGeneator){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("smallgeneator");
 				smallGeneator = false;
 			}
+			PreSetTower("smallgeneator",hit);
 		} else if(largeGeneator){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("largegeneator");
 				largeGeneator = false;
 			}
+			PreSetTower("largegeneator",hit);
 		} else if(targetingFacility) {
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("targetingfacility");
 				targetingFacility = false;
 			}
+			PreSetTower("targetingfacility",hit);
 		} else if(superCapacitor) {
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("supercapacitor");
 				superCapacitor = false;
 			}
+			PreSetTower("supercapacitor",hit);
 		} else if(alienRecovery){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("alienrecovery");
 				alienRecovery = false;
 			}
+			PreSetTower("alienrecovery",hit);
 		} else if(antenna){
 			if(Input.GetMouseButtonDown(0)){
+				Destroy(go);
 				SetTower("antenna");
 				antenna = false;
 			}
+			PreSetTower("antenna",hit);
 		}
 		//if(time > tower1AttackRate){
 		if (gManager.tower1List.Count > 0 && Time.timeScale == 1) {
@@ -352,7 +477,7 @@ public class TowerBuildManager : MonoBehaviour {
 			if (hit.transform.tag == "Tower1") {
 				//show the current tower attack, upgrade button, destory button
 				name = "Basic Tower";
-				description = "this tower has middle attack range, medium rate of fire";
+				description = "This tower has middle attack range, medium rate of fire\n\n"+"Need 1 power to function";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = building.GetAttackPower()+"";
 				levelNumber = building.GetLevel()+"";
@@ -361,7 +486,7 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "Tower2"){
 				name = "Shotgun Tower";
-				description = "this tower has low range, medium rate of fire, can shoot two enemies";
+				description = "This tower has low range, medium rate of fire, can shoot two enemies\n\n"+"Need 2 power to function";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = building.GetAttackPower()+"";
 				levelNumber = building.GetLevel()+"";
@@ -369,7 +494,7 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "Tower4"){
 				name = "Stasis Tower";
-				description = "this tower slows the near enemies";
+				description = "This tower slows the near enemies\n\n"+"Need 1 power to function";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0 + "";
 				levelNumber = building.GetLevel()+"";
@@ -377,7 +502,7 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "Tower7"){
 				name = "Missile Tower";
-				description = "this tower attack the area enemies";
+				description = "This tower attack the area enemies\n\n"+"Need 2 power to function";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = building.GetAttackPower()+"";
 				levelNumber = building.GetLevel()+"";
@@ -385,7 +510,7 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "Tower10"){
 				name = "Laser Tower";
-				description = "this tower is the most powerful tower";
+				description = "This tower is the most powerful tower\n\n"+"Need 3 power to function";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = building.GetAttackPower()+"";
 				levelNumber = building.GetLevel()+"";
@@ -393,42 +518,42 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "Research"){
 				name = "Research Lab";
-				description = "this tower will allow you to generate research point to be used in tech tree";
+				description = "This tower will allow you to generate research point to be used in tech tree";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0 + "";
 				levelNumber = 0 + "";
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "SmallMine"){
 				name = "Small Mine";
-				description = "this tower collection diamond from nearby resource 1 per second";
+				description = "This tower collection diamond from nearby resource 1 per second";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0 +"";
 				levelNumber = 0 + "";
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "LargeMine"){
 				name = "Large Mine";
-				description = "this tower collection diamond from nearby resource 2 per second";
+				description = "This tower collection diamond from nearby resource 2 per second";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0 +"";
 				levelNumber = 0 + "";
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "SmallGeneator"){
 				name = "Small Power";
-				description = "this tower will provide: "+ GetSmallGenPower() +" power";
+				description = "This tower will provide: "+ GetSmallGenPower() +" power";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0+"";
 				levelNumber = 0 + "";
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "LargeGeneator"){
 				name = "Large Power";
-				description = "this tower will provide: "+ GetBigGenPower() + " power";
+				description = "This tower will provide: "+ GetBigGenPower() + " power";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0+"";
 				levelNumber = 0 + "";
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "Targeting"){
 				name = "Targeting Facility";
-				description = "this tower will increase 10 attack number for nearby towers";
+				description = "This tower will increase 1 attack number for nearby towers\n\n"+"Need 2 power to function";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0+"";
 				levelNumber = 0 + "";
@@ -436,7 +561,7 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "SuperCapacitor"){
 				name = "Super Capacitor";
-				description = "this tower will increase the attack rate for nearby towers";
+				description = "This tower will increase the attack rate for nearby towers\n\n"+"Need 2 power to function";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0+"";
 				levelNumber = 0+"";
@@ -444,7 +569,7 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "AlienRecovery"){
 				name = "Alien Recovery";
-				description = "this tower will collect diamond when killing enemies in the range";
+				description = "This tower will collect diamond when killing enemies in the range";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0+"";
 				levelNumber = 0+"";
@@ -453,7 +578,7 @@ public class TowerBuildManager : MonoBehaviour {
 			} else if(hit.transform.tag == "Antenna"){
 				name = "Antenna";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
-				description = "this tower supply power to nearby towers\n"+"Current Power: "+((Antenna)building).GetCurrentPower();
+				description = "This tower supply power to nearby towers\n"+"Current Power: "+((Antenna)building).GetCurrentPower();
 				attackNumber = 0+"";
 				levelNumber = 0+"";
 				SetAttackRangeShow(building);
@@ -476,12 +601,23 @@ public class TowerBuildManager : MonoBehaviour {
 	private void SetAttackRangeHide(){
 		circleObj.SetActive (false);
 	}
-	
+
+	public UILabel costLabel;
+	public UILabel attackLabel;
+
 	private void SetPanel(string nameText, string desText, string attackNumText, string levelNumText){
 		if (building.GetLevel() <= 2) {
+			//set upgrade label visible
+			costLabel.gameObject.SetActive(true);
+			attackLabel.gameObject.SetActive(true);
+			//set the upgrade button visible
 			upgrade.normalSprite = "btn_red1";
 			upgrade.enabled = true;
 		}else if (building.GetLevel() == 3) {
+			//set upgrade label invisible
+			costLabel.gameObject.SetActive(false);
+			attackLabel.gameObject.SetActive(false);
+			//set the upgrade button not able
 			upgrade.normalSprite = "btn_red4";
 			upgrade.enabled = false;
 		}
@@ -490,6 +626,9 @@ public class TowerBuildManager : MonoBehaviour {
 		   || building.buildingType == CharacterData.buildingMode.GENERATOR1 || building.buildingType == CharacterData.buildingMode.GENERATOR2
 		   || building.buildingType == CharacterData.buildingMode.TARGETING || building.buildingType == CharacterData.buildingMode.CAPACITOR
 		   || building.buildingType == CharacterData.buildingMode.ALIEN || building.buildingType == CharacterData.buildingMode.ANTENNA){
+			//set upgrade label invisible
+			costLabel.gameObject.SetActive(false);
+			attackLabel.gameObject.SetActive(false);
 			upgrade.normalSprite = "btn_red4";
 			upgrade.enabled = false;
 		}
@@ -535,6 +674,8 @@ public class TowerBuildManager : MonoBehaviour {
 			upgrade.normalSprite = "btn_red1";
 			upgrade.enabled = true;
 		}else if (building.GetLevel() > 1) {
+				costLabel.gameObject.SetActive(false);
+				attackLabel.gameObject.SetActive(false);
 			upgrade.normalSprite = "btn_red4";
 			upgrade.enabled = false;
 		}
@@ -716,7 +857,7 @@ public class TowerBuildManager : MonoBehaviour {
 			if(gManager.targetingFacList[i].ID == id){
 				//decrease all the tower attack power
 				foreach(Character chara in gManager.targetingFacList[i].hasIncreasedList){
-					chara.SetAttackPower(chara.GetAttackPower()-10);
+					chara.SetAttackPower(chara.GetAttackPower()-2);
 				}
 				gManager.targetingFacList[i].Destroy();
 				gManager.targetingFacList.RemoveAt(i);

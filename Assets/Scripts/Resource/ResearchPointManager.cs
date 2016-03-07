@@ -13,11 +13,15 @@ public class ResearchPointManager : MonoBehaviour {
 	private UISprite progess;
 	private UILabel percentage;
 
+	public UILabel techTreeCurrentPointLabel;
+	public UILabel techTree2CurrentPointLabel;
+	public UILabel techTree3CurrentPointLabel;
+
 	private float timer = 1f;
 	private float time = 0;
 
 	private int currentPercentage = 0;
-	private int currentPoint = 10;
+	private int currentPoint = 30;
 
 	private bool isActive = false;
 	private int speed = 0;
@@ -55,10 +59,13 @@ public class ResearchPointManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		currentPointLabel.text = currentPoint+"";
+		techTreeCurrentPointLabel.text = currentPoint + "";
+		techTree2CurrentPointLabel.text = currentPoint + "";
+		techTree3CurrentPointLabel.text = currentPoint + "";
 		speed = tManager.GetResearchTowerNum ();
 		if (speed == 0) {
 			isActive = true;
-			timer = 2;
+			timer = 1;
 		} else {
 			isActive = true;
 			if(speed == 1){
@@ -88,6 +95,9 @@ public class ResearchPointManager : MonoBehaviour {
 					percentage.text = "0%"+"";
 					currentPoint++;
 					currentPointLabel.text = currentPoint+"";
+					techTreeCurrentPointLabel.text = currentPoint + "";
+					techTree2CurrentPointLabel.text = currentPoint+"";
+					techTree3CurrentPointLabel.text = currentPoint + "";
 				}
 				time = 0;
 			}

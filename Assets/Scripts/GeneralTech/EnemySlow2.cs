@@ -5,7 +5,7 @@ public class EnemySlow2 : MonoBehaviour {
 
 	private bool isExtraSlow = false;
 	private bool hasExtraSlow = false;
-	private float slowSpeed = 0.01f;
+	private float slowSpeed = 0.015f;
 
 
 	//only extra slow for a little while, for 2 seconds

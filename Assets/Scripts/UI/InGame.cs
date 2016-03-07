@@ -4,8 +4,14 @@ using System.Collections;
 public class InGame : MonoBehaviour {
 
 	public TweenPosition techTween;
+	public TweenPosition techTween2;
+	public TweenPosition techTween3;
 	public TweenPosition wikiTween;
 
+	public GameObject objTechTree1;
+	public GameObject objTechTree2;
+	public GameObject objTechTree3;
+	
 	public UIButton tower01;
 	public UIButton tower02;
 	public UIButton tower03;
@@ -35,7 +41,11 @@ public class InGame : MonoBehaviour {
 	public UIButton techTree;
 	public UIButton wiki;
 	public UIButton closeBtn;
+	public UIButton closeBtn2;
+	public UIButton closeBtn3;
 	public UIButton closewiki;
+	public UIButton techTree2;
+	public UIButton techTree3;
 
 	private TechNode node;
 	
@@ -48,7 +58,11 @@ public class InGame : MonoBehaviour {
 		UIEventListener.Get (stop.gameObject).onClick += OnStop;
 		UIEventListener.Get (start.gameObject).onClick += OnStart;
 		UIEventListener.Get (techTree.gameObject).onClick += OnShowTechTree;
+		UIEventListener.Get (techTree2.gameObject).onClick += OnShowTechTree2;
+		UIEventListener.Get (techTree3.gameObject).onClick += OnShowTechTree3;
 		UIEventListener.Get (closeBtn.gameObject).onClick += OnHideTechTree;
+		UIEventListener.Get (closeBtn2.gameObject).onClick += OnHideTechTree2;
+		UIEventListener.Get (closeBtn3.gameObject).onClick += OnHideTechTree3;
 		UIEventListener.Get (wiki.gameObject).onClick += OnShowWiki;
 		UIEventListener.Get (closewiki.gameObject).onClick += OnHideWiki;
 		Time.timeScale = 0;
@@ -77,12 +91,36 @@ public class InGame : MonoBehaviour {
 	}
 
 	public void OnShowTechTree(GameObject obj){
+		objTechTree1.SetActive (true);
 		techTween.PlayForward ();
 		Time.timeScale = 0;
 	}
 
 	public void OnHideTechTree(GameObject obj){
 		techTween.PlayReverse ();
+		//objTechTree1.SetActive (false);
+	}
+
+	public void OnShowTechTree2(GameObject obj){
+		objTechTree2.SetActive (true);
+		techTween2.PlayForward ();
+		Time.timeScale = 0;
+	}
+	
+	public void OnHideTechTree2(GameObject obj){
+		techTween2.PlayReverse ();
+		//objTechTree2.SetActive (false);
+	}
+
+	public void OnShowTechTree3(GameObject obj){
+		objTechTree3.SetActive (true);
+		techTween3.PlayForward ();
+		Time.timeScale = 0;
+	}
+	
+	public void OnHideTechTree3(GameObject obj){
+		techTween3.PlayReverse ();
+		//objTechTree3.SetActive (false);
 	}
 
 	public void OnShowWiki(GameObject obj){
@@ -101,8 +139,12 @@ public class InGame : MonoBehaviour {
 		UIEventListener.Get (start.gameObject).onClick -= OnStart;
 		UIEventListener.Get (techTree.gameObject).onClick -= OnShowTechTree;
 		UIEventListener.Get (closeBtn.gameObject).onClick -= OnHideTechTree;
+		UIEventListener.Get (closeBtn2.gameObject).onClick -= OnHideTechTree2;
+		UIEventListener.Get (closeBtn3.gameObject).onClick -= OnHideTechTree3;
 		UIEventListener.Get (wiki.gameObject).onClick -= OnShowWiki;
 		UIEventListener.Get (closewiki.gameObject).onClick -= OnHideWiki;
+		UIEventListener.Get (techTree2.gameObject).onClick -= OnShowTechTree2;
+		UIEventListener.Get (techTree3.gameObject).onClick -= OnShowTechTree3;
 	}
 
 	void Update(){

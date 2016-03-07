@@ -55,7 +55,7 @@ public class Enemy : Character {
 				foreach(Character chara1 in EnemySpawnManager._instance.enemyList){
 					if(chara1.Life<=0){
 						if(Vector3.Distance(chara.GetPos(),chara1.GetPos()) < chara.GetAttackRange()){
-							DiamondManager._instance.AddDiamond(10);
+							DiamondManager._instance.AddDiamond(Random.Range(20,29));
 						}
 					}
 				}
@@ -69,9 +69,15 @@ public class Enemy : Character {
 			if(!node.GetArmorPiercing){
 				if(damage - GetArmor > 0){
 					data.life = data.life - (damage - GetArmor);
+				} else if(damage - GetArmor <= 0){
+					data.life -= 1;
 				}
 			} else if(node.GetArmorPiercing){
-				data.life -= damage;
+				if(GetArmor != 0){
+					data.life = data.life - (damage - GetArmor + 1);
+				} else if(GetArmor == 0){
+					data.life = data.life - damage;
+				}
 			}
 		if (data.life <= 0) {
 			

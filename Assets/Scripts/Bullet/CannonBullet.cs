@@ -20,7 +20,7 @@ public class CannonBullet : MonoBehaviour, IBullet {
 	private bool move = true;
 	private Character curTarget;
 	private float Distance;
-	private float explosionRange = 3f;
+	private float explosionRange = 0.8f;
 
 	public float minDistance = 0.5f;
 

@@ -65,6 +65,9 @@ public class TechNode : MonoBehaviour {
 
 
 
+	//is this tech node active or not
+	public bool isTechActive = false;
+
 	public bool GetTower1{
 		get { return isTower1; }
 	}
@@ -208,6 +211,18 @@ public class TechNode : MonoBehaviour {
 		}
 	}
 
+	public void SetNodeNotActive(){
+		this.nodeButton.GetComponent<UIButton> ().enabled = false;
+		this.nodeButton.normalSprite = unableSprite;
+		this.nodeButton.SetState (UIButtonColor.State.Disabled, true);
+	}
+
+	public void SetNodeActive(){
+		this.nodeButton.GetComponent<UIButton> ().enabled = true;
+		this.nodeButton.normalSprite = ableSprite;
+		this.nodeButton.SetState(UIButtonColor.State.Normal,true);
+	}
+
 	public void ActiveNextNode(){
 		if(Atlas != null){
 			foreach (TechNode node in techNodeList) {
@@ -232,8 +247,10 @@ public class TechNode : MonoBehaviour {
 	public void OnBtnClicked(){
 		nodeButton.SetState(UIButtonColor.State.Pressed,true);
 		if(ResearchPointManager._instance.GetResearchPoint() > 0){
-			if(active != null)
+			if(active != null){
 				active.gameObject.SetActive (true);
+				isTechActive = true;
+			}
 			if (ableSprite == "bloodraven_1") {
 				isTower8 = true;
 				UsePointGetTech();

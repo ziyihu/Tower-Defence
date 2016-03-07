@@ -16,6 +16,17 @@ public class EnemySpawnManager : MonoBehaviour {
 	GameObject startPoint;
 	EnemySpawn enemySpawn;
 
+	private IEnumerator CreateEnemy(string enemyName, int number){
+		//the first wave enemy
+		for(int i = 0 ; i < number ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn(enemyName));
+			yield return new WaitForSeconds(1f);
+		}
+		while (enemyList.Count > 0) {
+			yield return new WaitForSeconds(0.2f);
+		}
+	}
+
 	void Awake(){
 		_instance = this;
 		GameObject startPoint = GameObject.Find ("StartPoint");
@@ -75,6 +86,10 @@ public class EnemySpawnManager : MonoBehaviour {
 		WaveAdd ();
 
 		//fifth wave enemy
+		for(int i = 0 ; i < 5 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy18"));
+			yield return new WaitForSeconds(1f);
+		}
 		for(int i = 0 ; i < 10 ; i++){
 			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
 			yield return new WaitForSeconds(1f);
@@ -83,23 +98,23 @@ public class EnemySpawnManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.2f);
 		}
 		WaveAdd ();
+
+//		//sixth wave enemy
+//		for(int i = 0 ; i < 5 ; i++){
+//			enemyList.Add(enemySpawn.EnemyBorn("enemy18"));
+//			yield return new WaitForSeconds(1f);
+//		}
+//		for(int i = 0 ; i < 10 ; i++){
+//			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
+//			yield return new WaitForSeconds(1f);
+//		}
+//		while (enemyList.Count > 0) {
+//			yield return new WaitForSeconds(0.2f);
+//		}
+//		WaveAdd ();
 
 		//sixth wave enemy
 		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy18"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-
-		//seventh wave enemy
-		for(int i = 0 ; i < 5 ; i++){
 			enemyList.Add(enemySpawn.EnemyBorn("enemy26"));
 			yield return new WaitForSeconds(1f);
 		}
@@ -108,36 +123,15 @@ public class EnemySpawnManager : MonoBehaviour {
 		}
 		WaveAdd ();
 
-		//eighth wave enemy
+		//7th wave enemy
 		for(int i = 0 ; i < 5 ; i++){
 			enemyList.Add(enemySpawn.EnemyBorn("enemy18"));
 			yield return new WaitForSeconds(1f);
 		}
 		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy26"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-
-
-		//ninth enemy
-		for(int i = 0 ; i < 5 ; i++){
 			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
 			yield return new WaitForSeconds(1f);
 		}
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy26"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-
-		//tenth enemy
 		for(int i = 0 ; i < 10 ; i++){
 			enemyList.Add(enemySpawn.EnemyBorn("enemy26"));
 			yield return new WaitForSeconds(1f);
@@ -148,9 +142,52 @@ public class EnemySpawnManager : MonoBehaviour {
 		WaveAdd ();
 
 
-		//11th wave enemy
+		//8th enemy
 		for(int i = 0 ; i < 5 ; i++){
 			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
+			yield return new WaitForSeconds(1f);
+		}
+		while (enemyList.Count > 0) {
+			yield return new WaitForSeconds(0.2f);
+		}
+		WaveAdd ();
+
+		//9th enemy
+		for(int i = 0 ; i < 10 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
+			yield return new WaitForSeconds(1f);
+		}
+		for(int i = 0 ; i < 10 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy26"));
+			yield return new WaitForSeconds(1f);
+		}
+		for(int i = 0 ; i < 10 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
+			yield return new WaitForSeconds(1f);
+		}
+		while (enemyList.Count > 0) {
+			yield return new WaitForSeconds(0.2f);
+		}
+		WaveAdd ();
+
+
+		//10th wave enemy
+		for(int i = 0 ; i < 5 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
+			yield return new WaitForSeconds(1f);
+		}
+		while (enemyList.Count > 0) {
+			yield return new WaitForSeconds(0.2f);
+		}
+		WaveAdd ();
+		
+		//11th wave enemy
+		for(int i = 0 ; i < 10 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
+			yield return new WaitForSeconds(1f);
+		}
+		for(int i = 0 ; i < 10 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
 			yield return new WaitForSeconds(1f);
 		}
 		while (enemyList.Count > 0) {
@@ -163,14 +200,19 @@ public class EnemySpawnManager : MonoBehaviour {
 			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
 			yield return new WaitForSeconds(1f);
 		}
+		for(int i = 0 ; i < 15 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
+			yield return new WaitForSeconds(1f);
+		}
 		while (enemyList.Count > 0) {
 			yield return new WaitForSeconds(0.2f);
 		}
 		WaveAdd ();
+		
 		
 		//13th wave enemy
 		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
+			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
 			yield return new WaitForSeconds(1f);
 		}
 		while (enemyList.Count > 0) {
@@ -178,14 +220,13 @@ public class EnemySpawnManager : MonoBehaviour {
 		}
 		WaveAdd ();
 		
-		
 		//14th wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
+		for(int i = 0 ; i < 10 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
 			yield return new WaitForSeconds(1f);
 		}
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
+		for(int i = 0 ; i < 10 ; i++){
+			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
 			yield return new WaitForSeconds(1f);
 		}
 		while (enemyList.Count > 0) {
@@ -195,16 +236,6 @@ public class EnemySpawnManager : MonoBehaviour {
 		
 		//15th wave enemy
 		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-		
-		//16th wave enemy
-		for(int i = 0 ; i < 5 ; i++){
 			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
 			yield return new WaitForSeconds(1f);
 		}
@@ -212,51 +243,6 @@ public class EnemySpawnManager : MonoBehaviour {
 			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
 			yield return new WaitForSeconds(1f);
 		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-		
-		//17th wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-		
-		//18th wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-		
-		
-		//19th enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-		
-		//20th enemy
 		for(int i = 0 ; i < 10 ; i++){
 			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
 			yield return new WaitForSeconds(1f);
@@ -265,6 +251,55 @@ public class EnemySpawnManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.2f);
 		}
 		WaveAdd ();
+		
+//		//17th wave enemy
+//		for(int i = 0 ; i < 5 ; i++){
+//			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
+//			yield return new WaitForSeconds(1f);
+//		}
+//		while (enemyList.Count > 0) {
+//			yield return new WaitForSeconds(0.2f);
+//		}
+//		WaveAdd ();
+//		
+//		//18th wave enemy
+//		for(int i = 0 ; i < 5 ; i++){
+//			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
+//			yield return new WaitForSeconds(1f);
+//		}
+//		for(int i = 0 ; i < 5 ; i++){
+//			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
+//			yield return new WaitForSeconds(1f);
+//		}
+//		while (enemyList.Count > 0) {
+//			yield return new WaitForSeconds(0.2f);
+//		}
+//		WaveAdd ();
+//		
+//		
+//		//19th enemy
+//		for(int i = 0 ; i < 5 ; i++){
+//			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
+//			yield return new WaitForSeconds(1f);
+//		}
+//		for(int i = 0 ; i < 5 ; i++){
+//			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
+//			yield return new WaitForSeconds(1f);
+//		}
+//		while (enemyList.Count > 0) {
+//			yield return new WaitForSeconds(0.2f);
+//		}
+//		WaveAdd ();
+//		
+//		//20th enemy
+//		for(int i = 0 ; i < 10 ; i++){
+//			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
+//			yield return new WaitForSeconds(1f);
+//		}
+//		while (enemyList.Count > 0) {
+//			yield return new WaitForSeconds(0.2f);
+//		}
+//		WaveAdd ();
 
 //		//enemy 2 - 9
 //		for (int i = 0; i < 10; i++) {

@@ -5,7 +5,7 @@ public class EnemySlow : MonoBehaviour {
 
 	private bool isExtraSlow = false;
 	private bool hasExtraSlow = false;
-	private float slowSpeed = 0.01f;
+	private float slowSpeed = 0.015f;
 
 	CharacterManager cManager;
 	private TechNode node;

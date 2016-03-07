@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class SuperCapacitor : Building {
 
 	public Antenna powerProvider;
-	public int needPower = 1;
 
 	public List<Character> towerList = new List<Character> ();
 	public List<Character> hasIncreasedList = new List<Character>();

@@ -3,11 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class CharacterManager : MonoBehaviour,IMessageObject {
-
-	private List<int> armorList = new List<int>(){1,2,2,3,4,5};
+	//enemy armor
+	private List<int> armorList = new List<int>(){0,1,1,2,4,5};
 	//private List<int> armorList2 = new List<int>(){0,1,1,2,3,4};
 
-	private List<int> hpList = new List<int>(){5,7,9,12,15,18};
+	//enemy hp
+	private List<int> hpList = new List<int>(){5,9,13,18,28,40};
+
+	//towers need power
+	//basic : 1		shotgun : 2		stasis : 1
+	//how : 2		laser : 3		
+	//targeting : 2 super : 2
+	private List<int> towerPowerList = new List<int>(){1,2,1,2,3,2,2};
 
 	private TechNode node = new TechNode ();
 
@@ -15,10 +22,10 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 	public List<Character> building = new List<Character>();
 	List<Character> allCharacter = new List<Character> ();
 	List<Vector3> position = new List<Vector3>();
-	private static int tower1AttackNumber = 4;
-	private static int tower2AttackNumber = 3;
-	private static int tower7AttackNumber = 8;
-	private static int tower10AttackNumber = 10;
+	private static int tower1AttackNumber = 3;
+	private static int tower2AttackNumber = 2;
+	private static int tower7AttackNumber = 4;
+	private static int tower10AttackNumber = 6;
 
 	public void SetTower1AttackNumber(int number) { tower1AttackNumber = number; }
 	public int GetTower1AttackNumber(){ return tower1AttackNumber; }
@@ -359,14 +366,14 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 			//Tower01
 			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.TOWER1){
 				Tower1 character = new Tower1();
-				character.SetAttackRange(3);
+				character.SetAttackRange(2.25f);
 				character.SetLevel(1);
 				character.SetPos(pos);
 				character.SetDir(dir);
 				character.SetPose (pose);
 				character.SetCamp(camp);
 				character.SetAttackRate(1f);
-				character.SetNeedPower(1);
+				character.SetNeedPower(towerPowerList[0]);
 				//set attack power
 				character.SetAttackPower(tower1AttackNumber);
 				tempChar = character;
@@ -381,7 +388,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPose (pose);
 				character.SetCamp(camp);
 				character.SetAttackRate(1f);
-				character.SetNeedPower(2);
+				character.SetNeedPower(towerPowerList[1]);
 				//set attack power
 				character.SetAttackPower(tower2AttackNumber);
 				tempChar = character;
@@ -395,13 +402,13 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetDir(dir);
 				character.SetPose(pose);
 				character.SetCamp(camp);
-				character.SetNeedPower(1);
+				character.SetNeedPower(towerPowerList[2]);
 				tempChar = character;
 			}
 			//Tower7
 			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.TOWER7){
 				Tower7 character = new Tower7();
-				character.SetAttackRange(3.5f);
+				character.SetAttackRange(2.5f);
 				character.SetLevel(1);
 				character.SetPos(pos);
 				character.SetDir(dir);
@@ -409,13 +416,13 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetCamp(camp);
 				character.SetAttackPower(tower7AttackNumber);
 				character.SetAttackRate(1f);
-				character.SetNeedPower(2);
+				character.SetNeedPower(towerPowerList[3]);
 				tempChar = character;
 			}
 			//Tower10
 			else if((CharacterData.buildingMode)charModeType == CharacterData.buildingMode.TOWER10){
 				Tower10 character = new Tower10();
-				character.SetAttackRange(3.5f);
+				character.SetAttackRange(2.5f);
 				character.SetLevel(1);
 				character.SetPos(pos);
 				character.SetDir(dir);
@@ -423,7 +430,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetCamp(camp);
 				character.SetAttackPower(tower10AttackNumber);
 				character.SetAttackRate(1f);
-				character.SetNeedPower(3);
+				character.SetNeedPower(towerPowerList[4]);
 				tempChar = character;
 			}
 			//Research
@@ -482,7 +489,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPose(pose);
 				character.SetCamp(camp);
 				character.SetAttackRange(2);
-				character.SetNeedPower(1);
+				character.SetNeedPower(towerPowerList[5]);
 				tempChar = character;
 			}
 			//Super Capacitor
@@ -492,7 +499,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPose(pose);
 				character.SetCamp(camp);
 				character.SetAttackRange(2);
-				character.SetNeedPower(1);
+				character.SetNeedPower(towerPowerList[6]);
 				tempChar = character;
 			}
 			//Alien Recovery

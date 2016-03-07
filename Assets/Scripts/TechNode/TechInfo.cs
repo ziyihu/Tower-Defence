@@ -46,7 +46,7 @@ public class TechInfo : MonoBehaviour {
 				techNodeInfoPanel.SetActive(true);
 				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
 				techNodeInfoName.text = "Small Mine";
-				techNodeInfoDes.text = "Description:\nslows diamond acquisition";
+				techNodeInfoDes.text = "Description:\nslow diamond acquisition";
 			} else if(this.transform.tag == "largemine"){
 				techNodeInfoPanel.SetActive(true);
 				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
@@ -86,7 +86,7 @@ public class TechInfo : MonoBehaviour {
 				techNodeInfoPanel.SetActive(true);
 				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
 				techNodeInfoName.text = "Extra Damage";
-				techNodeInfoDes.text = "Description:\nincreases the damage of the towers";
+				techNodeInfoDes.text = "Description:\nincreases the damage of all the towers";
 			} else if(this.transform.tag == "stasisfielddamage"){
 				techNodeInfoPanel.SetActive(true);
 				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);

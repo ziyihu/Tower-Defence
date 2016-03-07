@@ -53,7 +53,7 @@ public class Tower4 : Building {
 					EnemySpawnManager._instance.enemyList[i].SetSpeed(0.02f);
 				}
 			} else {
-				EnemySpawnManager._instance.enemyList[i].SetSpeed(0.008f);
+				EnemySpawnManager._instance.enemyList[i].SetSpeed(0.01f);
 			}
 		}
 	}

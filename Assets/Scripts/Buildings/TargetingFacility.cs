@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class TargetingFacility : Building {
 
 	public Antenna powerProvider;
-	public int needPower = 1;
 
 	public List<Character> towerList = new List<Character> ();
 	public List<Character> hasIncreasedList = new List<Character>();
+
+	private int increaseAttackNum = 2;
 
 	private bool hasIncreased = false;
 
@@ -59,7 +60,7 @@ public class TargetingFacility : Building {
 					}
 			}
 			if(hasIncreased == false){
-				chara.SetAttackPower(chara.GetAttackPower()+10);
+				chara.SetAttackPower(chara.GetAttackPower()+increaseAttackNum);
 				hasIncreasedList.Add(chara);
 			} else {
 				hasIncreased = false;

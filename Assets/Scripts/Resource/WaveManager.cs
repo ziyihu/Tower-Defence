@@ -12,7 +12,7 @@ public class WaveManager : MonoBehaviour {
 	private UILabel waveLabel;
 
 	private static int currentWave = 1;
-	private static int maxWave = 20;
+	private static int maxWave = 15;
 
 	public int GetMaxWave(){
 		return maxWave;
