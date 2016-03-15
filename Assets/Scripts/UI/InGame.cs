@@ -66,6 +66,7 @@ public class InGame : MonoBehaviour {
 		UIEventListener.Get (wiki.gameObject).onClick += OnShowWiki;
 		UIEventListener.Get (closewiki.gameObject).onClick += OnHideWiki;
 		Time.timeScale = 0;
+		//EnemySpawnManager._instance.isContinue = false;
 	}
 	
 	void OnEnable(){
@@ -82,18 +83,22 @@ public class InGame : MonoBehaviour {
 	public void OnStop(GameObject obj){
 		if (Time.timeScale == 1) {
 			Time.timeScale = 0;
+			//EnemySpawnManager._instance.isContinue = false;
 		} else if(Time.timeScale == 0){
 			Time.timeScale = 1;
+			//EnemySpawnManager._instance.isContinue = true;
 		}
 	}
 	public void OnStart(GameObject obj){
 		Time.timeScale = 1;
+		//EnemySpawnManager._instance.isContinue = true;
 	}
 
 	public void OnShowTechTree(GameObject obj){
 		objTechTree1.SetActive (true);
 		techTween.PlayForward ();
 		Time.timeScale = 0;
+		//EnemySpawnManager._instance.isContinue = false;
 	}
 
 	public void OnHideTechTree(GameObject obj){
@@ -105,6 +110,7 @@ public class InGame : MonoBehaviour {
 		objTechTree2.SetActive (true);
 		techTween2.PlayForward ();
 		Time.timeScale = 0;
+		//EnemySpawnManager._instance.isContinue = false;
 	}
 	
 	public void OnHideTechTree2(GameObject obj){
@@ -116,6 +122,7 @@ public class InGame : MonoBehaviour {
 		objTechTree3.SetActive (true);
 		techTween3.PlayForward ();
 		Time.timeScale = 0;
+		//EnemySpawnManager._instance.isContinue = false;
 	}
 	
 	public void OnHideTechTree3(GameObject obj){
@@ -126,6 +133,7 @@ public class InGame : MonoBehaviour {
 	public void OnShowWiki(GameObject obj){
 		wikiTween.PlayForward ();
 		Time.timeScale = 0;
+		//EnemySpawnManager._instance.isContinue = false;
 	}
 
 	public void OnHideWiki(GameObject obj){

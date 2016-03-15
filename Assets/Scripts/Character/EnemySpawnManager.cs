@@ -9,6 +9,7 @@ public class EnemySpawnManager : MonoBehaviour {
 	public EnemySpawn[] bowmanBornArray;
 	public EnemySpawn[] vikingBornArray;
 	public EnemySpawn[] gaintBornArray;
+	//public bool isContinue = true;
 
 	public bool isStart = false;
 
@@ -39,65 +40,64 @@ public class EnemySpawnManager : MonoBehaviour {
 	}
 
 	IEnumerator Born(){
+						//the first wave enemy
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy18"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 
-		//the first wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy18"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//second wave enemy
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy18"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 
-		//second wave enemy
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy18"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-
-		//third wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//third wave enemy
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy23"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 
 
-		//forth wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy18"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//forth wave enemy
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy18"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy23"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 
-		//fifth wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy18"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//fifth wave enemy
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy18"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy23"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 
 //		//sixth wave enemy
 //		for(int i = 0 ; i < 5 ; i++){
@@ -113,145 +113,145 @@ public class EnemySpawnManager : MonoBehaviour {
 //		}
 //		WaveAdd ();
 
-		//sixth wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy26"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//sixth wave enemy
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy26"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 
-		//7th wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy18"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy26"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-
-
-		//8th enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-
-		//9th enemy
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy23"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy26"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//7th wave enemy
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy18"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy23"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy26"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 
 
-		//10th wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//8th enemy
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy29"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
+
+						//9th enemy
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy23"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy26"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy29"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
+
+
+						//10th wave enemy
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy40"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 		
-		//11th wave enemy
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//11th wave enemy
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy29"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy40"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 		
-		//12th wave enemy
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 15 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//12th wave enemy
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy29"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 15; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy40"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 		
 		
-		//13th wave enemy
-		for(int i = 0 ; i < 5 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//13th wave enemy
+						for (int i = 0; i < 5; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy42"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 		
-		//14th wave enemy
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
+						//14th wave enemy
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy40"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 10; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy42"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
 		
-		//15th wave enemy
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy29"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy40"));
-			yield return new WaitForSeconds(1f);
-		}
-		for(int i = 0 ; i < 10 ; i++){
-			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
-			yield return new WaitForSeconds(1f);
-		}
-		while (enemyList.Count > 0) {
-			yield return new WaitForSeconds(0.2f);
-		}
-		WaveAdd ();
-		
+						//15th wave enemy
+						for (int i = 0; i < 20; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy29"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 20; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy40"));
+								yield return new WaitForSeconds (1f);
+						}
+						for (int i = 0; i < 20; i++) {
+								enemyList.Add (enemySpawn.EnemyBorn ("enemy42"));
+								yield return new WaitForSeconds (1f);
+						}
+						while (enemyList.Count > 0) {
+								yield return new WaitForSeconds (0.2f);
+						}
+						WaveAdd ();
+				
 //		//17th wave enemy
 //		for(int i = 0 ; i < 5 ; i++){
 //			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
@@ -512,8 +512,8 @@ public class EnemySpawnManager : MonoBehaviour {
 //		}
 //		while (enemyList.Count > 0) {
 //			yield return new WaitForSeconds(0.2f);
-//		}
-
+//		
+					
 	}
 
 	private void WaveAdd(){

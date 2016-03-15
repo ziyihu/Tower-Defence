@@ -64,6 +64,7 @@ public class Enemy : Character {
 	}
 
 	public override void OnBeHit(int damage){
+
 		base.OnBeHit (damage);
 		if(model != null){
 			if(!node.GetArmorPiercing){
@@ -74,7 +75,11 @@ public class Enemy : Character {
 				}
 			} else if(node.GetArmorPiercing){
 				if(GetArmor != 0){
-					data.life = data.life - (damage - GetArmor + 1);
+					if(damage - GetArmor > 0){
+						data.life = data.life - (damage - GetArmor + 1);
+					} else {
+						data.life -= 1;
+					}
 				} else if(GetArmor == 0){
 					data.life = data.life - damage;
 				}
@@ -94,7 +99,7 @@ public class Enemy : Character {
 			//destory the game object
 			GameManager.Instance.DeleteById(ID);
 			//create a new game object to show the animation die
-			dieObj = (GameObject)GameObject.Instantiate (Resources.Load ("die"));
+			dieObj = DieAniPool.instance.Pop();
 			dieObj.transform.position = diePos;
 			return;
 		}

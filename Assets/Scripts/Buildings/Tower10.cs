@@ -69,6 +69,7 @@ public class Tower10 : Building {
 							for(int i = 0;i < enemyLists.Count ; i ++){
 								if(enemyLists[i].Life <= 0){
 									enemyLists.Remove(enemyLists[i]);
+									i--;
 								}
 							}
 						}

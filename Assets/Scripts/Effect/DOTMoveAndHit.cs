@@ -3,21 +3,19 @@ using System.Collections;
 
 public class DOTMoveAndHit : MonoBehaviour {
 
-	private float timer = 0.33f;
+	private float timer = 0.5f;
 	private int attackNum = 3;
 	private float time = 0;
+	private float time2 = 0;
+	private float removeTimer = 2f;
 
 	public Character target;
 
 	public void SetTarget(Character enemy){
 		target = enemy;
 	}
+	
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		if(target != null){
@@ -31,9 +29,14 @@ public class DOTMoveAndHit : MonoBehaviour {
 		//if the Life is more than 0, attack the current enemy
 		if (target.Life > 0) {
 			time += Time.deltaTime;
+			time2 += Time.deltaTime;
 			if(timer < time){
 				target.OnBeHit(attackNum);
 				time = 0;
+			}
+			if(time2 > removeTimer){
+				target.SetIsPonsion(false);
+				time2 = 0;
 			}
 		}
 	}

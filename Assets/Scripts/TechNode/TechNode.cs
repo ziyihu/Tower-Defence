@@ -63,7 +63,8 @@ public class TechNode : MonoBehaviour {
 	//no 25. tech node. Extra Slow2
 	private static bool isExtraSlow2 = false;
 
-
+	public bool isExistParent = false;
+	public bool isBeingParent = false;
 
 	//is this tech node active or not
 	public bool isTechActive = false;
@@ -212,12 +213,14 @@ public class TechNode : MonoBehaviour {
 	}
 
 	public void SetNodeNotActive(){
+		active.gameObject.SetActive (false);
 		this.nodeButton.GetComponent<UIButton> ().enabled = false;
 		this.nodeButton.normalSprite = unableSprite;
 		this.nodeButton.SetState (UIButtonColor.State.Disabled, true);
 	}
 
 	public void SetNodeActive(){
+		active.gameObject.SetActive (false);
 		this.nodeButton.GetComponent<UIButton> ().enabled = true;
 		this.nodeButton.normalSprite = ableSprite;
 		this.nodeButton.SetState(UIButtonColor.State.Normal,true);
@@ -311,7 +314,7 @@ public class TechNode : MonoBehaviour {
 				isPoison = true;
 				UsePointGetTech();
 			}
-			if (ableSprite == "towerskyrunner_2_o") {
+			if (ableSprite == "btnOption_p") {
 				isExtraSlow = true;
 				UsePointGetTech();
 			}
@@ -367,7 +370,7 @@ public class TechNode : MonoBehaviour {
 				isArmorPiercing = true;
 				UsePointGetTech();
 			}
-			if (ableSprite == "btnOption_p") {
+			if (ableSprite == "towerskyrunner_2_o") {
 				isExtraSlow2 = true;
 				UsePointGetTech();
 			}

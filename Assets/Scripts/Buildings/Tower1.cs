@@ -71,6 +71,7 @@ public class Tower1 : Building {
 						for(int i = 0;i < enemyLists.Count ; i ++){
 							if(enemyLists[i].Life <= 0){
 								enemyLists.Remove(enemyLists[i]);
+								i--;
 							}
 						}
 					}
@@ -169,8 +170,9 @@ public class Tower1 : Building {
 				canAttack = false;
 			} else {	
 				if(curEnemy!= null) {
-				GameObject bulletgo = (GameObject)GameObject.Instantiate(Resources.Load("cannonbullet"));
+					GameObject bulletgo = BulletPool.instance.Pop();
 				CannonBullet bullet = bulletgo.GetComponent<CannonBullet>();
+					bullet.move = true;
 				bulletgo.transform.position = GetTransform().position+GetTransform().forward * 0.6f;
 				bullet.parent1 = this;
 					if(enemyLists.Count > 0){

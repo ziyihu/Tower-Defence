@@ -7,9 +7,13 @@ public class AntennaEffects : MonoBehaviour {
 	private GameObject explosionObj = null;
 	private GameObject DOTObj = null;
 	public float speed = 90;
+
+	private float timer = 2f;
+	private float time = 0;
 	
 	// Update is called once per frame
 	void Update () {
+		time += Time.deltaTime;
 		foreach (Antenna ant in TowerBuildManager._instance.GetAntennaList()) {
 			//if the antenna is providing power to the towers nearby, set the animation work
 			if(ant.GetProvidePowerTowerList().Count > 0){
@@ -22,6 +26,7 @@ public class AntennaEffects : MonoBehaviour {
 		}
 
 		//set the effect to show the power is providing to the towers
+		if(time >= timer){
 		foreach (Antenna ant in TowerBuildManager._instance.GetAntennaList()) {
 			if(ant.GetProvidePowerTowerList().Count > 0 && Time.deltaTime != 0){
 				foreach(Character chara in ant.GetProvidePowerTowerList()){
@@ -29,15 +34,18 @@ public class AntennaEffects : MonoBehaviour {
 					//start position : ant.GetPos();
 					//end position : chara.GetPos();
 					//effect name : powerprovide
-					GameObject bulletgo = (GameObject)GameObject.Instantiate(Resources.Load("antennaeffect"));
+						GameObject bulletgo = AtennaEffectPool.instance.Pop();
 					CannonBullet bullet = bulletgo.GetComponent<CannonBullet>();
+						bullet.move = true;
+						bullet.antennaParent = this;
 					bulletgo.transform.position = new Vector3(ant.GetPos().x, 0.4f, ant.GetPos().z);
 					bullet.minDistance = 0.2f;
 						bullet.AntennaFire(chara);
 				}
 			}
 		}
-
+			time = 0;
+		}
 	}
 
 //	IEnumerator Shoot(Character target){

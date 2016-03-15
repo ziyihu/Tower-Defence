@@ -18,6 +18,7 @@ public  class Character : IMessageObject,IComparable<Character>
 	//public bool isDirty;
 	static long id;
 	long mId;
+	public bool IsPonsion {get {return data.isPonsion; }}
 	public CharacterStatus GetCharacterStatus {get{ return status;} }
 	public float AttackRate {get {return data.attackRate;}}
 	public long ID{ get { return mId; } }
@@ -153,6 +154,10 @@ public  class Character : IMessageObject,IComparable<Character>
 	}
 	public void SetPowerProvider(Antenna ant){
 		data.powerProvider = ant;
+	}
+
+	public void SetIsPonsion(bool ponsion){
+		data.isPonsion = ponsion;
 	}
 	
 	public virtual void OnPathComplete()

@@ -7,7 +7,7 @@ public class CannonBullet : MonoBehaviour, IBullet {
 	public int ID { get; set; }
 	public float DelayTime{ get; set; }
 
-	public float speed = 90;
+	public float speed = 3.5f;
 	public float maxTime = 2;
 	public float Timer = 0;
 
@@ -16,8 +16,9 @@ public class CannonBullet : MonoBehaviour, IBullet {
 	public Tower1 parent1 { get; set; }
 	public Tower2 parent2 { get; set; }
 	public Tower7 parent7 { get; set; }
+	public AntennaEffects antennaParent { get; set; }
 	private float distanceToTarget;
-	private bool move = true;
+	public bool move = true;
 	private Character curTarget;
 	private float Distance;
 	private float explosionRange = 0.8f;
@@ -86,7 +87,16 @@ public class CannonBullet : MonoBehaviour, IBullet {
 			}
 			else{
 				move = false;
-				GameObject.Destroy(gameObject);
+				if(parent1 != null){
+					parent1 = null;
+					BulletPool.instance.Push(this.gameObject);
+				}
+				else if(antennaParent != null){
+					antennaParent = null;
+					AtennaEffectPool.instance.Push(this.gameObject);
+				}
+				else 
+					Destroy(this.gameObject);
 			}
 		}
 	}
@@ -99,9 +109,12 @@ public class CannonBullet : MonoBehaviour, IBullet {
 
 	//DOT Effect
 	public void OnDOTEffect(){
-		DOTObj = (GameObject)GameObject.Instantiate(Resources.Load("DOT"));
-		DOTObj.transform.position = curTarget.GetPos ();
-		DOTObj.GetComponent<DOTMoveAndHit> ().SetTarget (curTarget);
+		if(curTarget.IsPonsion == false){
+			DOTObj = (GameObject)GameObject.Instantiate(Resources.Load("DOT"));
+			DOTObj.transform.position = curTarget.GetPos ();
+			DOTObj.GetComponent<DOTMoveAndHit> ().SetTarget (curTarget);
+			curTarget.SetIsPonsion(true);
+		}
 	}
 
 	public void OnHited(){
@@ -146,18 +159,36 @@ public class CannonBullet : MonoBehaviour, IBullet {
 			OnExplosionEffect();
 			if (curTarget.Life <= 0) {
 				parent7.curEnemy = null;
-				GameObject.Destroy (gameObject);
+				Destroy(gameObject);
 			} 
 		}
 
-		GameObject.Destroy (gameObject);
+		if(parent1 != null){
+			parent1 = null;
+			BulletPool.instance.Push(this.gameObject);
+		}
+		else if(antennaParent != null){
+			antennaParent = null;
+			AtennaEffectPool.instance.Push(this.gameObject);
+		}
+		else 
+			Destroy(this.gameObject);
 	}
 
 	public void Update(){
 		Timer += Time.deltaTime;
 		if (Timer >= maxTime) {
-			GameObject.Destroy(gameObject);
+			if(parent1 != null){
+				this.parent1 = null;
+				BulletPool.instance.Push(this.gameObject);
+			} else if(antennaParent != null){
+				this.antennaParent = null;
+				AtennaEffectPool.instance.Push(this.gameObject);
+			} else {
+				Destroy(this.gameObject);
+			}
 			Timer = 0;
+			return;
 		}
 	}
 }

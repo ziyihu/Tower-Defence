@@ -47,7 +47,7 @@ public class Tower4 : Building {
 		}
 		for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
 			if(Vector3.Distance(this.GetPos(),EnemySpawnManager._instance.enemyList[i].GetPos()) >= this.GetAttackRange()){
-				if(node != null && node.GetExtraSlow){
+				if(node != null && node.GetExtraSlow2){
 					EnemySpawnManager._instance.enemyList[i].SetSpeed(0.015f);
 				} else {
 					EnemySpawnManager._instance.enemyList[i].SetSpeed(0.02f);

@@ -5,11 +5,7 @@ public class EnemyMove : MonoBehaviour {
 
 	private GameObject effect11 = null;
 
-	// Use this for initialization
-	void Start () {
 
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		for (int i = 0; i < EnemySpawnManager._instance.enemyList.Count; i++) {

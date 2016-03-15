@@ -111,4 +111,5 @@ public struct CharacterData{
 	public int armor;
 	public int needPower;
 	public Antenna powerProvider;
+	public bool isPonsion;
 }

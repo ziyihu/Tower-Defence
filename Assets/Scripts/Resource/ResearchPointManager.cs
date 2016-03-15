@@ -34,8 +34,7 @@ public class ResearchPointManager : MonoBehaviour {
 
 	public int GetResearchPoint() { return currentPoint; }
 	public void UseResearchPoint() { currentPoint = currentPoint - 1; }
-	
-	TowerBuildManager tManager;
+
 
 	public void SetActive(){
 		isActive = true;
@@ -53,7 +52,6 @@ public class ResearchPointManager : MonoBehaviour {
 		progess.fillAmount = 0;
 		percentage.text = "0%"+"";
 		currentPointLabel.text = 0 + "";
-		tManager = new TowerBuildManager ();
 	}
 	
 	// Update is called once per frame
@@ -62,7 +60,7 @@ public class ResearchPointManager : MonoBehaviour {
 		techTreeCurrentPointLabel.text = currentPoint + "";
 		techTree2CurrentPointLabel.text = currentPoint + "";
 		techTree3CurrentPointLabel.text = currentPoint + "";
-		speed = tManager.GetResearchTowerNum ();
+		speed = TowerBuildManager._instance.GetResearchTowerNum ();
 		if (speed == 0) {
 			isActive = true;
 			timer = 1;
