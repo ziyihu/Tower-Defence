@@ -142,7 +142,7 @@ public class TechInfo : MonoBehaviour {
 				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
 				techNodeInfoName.text = "Armor Piercing";
 				techNodeInfoDes.text = "Description:\nincreased armor piercing";
-			} else if(this.transform.tag == "extraslow"){
+			} else if(this.transform.tag == "extraslow1"){
 				techNodeInfoPanel.SetActive(true);
 				techNodeInfoPanel.transform.position = new Vector3(this.transform.position.x,this.transform.position.y-0.3f,this.transform.position.z);
 				techNodeInfoName.text = "Extra Slow";

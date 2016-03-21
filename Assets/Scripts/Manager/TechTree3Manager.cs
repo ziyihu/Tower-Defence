@@ -34,6 +34,7 @@ public class TechTree3Manager : MonoBehaviour {
 		RandomRemoveAllLevelNodes ();
 		CopyFromList ();
 	//	RandomRemoveAllLevelNodes ();
+		SetAllNodeNotActive ();
 		GeneatorRandomNodeTree ();
 		GeneatroRandomTechTree ();
 	}
