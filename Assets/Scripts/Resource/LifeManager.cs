@@ -12,8 +12,8 @@ public class LifeManager : MonoBehaviour {
 		node = new TechNode ();
 	}
 
-	private static int currentLife = 50;
-	private static int maxLife = 50;
+	private static int currentLife = 30;
+	private static int maxLife = 30;
 
 	//recovery life, only the technology is used
 	private bool isActive = false;

@@ -21,7 +21,7 @@ public class ResearchPointManager : MonoBehaviour {
 	private float time = 0;
 
 	private int currentPercentage = 0;
-	private int currentPoint = 30;
+	private int currentPoint = 4;
 
 	private bool isActive = false;
 	private int speed = 0;
@@ -63,19 +63,19 @@ public class ResearchPointManager : MonoBehaviour {
 		speed = TowerBuildManager._instance.GetResearchTowerNum ();
 		if (speed == 0) {
 			isActive = true;
-			timer = 1;
+			timer = 0.5f;
 		} else {
 			isActive = true;
 			if(speed == 1){
-				timer = 0.9f * speedUp;
+				timer = 0.47f * speedUp;
 			} else if(speed == 2){
-				timer = 0.8f * speedUp;
+				timer = 0.44f * speedUp;
 			} else if(speed == 3){
-				timer = 0.7f * speedUp;
+				timer = 0.41f * speedUp;
 			} else if(speed == 4){
-				timer = 0.6f * speedUp;
+				timer = 0.38f * speedUp;
 			} else if(speed == 5){
-				timer = 0.5f * speedUp;
+				timer = 0.35f * speedUp;
 			}
 		}
 		time += Time.deltaTime;

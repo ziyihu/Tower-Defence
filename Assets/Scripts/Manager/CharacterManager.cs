@@ -8,7 +8,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 	//private List<int> armorList2 = new List<int>(){0,1,1,2,3,4};
 
 	//enemy hp
-	public List<int> hpList = new List<int>(){15,25,35,50,70,90};
+	public List<int> hpList = new List<int>(){15,25,35,45,55,70};
 
 	//towers need power
 	//basic : 1		shotgun : 2		stasis : 1

@@ -9,7 +9,7 @@ public class ResearchSpeedup : MonoBehaviour {
 	private bool isResearchSpeedup = false;
 	private bool hasResearchSpeedup = false;
 
-	private float speedUpNumber = 0.5f;
+	private float speedUpNumber = 0.8f;
 	
 	// Use this for initialization
 	void Start () {
