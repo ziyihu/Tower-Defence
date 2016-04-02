@@ -57,8 +57,6 @@ This is a tower defence game using C# language.
  Have implemented the antenna(provide power to nearby towers so that the towers can work)
  when destory towers, power generator, the power will change.
  
- Almost finish all parts of the game
- 
  Add enemy introduction panel, add game over panel.
  Ensure 6 types of enemy.
  There are 15 waves of enemies in the game now.
@@ -69,7 +67,11 @@ add effect to the antenna when its working and when its providing power to the o
 Has three types of technology tree in the game.
 
 Improve performance by using game object pool and reduce the number of effects.
+
+Change some numbers, debug the posion effect error.
+The original diamond is 100 and the research point is 3.
  
+ Finish the game.
  
 Undo parts: 
 // Targeting facility: increases the damage of nearby towers
