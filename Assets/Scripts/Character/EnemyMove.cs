@@ -5,6 +5,17 @@ public class EnemyMove : MonoBehaviour {
 
 	private GameObject effect11 = null;
 
+	private TechNode node;
+
+	//extra slow time
+	private bool isExtraSlow = false;
+	private float timer = 2.0f;
+	private float time = 0;
+
+	void Start(){
+		node = new TechNode ();
+	}
+
 
 	// Update is called once per frame
 	void Update () {
@@ -103,6 +114,28 @@ public class EnemyMove : MonoBehaviour {
 				}
 				EnemySpawnManager._instance.enemyList.Remove(enemy);
 				enemy.Destroy();
+				//last enemy will not affect the speed
+				//enemy reach base, if the extra slow1 is active
+				if(node.GetExtraSlow){
+					if(EnemySpawnManager._instance.enemyList.Count != 0){
+						//set the variable 
+						TowerBuildManager._instance.SetExtraSlowNum(0.8f);
+						isExtraSlow = true;
+						time = 0;
+					} else {
+						TowerBuildManager._instance.SetExtraSlowNum(1.0f);
+						isExtraSlow = false;
+						time = 0;
+					}
+				}
+			}
+		}
+		if (isExtraSlow) {
+			time += Time.deltaTime;
+			if(time >= timer){
+				TowerBuildManager._instance.SetExtraSlowNum(1.0f);
+				isExtraSlow = false;
+				time = 0;
 			}
 		}
 

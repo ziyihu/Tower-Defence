@@ -152,8 +152,11 @@ public class TowerBuildManager : MonoBehaviour {
 		powerNum += number;
 	}
 
+	TechNode node;
+
 	// Use this for initialization
 	void Start () {
+		node = new TechNode ();
 		cManager = new CharacterManager ();
 		gManager = new GameManager ();
 		//add the diamond resource to the game manager.
@@ -268,6 +271,15 @@ public class TowerBuildManager : MonoBehaviour {
 			}
 		}
 		
+	}
+
+	private bool InSlowTowerRange = false;
+	private float extraSlowNum = 1.0f;
+	public void SetExtraSlowNum(float number){
+		extraSlowNum = number;
+	}
+	public float GetExtraSlowNum(){
+		return extraSlowNum;
 	}
 
 	// Update is called once per frame
@@ -403,11 +415,26 @@ public class TowerBuildManager : MonoBehaviour {
 			}
 		}
 		if (gManager.tower4List.Count > 0 && Time.timeScale == 1) {
-			foreach (Tower4 t in gManager.tower4List) {
-				if(t.GetPowerProvider()!=null){
-					t.SlowEnemy();
+			for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
+				foreach (Tower4 t in gManager.tower4List) {
+					//in the range
+					if(t.InRange(i)){
+						//slow the enemy
+						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.01f * extraSlowNum);
+						EnemySpawnManager._instance.enemyList[i].isSlow = true;
+						InSlowTowerRange = true;
+					}
 				}
+				if(InSlowTowerRange == false){
+					if(node.GetExtraSlow2){
+						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.15f * extraSlowNum);
+					} else {
+						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.02f * extraSlowNum);
+					}
+				}
+				InSlowTowerRange = false;
 			}
+
 		}
 		if (gManager.tower7List.Count > 0 && Time.timeScale == 1) {
 			foreach (Tower7 t in gManager.tower7List) {

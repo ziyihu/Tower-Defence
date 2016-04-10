@@ -39,21 +39,32 @@ public class Tower4 : Building {
 		house.gameObject.GetComponent<Renderer>().sortingOrder = layerOrder = LAYER_BASE + 1;
 		buildingType = CharacterData.buildingMode.TOWER4;
 	}
-	
+
+	public bool InRange(int i){
+		return (Vector3.Distance (this.GetPos (), EnemySpawnManager._instance.enemyList [i].GetPos ()) <= this.GetAttackRange ());
+	}
+
 	//Hit the enmey
 	public void SlowEnemy(){
-		if (GameManager.Instance.CurStatus != GameManager.Status.START_GAME) {
-			return;
-		}
+//		if (GameManager.Instance.CurStatus != GameManager.Status.START_GAME) {
+//			return;
+//		}
 		for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
-			if(Vector3.Distance(this.GetPos(),EnemySpawnManager._instance.enemyList[i].GetPos()) >= this.GetAttackRange()){
-				if(node != null && node.GetExtraSlow2){
-					EnemySpawnManager._instance.enemyList[i].SetSpeed(0.015f);
-				} else {
-					EnemySpawnManager._instance.enemyList[i].SetSpeed(0.02f);
+			if(Vector3.Distance(this.GetPosition(),EnemySpawnManager._instance.enemyList[i].GetPos()) >= this.GetAttackRange()){
+				if(EnemySpawnManager._instance.enemyList[i].isSlow == true){
+//					if(node != null && node.GetExtraSlow2){
+//						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.015f);
+//						EnemySpawnManager._instance.enemyList[i].isSlow = false;
+//					} else {
+						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.02f);
+						EnemySpawnManager._instance.enemyList[i].isSlow = false;
+					//}
 				}
 			} else {
-				EnemySpawnManager._instance.enemyList[i].SetSpeed(0.01f);
+				if(EnemySpawnManager._instance.enemyList[i].isSlow == false){
+					EnemySpawnManager._instance.enemyList[i].isSlow = true;
+					EnemySpawnManager._instance.enemyList[i].SetSpeed(0.01f);
+				}
 			}
 		}
 	}

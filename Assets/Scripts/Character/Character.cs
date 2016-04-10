@@ -34,6 +34,7 @@ public  class Character : IMessageObject,IComparable<Character>
 	public int GetLevel() {return data.level;}
 	public Antenna GetPowerProvider() { return data.powerProvider; }
 	public int GetArmor{ get { return data.armor; } }
+	public bool isSlow = false;
 	//public Vector3 GetPos
 	private bool bNeedChange = false;
 	private bool bInited = false;
