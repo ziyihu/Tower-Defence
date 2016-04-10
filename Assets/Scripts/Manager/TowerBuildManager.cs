@@ -54,7 +54,7 @@ public class TowerBuildManager : MonoBehaviour {
 	//the number of the collection speed of diamond(depending on how many collection towers you have)
 	private static int diamondColNum = 0;
 	//the number of the current power you have(depending on the number of the power towers)
-	private static int powerNum = 5;
+	private static int powerNum = 8;
 
 	private static int smallMineNum = 0;
 	private static int largeMineNum = 0;

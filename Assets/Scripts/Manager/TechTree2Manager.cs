@@ -33,20 +33,45 @@ public class TechTree2Manager : MonoBehaviour {
 	void Start () {
 		instance = this;
 		level1AvaliableLabel.text = 3 + "";
+		//Remove 1 node from level3
+		RandomRemoveFromList (level3TechNodeList, 1);
+		//Remove 1 node from level4
+		RandomRemoveFromList (level4TechNodeList, 1);
+		//Remove 1 node from level5
+		RandomRemoveFromList (level5TechNodeList, 1);
+
+		int number = 0;
+		int level = 2;
+
 		foreach (TechNode tn in level2TechNodeList) {
 			tn.SetNodeNotActive();
 			level2AvaliableLabel.text = 0 + "";
 		}
+
 		foreach (TechNode tn in level3TechNodeList) {
 			tn.SetNodeNotActive();
+			tn.transform.localPosition = new Vector3(-350+number*130, 170-90*level,0);
+			number++;
 			level3AvaliableLabel.text = 0 + "";
 		}
+
+		number = 0;
+		level++;
+
 		foreach (TechNode tn in level4TechNodeList) {
 			tn.SetNodeNotActive();
+			tn.transform.localPosition = new Vector3(-350+number*130, 170-90*level,0);
+			number++;
 			level4AvaliableLabel.text = 0 + "";
 		}
+
+		number = 0;
+		level++;
+
 		foreach (TechNode tn in level5TechNodeList) {
 			tn.SetNodeNotActive();
+			tn.transform.localPosition = new Vector3(-350+number*130, 170-90*level,0);
+			number++;
 			level5AvaliableLabel.text = 0 + "";
 		}
 	}
@@ -244,6 +269,15 @@ public class TechTree2Manager : MonoBehaviour {
 					level5TechNodeList[i].SetNodeActive();
 				}
 			}
+		}
+	}
+
+	public void RandomRemoveFromList(List<TechNode> techNodeList,int number){
+		int j = 0;
+		for (int i = 0; i < number; i++) {
+			j = Random.Range(0,techNodeList.Count-1);
+			techNodeList[j].gameObject.SetActive(false);
+			techNodeList.RemoveAt(j);
 		}
 	}
 }
