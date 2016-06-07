@@ -68,7 +68,7 @@ public class InGame : MonoBehaviour {
 		Time.timeScale = 0;
 		//EnemySpawnManager._instance.isContinue = false;
 	}
-	
+
 	void OnEnable(){
 		
 	}

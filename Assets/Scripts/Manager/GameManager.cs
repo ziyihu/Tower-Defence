@@ -11,6 +11,7 @@ public class GameManager : UnityAllSceneSingleton<GameManager>,IMessageObject {
 		PREPARE_SCAN,
 		START_GAME,
 		END_GAME,
+		WIN_GAME
 	}
 	public List<Cannon> can = new List<Cannon> ();
 	public List<Tower1> tower1List = new List<Tower1> ();

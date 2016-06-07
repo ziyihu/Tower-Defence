@@ -44,26 +44,78 @@ public class Tower4 : Building {
 		return (Vector3.Distance (this.GetPos (), EnemySpawnManager._instance.enemyList [i].GetPos ()) <= this.GetAttackRange ());
 	}
 
+
+	public void CheckEnemy(){
+		if (GameManager.Instance.CurStatus != GameManager.Status.START_GAME) {
+			return;
+		}
+	//	if (Time.realtimeSinceStartup > lastTime + data.attackInterval) {
+			//get the enemy list
+			if(EnemySpawnManager._instance.enemyList.Count > 0){
+				//attack the enemy
+				foreach(Character chara in EnemySpawnManager._instance.enemyList){
+					if(Vector3.Distance(this.GetPos(),chara.GetPos()) < this.GetAttackRange() && chara.Life >= 0){
+						isExist = false;
+						for(int i = 0 ; i < enemyLists.Count; i++) {
+							if(enemyLists[i].ID == chara.ID){
+								isExist = true;
+							}
+						}
+						if(isExist == false){
+							enemyLists.Add(chara);
+						}
+						for(int i = 0;i < enemyLists.Count ; i ++){
+							if(enemyLists[i].Life <= 0){
+								enemyLists.Remove(enemyLists[i]);
+								i--;
+							}
+						}
+					}
+				}
+				if(enemyLists.Count > 0){
+					for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
+						for(int j = 0 ; j < enemyLists.Count ; j++){
+							if(EnemySpawnManager._instance.enemyList[i].ID == enemyLists[j].ID){
+								curEnemy = enemyLists[j];
+								break;
+							}
+						}
+						if(curEnemy != null){
+							break;
+						}
+					}
+				} else if(enemyLists.Count == 0){
+					curEnemy = null;
+					return;
+				}
+			} else if(EnemySpawnManager._instance.enemyList.Count == 0){
+				enemyLists.Clear();
+				curEnemy = null;
+			}
+	}
+
+
 	//Hit the enmey
 	public void SlowEnemy(){
 //		if (GameManager.Instance.CurStatus != GameManager.Status.START_GAME) {
 //			return;
 //		}
-		for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
-			if(Vector3.Distance(this.GetPosition(),EnemySpawnManager._instance.enemyList[i].GetPos()) >= this.GetAttackRange()){
-				if(EnemySpawnManager._instance.enemyList[i].isSlow == true){
+		for(int i = 0 ; i < enemyLists.Count ; i++){
+			if(Vector3.Distance(this.GetPosition(),enemyLists[i].GetPos()) >= this.GetAttackRange()){
+				if(enemyLists[i].isSlow == true){
 //					if(node != null && node.GetExtraSlow2){
 //						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.015f);
 //						EnemySpawnManager._instance.enemyList[i].isSlow = false;
 //					} else {
-						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.02f);
-						EnemySpawnManager._instance.enemyList[i].isSlow = false;
+					enemyLists[i].SetSpeed(0.02f);
+					enemyLists[i].isSlow = false;
 					//}
 				}
-			} else {
-				if(EnemySpawnManager._instance.enemyList[i].isSlow == false){
-					EnemySpawnManager._instance.enemyList[i].isSlow = true;
-					EnemySpawnManager._instance.enemyList[i].SetSpeed(0.01f);
+			} 
+			else {
+				if(enemyLists[i].isSlow == false){
+					enemyLists[i].isSlow = true;
+					enemyLists[i].SetSpeed(0.01f);
 				}
 			}
 		}

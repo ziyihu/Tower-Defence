@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class TowerBuildManager : MonoBehaviour {
 	public static TowerBuildManager _instance;
-
+	public UILabel upgradeDiamondNum;
 	void Awake(){
 		_instance = this;
 	}
@@ -179,6 +179,7 @@ public class TowerBuildManager : MonoBehaviour {
 		                                                   1, obstacle2Pos, new Vector3 (0, 0, 0), CharacterStatus.Pose.Idle);
 		diamond.SetPosition (obstacle2Pos);
 		gManager.diamondList.Add (diamond);
+
 	}
 
 
@@ -281,6 +282,7 @@ public class TowerBuildManager : MonoBehaviour {
 	public float GetExtraSlowNum(){
 		return extraSlowNum;
 	}
+	
 
 	// Update is called once per frame
 	void Update () {
@@ -298,6 +300,9 @@ public class TowerBuildManager : MonoBehaviour {
 				tower01 = false;
 			}
 			PreSetTower("tower1",hit);
+			//show the range before put the tower in
+			ShowAttackRangeBeforePutting("tower1",hit);
+
 		} else if (tower02) {
 			if(Input.GetMouseButtonDown(0)){
 				Destroy(go);
@@ -305,6 +310,7 @@ public class TowerBuildManager : MonoBehaviour {
 				tower02 = false;
 			}
 			PreSetTower("tower2",hit);
+			ShowAttackRangeBeforePutting("tower2",hit);
 		} else if(tower04){
 			if(Input.GetMouseButtonDown(0)){
 				Destroy(go);
@@ -312,6 +318,7 @@ public class TowerBuildManager : MonoBehaviour {
 				tower04 = false;
 			}
 			PreSetTower("tower4",hit);
+			ShowAttackRangeBeforePutting("tower4",hit);
 		} else if(tower07){
 			if(Input.GetMouseButtonDown(0)){
 				Destroy(go);
@@ -319,6 +326,7 @@ public class TowerBuildManager : MonoBehaviour {
 				tower07 = false;
 			}
 			PreSetTower("tower7",hit);
+			ShowAttackRangeBeforePutting("tower7",hit);
 		} else if(tower10){
 			if(Input.GetMouseButtonDown(0)){
 				Destroy(go);
@@ -326,6 +334,7 @@ public class TowerBuildManager : MonoBehaviour {
 				tower10 = false;
 			}
 			PreSetTower("tower10",hit);
+			ShowAttackRangeBeforePutting("tower10",hit);
 		} else if(research){
 			if(Input.GetMouseButtonDown(0)){
 				Destroy(go);
@@ -373,6 +382,7 @@ public class TowerBuildManager : MonoBehaviour {
 				targetingFacility = false;
 			}
 			PreSetTower("targeting",hit);
+			ShowAttackRangeBeforePutting("targeting",hit);
 		} else if(superCapacitor) {
 			if(Input.GetMouseButtonDown(0)){
 				Destroy(go);
@@ -380,6 +390,7 @@ public class TowerBuildManager : MonoBehaviour {
 				superCapacitor = false;
 			}
 			PreSetTower("supercapacitor",hit);
+			ShowAttackRangeBeforePutting("super",hit);
 		} else if(alienRecovery){
 			if(Input.GetMouseButtonDown(0)){
 				Destroy(go);
@@ -387,6 +398,7 @@ public class TowerBuildManager : MonoBehaviour {
 				alienRecovery = false;
 			}
 			PreSetTower("alienrecovery",hit);
+			ShowAttackRangeBeforePutting("alien",hit);
 		} else if(antenna){
 			if(Input.GetMouseButtonDown(0)){
 				Destroy(go);
@@ -394,13 +406,17 @@ public class TowerBuildManager : MonoBehaviour {
 				antenna = false;
 			}
 			PreSetTower("antenna",hit);
+			ShowAttackRangeBeforePutting("antenna",hit);
 		}
 		//if(time > tower1AttackRate){
 		if (gManager.tower1List.Count > 0 && Time.timeScale == 1) {
 			foreach (Tower1 t in gManager.tower1List) {
 				if(t.GetPowerProvider()!=null){
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
 					t.CheckEnemy ();
 					t.HitEnemy ();
+				} else {
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
 				}
 			}
 		}
@@ -409,62 +425,90 @@ public class TowerBuildManager : MonoBehaviour {
 		if (gManager.tower2List.Count > 0 && Time.timeScale == 1) {
 			foreach (Tower2 t in gManager.tower2List) {
 				if(t.GetPowerProvider()!= null){
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
 					t.CheckEnemy ();
 					t.HitEnemy();
+				} else {
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
 				}
 			}
 		}
 		if (gManager.tower4List.Count > 0 && Time.timeScale == 1) {
 			for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
 				foreach (Tower4 t in gManager.tower4List) {
-					//in the range
-					if(t.InRange(i)){
-						//slow the enemy
-						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.01f * extraSlowNum);
-						EnemySpawnManager._instance.enemyList[i].isSlow = true;
-						InSlowTowerRange = true;
-					}
-				}
-				if(InSlowTowerRange == false){
-					if(node.GetExtraSlow2){
-						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.15f * extraSlowNum);
+					if(t.GetPowerProvider()!=null){
+						t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
+						t.CheckEnemy();
+						t.SlowEnemy();
 					} else {
-						EnemySpawnManager._instance.enemyList[i].SetSpeed(0.02f * extraSlowNum);
+						t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
 					}
-				}
-				InSlowTowerRange = false;
+//					if(t.GetPowerProvider()!= null){
+//						t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
+//						//in the range
+//						if(t.InRange(i)){
+//							//slow the enemy
+//							EnemySpawnManager._instance.enemyList[i].SetSpeed(0.015f * extraSlowNum);
+//							EnemySpawnManager._instance.enemyList[i].isSlow = true;
+//							InSlowTowerRange = true;
+//						}
+//					} else {
+//						t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
+//					}
+//					if(InSlowTowerRange == false){
+//						if(node.GetExtraSlow2){
+//							EnemySpawnManager._instance.enemyList[i].SetSpeed(0.018f * extraSlowNum);
+//						} else {
+//							EnemySpawnManager._instance.enemyList[i].SetSpeed(0.02f * extraSlowNum);
+//						}
+//					}
+//					InSlowTowerRange = false;
+//				}
+			}
 			}
 
 		}
 		if (gManager.tower7List.Count > 0 && Time.timeScale == 1) {
 			foreach (Tower7 t in gManager.tower7List) {
 				if(t.GetPowerProvider()!=null){
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
 					t.CheckEnemy();
 					t.HitEnemy();
+				} else {
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
 				}
 			}
 		}
 		if (gManager.tower10List.Count > 0 && Time.timeScale == 1) {
 			foreach (Tower10 t in gManager.tower10List){
 				if(t.GetPowerProvider()!=null){
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
 					t.CheckEnemy();
 					t.HitEnemy();
+				} else {
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
 				}
 			}
 		}
 		if (gManager.targetingFacList.Count > 0 && Time.timeScale == 1) {
 			foreach(TargetingFacility t in gManager.targetingFacList){
 				if(t.GetPowerProvider()!=null){
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
 					t.FindTowers();
 					t.IncreaseAttack();
+				} else {
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
 				}
 			}
 		}
 		if (gManager.superCapList.Count > 0 && Time.timeScale == 1) {
 			foreach(SuperCapacitor t in gManager.superCapList){
 				if(t.GetPowerProvider()!=null){
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Unlit/Transparent Colored");
 					t.FindTowers();
 					t.IncreaseAttackRate();
+				} else {
+					t.GetTransform().GetComponentInChildren<Renderer>().material.shader = Shader.Find("Transparent/Bumped Specular");
 				}
 			}
 		}
@@ -513,7 +557,7 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "Tower2"){
 				name = "Shotgun Tower";
-				description = "This tower has low range, medium rate of fire, can shoot two enemies\n\n"+"Need 2 power to function";
+				description = "This tower has low range, medium rate of fire, can shoot four enemies\n\n"+"Need 2 power to function";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = building.GetAttackPower()+"";
 				levelNumber = building.GetLevel()+"";
@@ -580,7 +624,7 @@ public class TowerBuildManager : MonoBehaviour {
 				SetPanel(name,description,attackNumber,levelNumber);
 			} else if(hit.transform.tag == "Targeting"){
 				name = "Targeting Facility";
-				description = "This tower will increase 1 attack number for nearby towers\n\n"+"Need 2 power to function";
+				description = "This tower will increase 2 attack number for nearby towers\n\n"+"Need 2 power to function";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
 				attackNumber = 0+"";
 				levelNumber = 0 + "";
@@ -605,7 +649,7 @@ public class TowerBuildManager : MonoBehaviour {
 			} else if(hit.transform.tag == "Antenna"){
 				name = "Antenna";
 				building = cManager.GetBuildingById(int.Parse(hit.collider.transform.name));
-				description = "This tower supply power to nearby towers\n"+"Current Power: "+((Antenna)building).GetCurrentPower();
+				description = "This tower supply power to nearby towers\n"+"Current Power: "+((Antenna)building).GetCurrentPower()+"/"+((Antenna)building).GetMaxPower();
 				attackNumber = 0+"";
 				levelNumber = 0+"";
 				SetAttackRangeShow(building);
@@ -623,6 +667,49 @@ public class TowerBuildManager : MonoBehaviour {
 		circleObj.gameObject.transform.GetComponent<DrawCircle>().m_Radius = building.GetAttackRange();
 		circleObj.SetActive(true);
 		circleObj.transform.position = building.GetPos();
+	}
+
+	private void SetAttackRangeShowPutting(float attackRange,Vector3 position) {
+		circleObj.gameObject.transform.GetComponent<DrawCircle> ().m_Radius = attackRange;
+		circleObj.SetActive (true);
+		circleObj.transform.position = position;
+	}
+
+	TechNode techNode = new TechNode();
+
+	private void ShowAttackRangeBeforePutting(string name,RaycastHit hit){
+		if(hit.collider != null) {
+			if(hit.collider.tag == "Map"){
+				if(name == "tower1"){
+					SetAttackRangeShowPutting(2.25f,hit.point);
+				} else if(name == "tower2"){
+					SetAttackRangeShowPutting(2f,hit.point);
+				} else if(name == "tower4") {
+					SetAttackRangeShowPutting(2f,hit.point);
+				} else if(name == "tower7") {
+					SetAttackRangeShowPutting(2.5f,hit.point);
+				} else if(name == "tower10") {
+					SetAttackRangeShowPutting(2.5f,hit.point);
+				} else if(name == "antenna"){
+					if(techNode.GetAntennaRange){
+						SetAttackRangeShowPutting(1.5f,hit.point);
+					} else {
+						SetAttackRangeShowPutting(0.5f,hit.point);
+					}
+				} else if(name == "targeting") {
+					SetAttackRangeShowPutting(1f,hit.point);
+				} else if(name == "super") {
+					SetAttackRangeShowPutting(1f,hit.point);
+				} else if(name == "alien") {
+					SetAttackRangeShowPutting(2f,hit.point);
+				}
+ 
+			} else {
+				SetAttackRangeHide();
+			}
+		} else {
+			SetAttackRangeHide();
+		}
 	}
 
 	private void SetAttackRangeHide(){
@@ -648,6 +735,21 @@ public class TowerBuildManager : MonoBehaviour {
 			upgrade.normalSprite = "btn_red4";
 			upgrade.enabled = false;
 		}
+
+		if (building.buildingType == CharacterData.buildingMode.TOWER1) {
+			upgradeDiamondCost = 20;
+			upgradeDiamondNum.text = "cost:"+upgradeDiamondCost;
+		} else if(building.buildingType == CharacterData.buildingMode.TOWER2){
+			upgradeDiamondCost = 30;
+			upgradeDiamondNum.text = "cost:"+upgradeDiamondCost;
+		} else if(building.buildingType == CharacterData.buildingMode.TOWER7){
+			upgradeDiamondCost = 50;
+			upgradeDiamondNum.text = "cost:"+upgradeDiamondCost;
+		} else if(building.buildingType == CharacterData.buildingMode.TOWER10){
+			upgradeDiamondCost = 100;
+			upgradeDiamondNum.text = "cost:"+upgradeDiamondCost;
+		}
+
 		if(building.buildingType == CharacterData.buildingMode.TOWER4 || building.buildingType == CharacterData.buildingMode.LAB
 		   || building.buildingType == CharacterData.buildingMode.MINE1 || building.buildingType == CharacterData.buildingMode.MINE2
 		   || building.buildingType == CharacterData.buildingMode.GENERATOR1 || building.buildingType == CharacterData.buildingMode.GENERATOR2
@@ -696,6 +798,19 @@ public class TowerBuildManager : MonoBehaviour {
 
 	public void UpGradeBtnClick(){
 		//use 20 diamond to upgrade
+		if (building.buildingType == CharacterData.buildingMode.TOWER1) {
+			upgradeDiamondCost = 20;
+			upgradeDiamondNum.text = "cost:"+upgradeDiamondCost;
+		} else if(building.buildingType == CharacterData.buildingMode.TOWER2){
+			upgradeDiamondCost = 30;
+			upgradeDiamondNum.text = "cost:"+upgradeDiamondCost;
+		} else if(building.buildingType == CharacterData.buildingMode.TOWER7){
+			upgradeDiamondCost = 50;
+			upgradeDiamondNum.text = "cost:"+upgradeDiamondCost;
+		} else if(building.buildingType == CharacterData.buildingMode.TOWER10){
+			upgradeDiamondCost = 100;
+			upgradeDiamondNum.text = "cost:"+upgradeDiamondCost;
+		}
 		if(DiamondManager._instance.GetCurrentDiamond() >= upgradeDiamondCost){
 		if (building.GetLevel() <= 1) {
 			upgrade.normalSprite = "btn_red1";
@@ -710,7 +825,7 @@ public class TowerBuildManager : MonoBehaviour {
 		//increase the attack power
 		attackNum = building.GetAttackPower ();
 		building.SetAttackPower (attackNum + tower10UpgradeAttackNumber);
-			DiamondManager._instance.UseDiamond(20);
+			DiamondManager._instance.UseDiamond(upgradeDiamondCost);
 		//increase the level
 		level = level + 1;
 		building.SetLevel (level);

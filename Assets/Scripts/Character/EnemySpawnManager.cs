@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class EnemySpawnManager : MonoBehaviour {
 
 	public static EnemySpawnManager _instance;
+	public UIPanel SuccessPanel;
 
 	public EnemySpawn[] bowmanBornArray;
 	public EnemySpawn[] vikingBornArray;
@@ -35,11 +36,18 @@ public class EnemySpawnManager : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
-		StartCoroutine (Born ());
+	public void StartCoroutine1 () {
+	//	if (chooseTechTree.CurrentTechTree == 1) {
+			StartCoroutine (Born ());
+	//	} 
+	}
+
+	public void EndCoroutine1(){
+		StopCoroutine (Born ());
 	}
 
 	IEnumerator Born(){
+	
 						//the first wave enemy
 						for (int i = 0; i < 5; i++) {
 								enemyList.Add (enemySpawn.EnemyBorn ("enemy18"));
@@ -251,7 +259,9 @@ public class EnemySpawnManager : MonoBehaviour {
 								yield return new WaitForSeconds (0.2f);
 						}
 						WaveAdd ();
-				
+		GameManager.Instance.CurStatus = GameManager.Status.WIN_GAME;
+
+		}
 //		//17th wave enemy
 //		for(int i = 0 ; i < 5 ; i++){
 //			enemyList.Add(enemySpawn.EnemyBorn("enemy42"));
@@ -514,7 +524,7 @@ public class EnemySpawnManager : MonoBehaviour {
 //			yield return new WaitForSeconds(0.2f);
 //		
 					
-	}
+
 
 	private void WaveAdd(){
 		if (LifeManager._instance.GetLife () != 0) {

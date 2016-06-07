@@ -8,7 +8,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 	//private List<int> armorList2 = new List<int>(){0,1,1,2,3,4};
 
 	//enemy hp
-	public List<int> hpList = new List<int>(){8,15,25,35,45,55};
+	public List<int> hpList = new List<int>(){7,10,16,25,35,55};
 
 	//towers need power
 	//basic : 1		shotgun : 2		stasis : 1
@@ -304,42 +304,42 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				Gaint chara = new Gaint("enemy18");
 				chara.SetArmor(armorList[0]);
 				chara.SetIsPonsion(false);
-				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[0]);
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,hpList[0]);
 				tempChar = chara;
 			} 
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY23){
 				Gaint chara = new Gaint("enemy23");
 				chara.SetArmor(armorList[1]);
 				chara.SetIsPonsion(false);
-				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[1]);
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,hpList[1]);
 				tempChar = chara;
 			} 
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY26){
 				Gaint chara = new Gaint("enemy26");
 				chara.SetArmor(armorList[2]);
 				chara.SetIsPonsion(false);
-				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[2]);
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,hpList[2]);
 				tempChar = chara;
 			} 
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY29){
 				Gaint chara = new Gaint("enemy29");
 				chara.SetArmor(armorList[3]);
 				chara.SetIsPonsion(false);
-				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[3]);
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,hpList[3]);
 				tempChar = chara;
 			}
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY40){
 				Gaint chara = new Gaint("enemy40");
 				chara.SetArmor(armorList[4]);
 				chara.SetIsPonsion(false);
-				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[4]);
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,hpList[4]);
 				tempChar = chara;
 			} 
 			else if((CharacterData.CharacterModel)charModeType == CharacterData.CharacterModel.ENEMY42){
 				Gaint chara = new Gaint("enemy42");
 				chara.SetArmor(armorList[5]);
 				chara.SetIsPonsion(false);
-				SetEnemy(chara,pos,dir,camp,pose,0.015f,hpList[5]);
+				SetEnemy(chara,pos,dir,camp,pose,0.02f,hpList[5]);
 				tempChar = chara;
 			} 
 
@@ -494,7 +494,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPos(pos);
 				character.SetPose(pose);
 				character.SetCamp(camp);
-				character.SetAttackRange(2);
+				character.SetAttackRange(1);
 				character.SetNeedPower(towerPowerList[5]);
 				tempChar = character;
 			}
@@ -504,7 +504,7 @@ public class CharacterManager : MonoBehaviour,IMessageObject {
 				character.SetPos(pos);
 				character.SetPose(pose);
 				character.SetCamp(camp);
-				character.SetAttackRange(2);
+				character.SetAttackRange(1);
 				character.SetNeedPower(towerPowerList[6]);
 				tempChar = character;
 			}

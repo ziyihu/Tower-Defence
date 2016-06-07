@@ -14,7 +14,7 @@ public class DiamondManager : MonoBehaviour {
 	
 	private float timer = 1f;
 	private float time = 0;
-	private int currentDiamond = 200;
+	private int currentDiamond = 20000;
 	
 	private bool isActive = false;
 	private int speed = 0;

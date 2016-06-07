@@ -44,8 +44,8 @@ public class TechTree2Manager : MonoBehaviour {
 		int level = 2;
 
 		foreach (TechNode tn in level2TechNodeList) {
-			tn.SetNodeNotActive();
-			level2AvaliableLabel.text = 0 + "";
+			//tn.SetNodeNotActive();
+			level2AvaliableLabel.text = level2TechNodeList.Count + "";
 		}
 
 		foreach (TechNode tn in level3TechNodeList) {
