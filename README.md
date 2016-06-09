@@ -73,25 +73,35 @@ The original diamond is 100 and the research point is 3.
  
  Finish the game.
  
-Undo parts: 
-// Targeting facility: increases the damage of nearby towers
-// Research labs: generates research point over time
-// Supercapcitor: increases the rate of fire of nearby towers
-// Antenna: supplies power to nearby towers
-// Alien recovery: generate resources from aliens killed nearby
+ Targeting facility: increases the damage of nearby towers
+ Research labs: generates research point over time
+ Supercapcitor: increases the rate of fire of nearby towers
+ Antenna: supplies power to nearby towers
+ Alien recovery: generate resources from aliens killed nearby
  
-// Extra damage
- Overcharge: towers can be set to consume more power, deal more damage
-// Stasis field does damage
-// Increased antenna range
-// Increased antenna power delivery
-// Increased power production from generators 
-// Research acceleration:can spend resources to get research points
-// Napalm: add DOT to shots
-// Increased armor piercing
+ Extra damage
+// Overcharge: towers can be set to consume more power, deal more damage
+ Stasis field does damage
+ Increased antenna range
+ Increased antenna power delivery
+ Increased power production from generators 
+ Research acceleration:can spend resources to get research points
+ Napalm: add DOT to shots
+ Increased armor piercing
  
-// Extra slow effect when enemies reach base
-// Extra slow effect on all enemies
-// Recover life when no enemies reached there in a while
+ Extra slow effect when enemies reach base
+ Extra slow effect on all enemies
+ Recover life when no enemies reached there in a while
  
- 
+On June 8th
+Using game object pool to optimize the explosion effects
+Players can see the tower range before they put the tower in the field
+Fixed a bug in the bullet, sometimes the bullet will miss the target because there is a bug the game object pool
+Fixed a bug in the stasis tower, sometimes the stasis tower will not slow the enemies because the function is not correct.
+
+Expected:
+Music effects
+Optimize the game
+Collect the information
+Make a video for the game
+Maybe give some guidiences to the player before they playing the game
