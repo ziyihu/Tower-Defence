@@ -1,4 +1,6 @@
 # Tower-Defence
+A video of this project can be seen in Youtube 
+The link: https://youtu.be/569TCqE4BZQ
 This is a tower defence game using C# language.
  This game is based on the Unity3d 4.6 version.
  Download the game and run it in the Unity3d.
@@ -99,9 +101,9 @@ Players can see the tower range before they put the tower in the field
 Fixed a bug in the bullet, sometimes the bullet will miss the target because there is a bug the game object pool
 Fixed a bug in the stasis tower, sometimes the stasis tower will not slow the enemies because the function is not correct.
 
-Expected:
-Music effects
-Optimize the game
-Collect the information
-Make a video for the game
-Maybe give some guidiences to the player before they playing the game
+On June 13th
+Add the music effect
+Add the final screen shot of the game
+Add the function to collect infromation after the player win or lose the game(using a txt file to save the information)
+Have optimized the shooting function
+Have built the Mac version of this game. (have some problems when building the Mac version. 1. Url to get the assetbundle needs to use Application.DataPath + "\Data\Streaming" 2. need to build the specific version of the assetbundle, BunildPipeLine BuildTarget.StandaloneOSXIntel64  3. need to add the Shader in the project setting  4. a function I used to draw the circle is not working in the Mac version because this provided by the Gizmos)
