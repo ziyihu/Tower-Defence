@@ -203,12 +203,14 @@ public class TechNode : MonoBehaviour {
 	public UIButton nodeButton;
 
 	void Start(){
-		foreach (TechNode node in techNodeList) {
-			node.nodeButton.GetComponent<UIButton>().enabled = false;
-			if(unableSprite != null){
-				node.nodeButton.normalSprite = node.unableSprite;
+		if (ableSprite != "marine_1" && ableSprite != "Antenna001" && ableSprite != "smallMine"){
+			foreach (TechNode node in techNodeList) {
+				node.nodeButton.GetComponent<UIButton>().enabled = false;
+				if(unableSprite != null){
+					node.nodeButton.normalSprite = node.unableSprite;
+				}
+				node.nodeButton.SetState(UIButtonColor.State.Disabled,true);
 			}
-			node.nodeButton.SetState(UIButtonColor.State.Disabled,true);
 		}
 	}
 

@@ -7,7 +7,7 @@ using LumenWorks.Framework.IO.Csv;
 
 public class DataManager : UnityAllSceneSingleton<DataManager>, IMessageObject {
 
-	public static readonly string PathURL = "file://"+Application.dataPath+"/StreamingAssets"+"/";
+	public static readonly string PathURL = "file://"+Application.dataPath+"/Data/StreamingAssets"+"/";
 	//Read the data from resources
 
 
@@ -44,7 +44,7 @@ public class DataManager : UnityAllSceneSingleton<DataManager>, IMessageObject {
 				this.PRINT("convert csv failed!");
 				continue;
 			}
-			StreamReader sr = new StreamReader(ms,Encoding.GetEncoding("GB2312"),true);
+			StreamReader sr = new StreamReader(ms,Encoding.GetEncoding("UTF-8"),true);
 			TextReader tr = sr as TextReader;
 			if(tr == null){
 				this.PRINT("text reader is null!");

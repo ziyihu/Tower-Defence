@@ -1,0 +1,36 @@
+Technology Tree1
+Start Time:0
+End Time:139.4683
+Play Time:139.4683
+Earned Money:116
+Spend Money:80
+Left Life:0
+Attacking Building Number:2
+Total Building Number:4
+Power Generated:0
+Total Damage:174
+
+Technology Tree1
+Start Time:0
+End Time:26.48511
+Play Time:26.48511
+Earned Money:0
+Spend Money:0
+Left Life:0
+Attacking Building Number:0
+Total Building Number:0
+Power Generated:0
+Total Damage:0
+
+Technology Tree1
+Start Time:0
+End Time:26.41596
+Play Time:26.41596
+Earned Money:0
+Spend Money:60
+Left Life:0
+Attacking Building Number:3
+Total Building Number:4
+Power Generated:0
+Total Damage:0
+

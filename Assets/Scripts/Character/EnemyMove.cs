@@ -102,6 +102,7 @@ public class EnemyMove : MonoBehaviour {
 			if(enemy.GetPos().x > 23.2f){
 				//show the escape effect
 				//TODO
+				AudioSource.PlayClipAtPoint(AudioManager._instance.escapeMusic,enemy.GetPos());
 				effect11 = (GameObject)GameObject.Instantiate(Resources.Load("effect11"));
 				effect11.transform.position = enemy.GetPos ();
 				//current life decrease 1

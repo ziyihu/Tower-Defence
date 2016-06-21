@@ -17,15 +17,15 @@ public class EnemySlow2 : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if (node.GetExtraSlow2) {
-			isExtraSlow = true;
-		}
-		if (isExtraSlow) {
-			for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
-				EnemySpawnManager._instance.enemyList[i].SetSpeed(slowSpeed);
-			}
-		}
-	}
+//	void Update () {
+//		if (node.GetExtraSlow2) {
+//			isExtraSlow = true;
+//		}
+//		if (isExtraSlow) {
+//			for(int i = 0 ; i < EnemySpawnManager._instance.enemyList.Count ; i++){
+//				EnemySpawnManager._instance.enemyList[i].SetSpeed(slowSpeed);
+//			}
+//		}
+//	}
 }
 

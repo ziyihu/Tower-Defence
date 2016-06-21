@@ -49,12 +49,11 @@ public class InGame : MonoBehaviour {
 
 	private TechNode node;
 	
+
 	void Start(){
 		node = new TechNode ();
-
 		//get the tower01 button
 		UIEventListener.Get (tower01.gameObject).onClick += OnCreateTower01;
-		
 		UIEventListener.Get (stop.gameObject).onClick += OnStop;
 		UIEventListener.Get (start.gameObject).onClick += OnStart;
 		UIEventListener.Get (techTree.gameObject).onClick += OnShowTechTree;
@@ -68,7 +67,7 @@ public class InGame : MonoBehaviour {
 		Time.timeScale = 0;
 		//EnemySpawnManager._instance.isContinue = false;
 	}
-	
+
 	void OnEnable(){
 		
 	}
@@ -142,7 +141,6 @@ public class InGame : MonoBehaviour {
 
 	void OnDestory(){
 		UIEventListener.Get (tower01.gameObject).onClick -= OnCreateTower01;
-		
 		UIEventListener.Get (stop.gameObject).onClick -= OnStop;
 		UIEventListener.Get (start.gameObject).onClick -= OnStart;
 		UIEventListener.Get (techTree.gameObject).onClick -= OnShowTechTree;

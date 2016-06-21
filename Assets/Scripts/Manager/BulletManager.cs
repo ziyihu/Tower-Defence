@@ -8,5 +8,6 @@ public class BulletManager : UnityAllSceneSingleton<BulletManager> {
 
 	public void CalcuBulletDamage(Character enemy, Building building){
 		enemy.OnBeHit (building.GetAttackPower ());
+		InformationSave.instance.TotalDamage += building.GetAttackPower ();
 	}
 }

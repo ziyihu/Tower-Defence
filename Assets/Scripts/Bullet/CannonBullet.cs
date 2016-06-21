@@ -103,7 +103,7 @@ public class CannonBullet : MonoBehaviour, IBullet {
 
 	public void OnExplosionEffect(){
 		//create a new game object to show the explosion effect
-		explosionObj = (GameObject)GameObject.Instantiate (Resources.Load ("explosion"));
+		explosionObj = ExplosionAniPool.instance.Pop();
 		explosionObj.transform.position = curTarget.GetPos();
 	}
 
@@ -177,6 +177,7 @@ public class CannonBullet : MonoBehaviour, IBullet {
 
 	public void Update(){
 		Timer += Time.deltaTime;
+
 		if (Timer >= maxTime) {
 			if(parent1 != null){
 				this.parent1 = null;
@@ -185,7 +186,7 @@ public class CannonBullet : MonoBehaviour, IBullet {
 				this.antennaParent = null;
 				AtennaEffectPool.instance.Push(this.gameObject);
 			} else {
-				Destroy(this.gameObject);
+			//	Destroy(this.gameObject);
 			}
 			Timer = 0;
 			return;

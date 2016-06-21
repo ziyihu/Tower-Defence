@@ -64,7 +64,7 @@ public class Enemy : Character {
 	}
 
 	public override void OnBeHit(int damage){
-
+		AudioSource.PlayClipAtPoint (AudioManager._instance.enemyHitMusic, this.GetPos ());
 		base.OnBeHit (damage);
 		if(model != null){
 			if(!node.GetArmorPiercing){

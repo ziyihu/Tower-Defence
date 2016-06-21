@@ -21,7 +21,11 @@ public class ResearchPointManager : MonoBehaviour {
 	private float time = 0;
 
 	private int currentPercentage = 0;
-	private int currentPoint = 5;
+	private int currentPoint = 10;
+
+	public void SetCurrentPoint(int point){
+		currentPoint = point;
+	}
 
 	private bool isActive = false;
 	private int speed = 0;

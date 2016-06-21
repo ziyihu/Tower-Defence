@@ -37,6 +37,7 @@ public class DiamondManager : MonoBehaviour {
 	}
 
 	public void UseDiamond(int number){
+		InformationSave.instance.SpendMoney += number;
 		currentDiamond -= number;
 	}
 
@@ -56,6 +57,7 @@ public class DiamondManager : MonoBehaviour {
 
 	IEnumerator Add(int speed){
 		for(int i = 1; i <= speed; i++){
+			InformationSave.instance.EarnedMoney += 1;
 			currentDiamond += 1;
 			diamondLabel.text = currentDiamond + "";
 			yield return new WaitForSeconds(0.08f);

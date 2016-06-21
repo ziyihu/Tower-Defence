@@ -12,7 +12,7 @@ public class AntennaRange : MonoBehaviour {
 	private TechNode node;
 	CharacterManager cManage;
 
-	public float increasedAntennaRange = 3f;
+	public float increasedAntennaRange = 1f;
 
 	// Use this for initialization
 	void Start () {
